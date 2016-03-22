@@ -11,18 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160309040009) do
+ActiveRecord::Schema.define(version: 20160322202936) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "charities", force: :cascade do |t|
-    t.string   "name"
-    t.string   "description"
-    t.string   "logo"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
 
   create_table "gif_tags", force: :cascade do |t|
     t.integer  "tag_id"
@@ -73,6 +65,14 @@ ActiveRecord::Schema.define(version: 20160309040009) do
 
   add_index "orders", ["user_id"], name: "index_orders_on_user_id", using: :btree
 
+  create_table "studios", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "status"
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -80,17 +80,21 @@ ActiveRecord::Schema.define(version: 20160309040009) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "username"
+    t.string   "email"
     t.string   "password_digest"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.integer  "role",            default: 0
+    t.integer  "studio_id"
   end
+
+  add_index "users", ["studio_id"], name: "index_users_on_studio_id", using: :btree
 
   add_foreign_key "gif_tags", "gifs"
   add_foreign_key "gif_tags", "tags"
-  add_foreign_key "gifs", "charities"
+  add_foreign_key "gifs", "studios", column: "charity_id"
   add_foreign_key "order_gifs", "gifs"
   add_foreign_key "order_gifs", "orders"
   add_foreign_key "orders", "users"
+  add_foreign_key "users", "studios"
 end
