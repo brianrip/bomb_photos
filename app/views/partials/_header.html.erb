@@ -19,9 +19,9 @@
       <% end %>
       <% if current_user %>
         <li><%= link_to "#{current_user.email}'s_dashboard", dashboard_path, class: "glyphicon" %></li>
-        <li><%= link_to "logout", logout_path, method: :delete, class: "glyphicon" %></li>
+        <li><%= link_to "Log Out", logout_path, method: :delete, class: "glyphicon" %></li>
       <% else %>
-        <li><%= link_to "login", login_path, class: "glyphicon" %></li>
+        <li><%= link_to "Log In", login_path, class: "glyphicon" %></li>
         <li><%= link_to "Sign Up", new_user_path, class: "glyphicon" %></li>
       <% end %>
     </ul>
