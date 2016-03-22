@@ -1,30 +1,35 @@
 require 'test_helper'
 
 class LoggedInUserCreatesAnOrderTest < ActionDispatch::IntegrationTest
-  # As a registered/logged-in user,
 
-  # when I visit the 'all photos' page,
-  visit root_path
+  test "user can see order summary" do
+    user = User.create(username: "Brock", password: "password",
+                       password_confirmation: "password")
 
-  click_on "Animals"
-  # and I click on a category,
-  click_on "photo of dog"
-  # and I click on the photo,
-  click_on "add to cart"
-  # and I click on 'add to cart',
-  visit cart_path
-  # and I visit the cart,
-  click_on "checkout"
-  # and I click on 'checkout',
-  # (in production, I should see stripe checkout),
-  # then I should see a message 'your order has been placed',
-  assert page.has_content? "Your order has been placed."
-  # and I should see the order total,
-  assert page.has_content? order.total
-  assert page.has_content? order.created_at
-  assert page.has_link? "all photos"
-  assert page.has_link? "all orders"
-  # and I should see the created at time/date,
-  # and I should see a link to "all photos",
-  # and I should see a link to all orders.
+    ApplicationController.any_instance.stubs(:current_user).returns(user)
+
+    photo = Photo.create(name: "dog in water", image_file_name: "test/asset_tests/photos/dog-swimming.jpeg", price: 200, description: "A happy labrador swims in a beautiful river.")
+
+    photo.categories.create(name: "Animals")
+
+    UserPhoto.create(photo_id: photo.id)
+
+    order = user.orders.create(total: 200, status: 0)
+
+    visit root_path
+
+    click_on "Animals"
+    click_on "photo of dog"
+    click_on "add to cart"
+
+    visit cart_path
+
+    click_on "checkout"
+
+    assert page.has_content? "Your order has been placed."
+    assert page.has_content? order.total
+    assert page.has_content? order.created_at
+    assert page.has_link? "all photos"
+    assert page.has_link? "all orders"
+  end
 end
