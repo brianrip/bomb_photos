@@ -6,31 +6,37 @@ class StudioAdminCanCreatePhotoTest < ActionDispatch::IntegrationTest
 
     studio = Studio.create(name:        "Studio",
                            description: "Example description.",
-                           status:      "Approved"
+                           status:      0
     )
 
-    admin = studio.users.create(username:  "admin",
-                                 password: "password",
-                                 role:     1
+    admin = studio.users.create(email:  "admin@example.com",
+                                password: "password",
+                                role:     1
     )
 
-    ApplicationController.any_instance.stubs(:current_user).returns(users(:admin))
+    ApplicationController.any_instance.stubs(:current_user).returns(admin)
 
-    visit studio_admin_dashboard_path
+    visit admin_dashboard_path
     click_on "Add New Photo"
 
-    assert_template "admin/photos#new"
+    assert_equal new_admin_photo_path, current_path
 
     fill_in "Name",        with: "Example Name"
     fill_in "Description", with: "Example Description"
     fill_in "Price",       with: "999"
-    find('#categorySelect').find(:xpath, "Example Category").select_option
-    fill_in  "Image URL",   with: #whereshouldthiscomefrom?
+    select "Example Category", from: "photo[category_id]"
+    attach_file "Image", "test/asset_tests/photos/sample_photo.jpg"
     click_on "Create Photo"
 
-    assert_template "admin/photos#new"
-    within(".photo")
-      assert page.has_content?(###)
+    photo = Photo.all.last
+
+    assert_equal photo_path(photo), current_path
+    within(".photo-show") do
+      assert page.has_content?(photo.name)
+      assert page.has_content?(photo.description)
+      assert page.has_content?(photo.studio.name)
     end
-    assert page.has_content("Your Photo Has Been Created")
+
+    assert page.has_content?("Your Photo Has Been Created")
   end
+end
