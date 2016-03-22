@@ -1,7 +1,6 @@
 class Admin::PhotosController < Admin::BaseController
   def new
     @photo = Photo.new
-    @studios = Studio.all
     @categories = Category.all
   end
 
@@ -18,16 +17,14 @@ class Admin::PhotosController < Admin::BaseController
   end
 
   def edit
-    @photo = find_photo
+    @photo = Photo.find(params[:id])
+    @categories = Category.all
   end
 
   def update
     @photo = find_photo
     if @photo.update(photo_params)
-      if params[:categories]
-        categories = params[:categories].split(", ")
-        @photo.create_categories(categories)
-      end
+      flash[:success] = "Photo Has Been Updated"
       redirect_to photo_path(@photo.id)
     else
       flash.now[:error] = "Invalid input"
