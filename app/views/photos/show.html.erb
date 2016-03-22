@@ -1,0 +1,28 @@
+<div class="row product photo-show-photo">
+    <div class="col-md-offset-1 col-md-4 text-center"><p><%= image_tag @photo.image, width: 400 %></p></div>
+      <div class="container col-md-offset-1 col-xs-12 col-md-3 photo-show">
+        <h2><%= @photo.name %></h2>
+        <p><%= @photo.description %></p>
+        <p>Studio: <%= link_to @photo.studio.name, '#' %></p>
+        <h3><%= format_price(@photo.price) %></h3>
+        <h3><%= link_to @photo.category.name, '#' %></h3>
+        <p>
+          <%# if @photo.retired? %>
+            <%#= "Sorry, this photo is no longer available" %>
+          <%# else %>
+          <%#= link_to "Add to cart", cart_photos_path(photo_id: @photo.id), method: :post, class: "btn btn-default" %>
+          <%# end %>
+        </p>
+        <br>
+        <% if current_admin? %>
+          <p><%= link_to "Edit", edit_admin_photo_path(@photo.id), class: "btn btn-default" %>
+          <p><%#= link_to "Delete", admin_photo_path(@photo.id), method: :delete, class: "btn btn-default" %>
+        <% end %>
+      </div>
+      <div class="container col-md-2 charity-column">
+        <%# if @charity %>
+          <p><%#= link_to (image_tag @charity.logo, width: 150), charity_path(@charity), class: "charity-link"%>
+        <%# end %>
+      </div>
+    </div>
+</div>
