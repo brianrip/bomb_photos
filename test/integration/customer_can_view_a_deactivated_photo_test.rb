@@ -7,7 +7,7 @@ class CustomerCanViewADeactivatedPhotoTest < ActionDispatch::IntegrationTest
 
     ApplicationController.any_instance.stubs(:current_user).returns(user)
 
-    photo = Photo.create(name: "dog in water", image_file_name: "test/asset_tests/photos/dog-swimming.jpeg", price: 200, description: "A happy labrador swims in a beautiful river.")
+    photo = Photo.create(name: "dog in water", image_file_name: "test/asset_tests/photos/dog-swimming.jpeg", price: 200, description: "A happy labrador swims in a beautiful river.", retired: true)
 
     photo.categories.create(name: "Animals")
 
@@ -15,16 +15,11 @@ class CustomerCanViewADeactivatedPhotoTest < ActionDispatch::IntegrationTest
 
     order = user.orders.create(total: 200, status: 0)
 
-    visit root_path
+    click_on "my orders"
+    click_on "Order: #{order.id}"
+    click_on order.photos.first.name
 
-    click_on "Animals"
+    assert page.has_content? "photo no longer available"
+    refute page.has_content? "add to cart"
   end
-  # As a registered/logged-in customer,
-  # when I visit my past orders,
-  # and I click on a past order,
-  # and I click on the photo name of a deactivated photo,
-  # then I should see the photo page,
-  # and I should see 'photo is no longer available',
-  # and I should not see 'add to cart'.
-
 end
