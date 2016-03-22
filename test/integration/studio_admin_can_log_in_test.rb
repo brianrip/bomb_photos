@@ -4,7 +4,7 @@ class AdminCanLogInTest < ActionDispatch::IntegrationTest
   test "login with valid information" do
     studio = Studio.create(name:        "Studio",
                            description: "Example description.",
-                           status:      "Approved"
+                           status:      0
                           )
 
     admin = studio.users.create(email: "admin@example.com",
