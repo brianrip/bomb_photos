@@ -10,8 +10,10 @@ class OrdersController < ApplicationController
   end
 
   def show
-    if current_user.orders.find(params[:id])
+    if Order.find(params[:id]).user == current_user
       @order = Order.find(params[:id])
+    else
+      render file: "/public/404"
     end
   end
 
