@@ -1,10 +1,11 @@
-<h1 class="text-center">admin_order_view_#<%= @order.id %></h1>
+<h1 class="text-center">Order <%= @order.id %></h1>
+<h3 class="text-center">Buyer: <%= @order.user.email %></h1>
 ​<div class="container">
   <table class="table table-striped">
     <thead>
       <tr>
         <th>Status</th>
-        <th>Total Price</th>
+        <!-- <th>Total Price</th> -->
         <th>Created At</th>
         <th>Updated At</th>
         <th>Order Status</th>
@@ -14,7 +15,7 @@
         <div id="gif-info">
           <tr>
             <td><%= @order.status %></td>
-            <td><%= number_to_currency(@order.total_price) %></td>
+            <td><%#= number_to_currency(@order.studio_total) %></td>
             <td><%= @order.created_at %></td>
             <td><%= @order.updated_at %></td>
             <td><%= @order.order_status %></td>
@@ -25,13 +26,17 @@
 </div>
 
 <div class="container">
-  <% @order.order_gifs.each do |order_gif| %>
+  <% price = 0 %>
+  <% @order.order_photos.each do |order_photo| %>
+    <% if order_photo.photo.studio == current_user.studio %>
   <div class="col-md-7">
     <div class="row product">
-      <div class="col-md-5 col-md-offset-0"><p><%= image_tag order_gif.gif.image, width: 200 %></p>
+      <div class="col-md-5 col-md-offset-0"><p><%= image_tag order_photo.photo.image, width: 200 %></p>
       </div>
-      <h4><%= link_to order_gif.gif.title, gif_path(order_gif.gif) %></h4>
-      <h4>Quantity: <%= order_gif.quantity %></h4>
+      <h4><%= link_to order_photo.photo.name, photo_path(order_photo.photo) %></h4>
+      <% price += order_photo.photo.price%>
     </div>
   </div>
   <% end %>
+<% end %>
+Your total: <%= number_to_currency(price) %>
