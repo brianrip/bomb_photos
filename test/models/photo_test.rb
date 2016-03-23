@@ -1,6 +1,6 @@
 require "test_helper"
 
-class GifTest < ActiveSupport::TestCase
+class PhotoTest < ActiveSupport::TestCase
   should validate_presence_of(:title)
   should validate_presence_of(:description)
   should validate_presence_of(:price)
