@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160322213427) do
+ActiveRecord::Schema.define(version: 20160323015144) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,17 +22,15 @@ ActiveRecord::Schema.define(version: 20160322213427) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "order_gifs", force: :cascade do |t|
+  create_table "order_photos", force: :cascade do |t|
     t.integer  "order_id"
-    t.integer  "gif_id"
+    t.integer  "photo_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "quantity"
-    t.integer  "subtotal"
   end
 
-  add_index "order_gifs", ["gif_id"], name: "index_order_gifs_on_gif_id", using: :btree
-  add_index "order_gifs", ["order_id"], name: "index_order_gifs_on_order_id", using: :btree
+  add_index "order_photos", ["order_id"], name: "index_order_photos_on_order_id", using: :btree
+  add_index "order_photos", ["photo_id"], name: "index_order_photos_on_photo_id", using: :btree
 
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id"
@@ -82,8 +80,8 @@ ActiveRecord::Schema.define(version: 20160322213427) do
 
   add_index "users", ["studio_id"], name: "index_users_on_studio_id", using: :btree
 
-  add_foreign_key "order_gifs", "orders"
-  add_foreign_key "order_gifs", "photos", column: "gif_id"
+  add_foreign_key "order_photos", "orders"
+  add_foreign_key "order_photos", "photos"
   add_foreign_key "orders", "users"
   add_foreign_key "photos", "categories"
   add_foreign_key "photos", "studios"
