@@ -1,8 +1,10 @@
-<h1 class="text-center">tagged_<%= @tag.name %></h1>
+<h1 class="text-center">tagged_<%= @category.name %></h1>
 <div class="container">
-  <% if @tag.gifs %>
-    <% @tag.gifs.each do |gif| %>
-    <%= render partial: './gif_column', locals: { gif: gif } %>
+  <% if @category.photos %>
+    <% @category.photos.each do |photo| %>
+      <%= render partial: "partials/photo_column", locals: { photo: photo } %>
     <% end %>
+    <% else %>
+     <h3>No photos for this category</h3>
   <% end %>
 </div>

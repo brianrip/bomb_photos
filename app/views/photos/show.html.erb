@@ -7,16 +7,20 @@
         <h3><%= format_price(@photo.price) %></h3>
         <h3><%= link_to @photo.category.name, '#' %></h3>
         <p>
-          <%# if @photo.retired? %>
-            <%#= "Sorry, this photo is no longer available" %>
-          <%# else %>
-          <%#= link_to "Add to cart", cart_photos_path(photo_id: @photo.id), method: :post, class: "btn btn-default" %>
-          <%# end %>
+          <% if @photo.active %>
+          <%= link_to "Add to Cart", cart_photos_path(photo_id: @photo.id), method: :post, class: "btn btn-default" %>
+          <% else %>
+          <h3><%= "Sorry, this photo is no longer available" %></h3>
+          <% end %>
         </p>
         <br>
         <% if current_admin? %>
           <p><%= link_to "Edit", edit_admin_photo_path(@photo.id), class: "btn btn-default" %>
-          <p><%#= link_to "Delete", admin_photo_path(@photo.id), method: :delete, class: "btn btn-default" %>
+          <% if @photo.active %>
+            <p><%= link_to "Deactivate", admin_path(@photo), method: :patch, class: "btn btn-default" %>
+          <% else %>
+            <p><%= link_to "Activate", admin_path(@photo), method: :patch, class: "btn btn-default" %>
+          <% end %>
         <% end %>
       </div>
       <div class="container col-md-2 charity-column">
