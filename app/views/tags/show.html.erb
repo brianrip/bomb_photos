@@ -1,8 +1,0 @@
-<h1 class="text-center">tagged_<%= @tag.name %></h1>
-<div class="container">
-  <% if @tag.gifs %>
-    <% @tag.gifs.each do |gif| %>
-    <%= render partial: './gif_column', locals: { gif: gif } %>
-    <% end %>
-  <% end %>
-</div>
