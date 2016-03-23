@@ -54,6 +54,7 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 2.0'
   gem "factory_girl_rails", "~> 4.0"
   gem "mocha"
+  gem 'rails_12factor'
  end
 
 group :development do
