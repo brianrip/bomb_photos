@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class VisitorCanAddPhotosToCartTest < ActionDispatch::IntegrationTest
-  test "visitor sees a cart with multiple items"
+  test "visitor sees a cart with multiple items" do
 
     category = Category.create(name: "Example Category")
     Category.create(name: "Other Category")
