@@ -9,6 +9,7 @@
       <tr>
         <th>Image</th>
         <th>Name and Description</th>
+        <th>Category</th>
         <th>Price</th>
         <th>Quantity</th>
         <th>Subtotal</th>
@@ -18,9 +19,10 @@
       <% @cart_photos.each do |photo| %>
         <div id="gif-info">
           <tr>
-            <td><%= image_tag gif.image, width: 80 %></td>
-            <td><%= photo.name %>
+            <td><%= image_tag photo.image, width: 80 %></td>
+            <td><%= link_to photo.name, photo_path(photo) %>
             <p><%= photo.description %></p></td>
+            <td><%= link_to Category.find(photo.category_id).name, category_path(Category.find(photo.category_id).slug) %></td>
             <td><%= format_price(photo.price) %></td>
             <td>
               <%= form_tag(cart_path(id: photo.id), method: :patch) do %>
@@ -35,8 +37,9 @@
       <% end %>
       <tr>
         <td colspan=5 align=right>
-          <p>Total: $<%= @cart.total_price / 100 %>.00</p>
+          <p>Total: $<%= @cart.total_price / 100.0 %>.00</p>
           <p><%= link_to "Checkout", orders_path, method: :post %></p>
+          <p><%= link_to "Continue Shopping", categories_path %></p>
         </td>
       </tr>
     </tbody>

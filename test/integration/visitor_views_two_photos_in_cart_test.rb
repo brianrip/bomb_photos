@@ -36,15 +36,14 @@ class VisitorViewsTwoPhotosInCartTest < ActionDispatch::IntegrationTest
 
     assert page.has_link? photo1.name
     assert page.has_link? category.name
-    assert page.has_content? photo1.price
+    assert page.has_content? "$9.99"
 
     assert page.has_link? photo2.name
     assert page.has_link? category.name
-    assert page.has_content? photo2.price
+    assert page.has_content? "$9.99"
+    assert page.has_content? ("19.98")
 
-    assert page.has_content? (photo1.price + photo2.price)
-
-    assert page.has_link? "Continue shopping"
+    assert page.has_link? "Continue Shopping"
     assert page.has_content? "Checkout"
   end
 end
