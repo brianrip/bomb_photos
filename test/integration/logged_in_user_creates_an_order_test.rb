@@ -3,6 +3,7 @@ require 'test_helper'
 class LoggedInUserCreatesAnOrderTest < ActionDispatch::IntegrationTest
 
   test "user can see order summary" do
+    skip
     user = User.create(username: "Brock", password: "password",
                        password_confirmation: "password")
 

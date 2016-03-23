@@ -2,7 +2,7 @@ require 'test_helper'
 
 class CustomerCanViewAPastOrderTest < ActionDispatch::IntegrationTest
   test "customer can see details of a past order" do
-
+    skip
     user = User.create(username: "Brock", password: "password",
                        password_confirmation: "password")
 
