@@ -11,12 +11,13 @@ Rails.application.routes.draw do
     get "/dashboard", to: "users#show"
     resources :orders, only: [:index, :update, :show]
     resources :photos, only: [:new, :create, :edit, :update, :destroy]
+    patch "/status/:id", to: "photos#change_status"
   end
 
-  resources :cart_gifs, only: [:create]
-  get "/cart", to: "cart_gifs#show"
-  delete "/cart", to: "cart_gifs#destroy"
-  patch "/cart", to: "cart_gifs#update"
+  resources :cart_photos, only: [:create]
+  get "/cart", to: "cart_photos#show"
+  delete "/cart", to: "cart_photos#destroy"
+  patch "/cart", to: "cart_photos#update"
 
   resources :orders, only: [:index, :show, :create, :new]
 
@@ -27,7 +28,7 @@ Rails.application.routes.draw do
   resources :charities, only: [:index, :show]
 
   resources :categories, only: [:index]
-  get "/tag/:name", :to => "tags#show", as: :tag
+  get "/categories/:name", :to => "categories#show", as: :category
 
   resources :charges
 end

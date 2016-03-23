@@ -39,6 +39,18 @@ class Admin::PhotosController < Admin::BaseController
     redirect_to root_url
   end
 
+  def change_status
+    @photo = Photo.find(params[:id])
+    if @photo.active
+      @photo.update_attributes(active: false)
+      flash[:success] = "Photo Has Been Deactivated"
+    else
+      @photo.update_attributes(active: true)
+      flash[:success] = "Photo Has Been Activated"
+    end
+    redirect_to :back
+  end
+
 private
 
   def photo_params
