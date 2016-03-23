@@ -18,7 +18,7 @@
         <li><%= link_to " cart(#{@cart.total_items})", cart_path, class: "glyphicon glyphicon-shopping-cart" %></li>
       <% end %>
       <% if current_user %>
-        <li><%= link_to "#{current_user.username}'s_dashboard", dashboard_path, class: "glyphicon" %></li>
+        <li><%= link_to "#{current_user.email}'s_dashboard", dashboard_path, class: "glyphicon" %></li>
         <li><%= link_to "logout", logout_path, method: :delete, class: "glyphicon" %></li>
       <% else %>
         <li><%= link_to "login", login_path, class: "glyphicon" %></li>
