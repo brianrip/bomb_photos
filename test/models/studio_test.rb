@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class CharityTest < ActiveSupport::TestCase
+class StudioTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
