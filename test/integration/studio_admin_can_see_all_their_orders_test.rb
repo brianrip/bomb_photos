@@ -42,7 +42,7 @@ class StudioAdminSeesAllTheirOrdersTest < ActionDispatch::IntegrationTest
 
     visit admin_dashboard_path
     click_on "View Orders"
-# save_and_open_page
+
     assert page.has_content?(order.id)
     assert page.has_content?(order.total_price)
     assert page.has_content?(order.created_at.to_date)
