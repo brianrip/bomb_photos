@@ -34,7 +34,7 @@ class VisitorCanAddPhotosToCartTest < ActionDispatch::IntegrationTest
     assert page.has_content? "Photo has been added to cart"
     assert page.has_content? "cart(1)"
 
-    visit category_path(category.name)
+    visit category_path(category.slug)
 
     click_on photo2.name
     click_on "Add to Cart"
