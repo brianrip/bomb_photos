@@ -1,8 +1,7 @@
 require 'test_helper'
 
-class VisitorCanAddPhotosToCartTest < ActionDispatch::IntegrationTest
-  test "visitor sees a cart with multiple items"
-
+class VisitorCanRemovePhotoFromCartTest < ActionDispatch::IntegrationTest
+  test "visitor sees cart without removed photo" do
     category = Category.create(name: "Example Category")
     Category.create(name: "Other Category")
 
@@ -24,22 +23,31 @@ class VisitorCanAddPhotosToCartTest < ActionDispatch::IntegrationTest
                                  price:       999,
                                  category_id: category.id
     )
-
     visit categories_path
 
     click_on category.name
     click_on photo.name
     click_on "Add to Cart"
+    visit categories_path
 
-    assert page.has_content? "Photo has been added to cart"
-    assert page.has_content? "cart(1)"
-
-    visit category_path(category.name)
-
+    click_on category.name
     click_on photo2.name
     click_on "Add to Cart"
 
-    assert page.has_content? "Photo has been added to cart"
-    assert page.has_content? "cart(2)"
+    within(".shopping-cart") do
+      click_on "Cart"
+    end
+
+    assert page.has_content? photo.name
+    assert page.has_content? photo2.name
+    assert page.has_content? "Total: 2"
+
+    within first("#photo-info", minimum: 1) do
+      click_link("Remove")
+    end
+
+    refute page.has_content? photo.name
+    assert page.has_content? photo2.name
+    assert page.has_content? "Total: 1"
   end
 end
