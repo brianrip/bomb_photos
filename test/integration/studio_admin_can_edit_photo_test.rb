@@ -22,13 +22,10 @@ class StudioAdminCanEditPhotoTest < ActionDispatch::IntegrationTest
                                  category_id: category.id
     )
 
-
-
     ApplicationController.any_instance.stubs(:current_user).returns(admin)
 
     visit photo_path(photo)
     click_on "Edit"
-
     assert_equal edit_admin_photo_path(photo), current_path
 
     fill_in "Name",        with: "New Name"
