@@ -1,32 +1,35 @@
-<h1 class="text-center">.your_shopping_cart</h1>
+<h1 class="text-center">Your Shopping Cart</h1>
 ​
 <div class="container">
+  <% if @cart_photos.empty? %>
+<h2>Your cart is empty</h2>
+  <% else %>
   <table class="table table-striped">
     <thead>
       <tr>
         <th>Image</th>
-        <th>Title and Description</th>
+        <th>Name and Description</th>
         <th>Price</th>
         <th>Quantity</th>
         <th>Subtotal</th>
       </tr>
     </thead>
     <tbody>
-      <% @cart_gifs.each do |gif| %>
+      <% @cart_photos.each do |photo| %>
         <div id="gif-info">
           <tr>
             <td><%= image_tag gif.image, width: 80 %></td>
-            <td><%= gif.name %>
-            <p><%= gif.description %></p></td>
-            <td><%= format_price(gif.price) %></td>
+            <td><%= photo.name %>
+            <p><%= photo.description %></p></td>
+            <td><%= format_price(photo.price) %></td>
             <td>
-              <%= form_tag(cart_path(id: gif.id), method: :patch) do %>
-                <p><%= select gif.id, gif.quantity, (1..15).to_a, selected: gif.quantity %></p>
+              <%= form_tag(cart_path(id: photo.id), method: :patch) do %>
+                <p><%= select photo.id, photo.quantity, (1..15).to_a, selected: photo.quantity %></p>
                 <p><%= submit_tag "Update Quantity" %></p>
               <% end %>
-              <p><%= link_to "Remove", cart_path(id: gif.id), method: :delete %></p>
+              <p><%= link_to "Remove", cart_path(id: photo.id), method: :delete %></p>
             </td>
-            <td><%= number_to_currency(gif.subtotal) %></td>
+            <td><%= number_to_currency(photo.subtotal) %></td>
           </tr>
         </div>
       <% end %>
@@ -38,4 +41,5 @@
       </tr>
     </tbody>
   </table>
+  <% end %>
 </div>
