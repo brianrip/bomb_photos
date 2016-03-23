@@ -1,6 +1,6 @@
 class PhotosController < ApplicationController
   def index
-    @gifs = Gif.all.page params[:page]
+    @photos = Photo.all.page params[:page]
   end
 
   def show
