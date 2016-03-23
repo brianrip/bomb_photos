@@ -32,7 +32,7 @@ class VisitorCanAddPhotosToCartTest < ActionDispatch::IntegrationTest
     click_on "Add to Cart"
 
     assert page.has_content? "Photo has been added to cart"
-    assert page.has_content? "cart(1)"
+    assert page.has_content? "Cart(1)"
 
     visit category_path(category.slug)
 
@@ -40,6 +40,6 @@ class VisitorCanAddPhotosToCartTest < ActionDispatch::IntegrationTest
     click_on "Add to Cart"
 
     assert page.has_content? "Photo has been added to cart"
-    assert page.has_content? "cart(2)"
+    assert page.has_content? "Cart(2)"
   end
 end

@@ -14,9 +14,7 @@
       <li><%= link_to "View All Photos", root_path, class: "glyphicon" %></li>
       <li><%= link_to "All Categories", categories_path, class: "glyphicon" %></li>
       <li><%= link_to "Shop By Studio", charities_path, class: "glyphicon" %></li>
-      <% if @cart.has_photos? %>
-        <li><%= link_to " cart(#{@cart.total_items})", cart_path, class: "glyphicon glyphicon-shopping-cart" %></li>
-      <% end %>
+      <li><%= link_to "Cart(#{@cart.total_items})", cart_path, class: "glyphicon glyphicon-shopping-cart" %></li>
       <% if current_user %>
         <li><%= link_to "#{current_user.email}'s_dashboard", dashboard_path, class: "glyphicon" %></li>
         <li><%= link_to "Log Out", logout_path, method: :delete, class: "glyphicon" %></li>

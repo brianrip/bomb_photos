@@ -18,10 +18,6 @@ class Cart
     contents.values.sum
   end
 
-  def has_photos?
-    total_items > 0
-  end
-
   def total_price
     prices = cart_photos.map do |cart_photo|
       (cart_photo.quantity * cart_photo.price)
