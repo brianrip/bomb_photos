@@ -1,7 +1,7 @@
 require 'test_helper'
 
-class CustomerCanViewAPastOrderTest < ActionDispatch::IntegrationTest
-  test "customer can see details of a past order" do
+class RegisteredUSerOrdersAuthorizationTest < ActionDispatch::IntegrationTest
+  test "user who tries to view other user's order cannot" do
     category = Category.create(name: "Example Category")
 
     studio = Studio.create(name:        "Studio",
@@ -10,6 +10,10 @@ class CustomerCanViewAPastOrderTest < ActionDispatch::IntegrationTest
     )
 
     user = studio.users.create(email:  "user@example.com",
+                                password: "password",
+                                role:     0
+    )
+    other_user = studio.users.create(email:  "other_user@example.com",
                                 password: "password",
                                 role:     0
     )
@@ -22,17 +26,10 @@ class CustomerCanViewAPastOrderTest < ActionDispatch::IntegrationTest
     )
 
     op = OrderPhoto.create(photo_id: photo.id)
-    order = user.orders.create(total_price: 200)
+    order = other_user.orders.create(total_price: 999)
     order.order_photos << op
-
     ApplicationController.any_instance.stubs(:current_user).returns(user)
-    visit orders_path
-    click_on "Order: #{order.id}"
-    assert page.has_content? order.id
-    assert page.has_content? order.created_at
-    assert page.has_content? order.photos.first.name
-    assert page.has_css?("img[src='#{order.photos.first.image}']")
-    assert page.has_content? order.photos.first.price
-    assert page.has_content?("$2.00")
+    visit order_path(order)
+    assert page.has_content?("The page you were looking for doesn't exist")
   end
 end
