@@ -1,0 +1,10 @@
+<div class="container text-center">
+  <div class="gifs">
+    <h1>all_tags</h1>
+    <% @categories.each do |category| %>
+      <div class="col-md-4">
+        <h4> <%= link_to "#{category.name}", category_path(category.slug) %></h2>
+      </div>
+    <% end %>
+  </div>
+</div>

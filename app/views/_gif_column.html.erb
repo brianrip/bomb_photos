@@ -1,6 +1,0 @@
-<% if gif.active %>
-  <div class="col-xs-9 col-sm-6 col-md-4 col-lg-3 gif">
-  <p class="gif-title"><%= link_to "#{gif.title}", gif_path(gif.id), class: "gif-title" %></p>
-  <%= link_to image_tag(gif.image, class: "gifs", width: "250", height: "200"), gif_path(gif.id) %>
-  </div>
-<% end %>

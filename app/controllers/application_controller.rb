@@ -16,8 +16,8 @@ class ApplicationController < ActionController::Base
     current_user && current_user.admin?
   end
 
-  def find_gif
-    Gif.find(params[:id])
+  def find_photo
+    Photo.find(params[:id])
   end
 
   def format_price(number)

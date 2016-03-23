@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
+      flash[:success] = "Thank you for creating an account!"
       redirect_to dashboard_path
     else
       flash.now[:error] = "Invalid Input"
