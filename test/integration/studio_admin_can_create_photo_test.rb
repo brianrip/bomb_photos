@@ -2,7 +2,7 @@ require "test_helper"
 
 class StudioAdminCanCreatePhotoTest < ActionDispatch::IntegrationTest
   test "create photo with valid attributes" do
-    Category.create(name: "Example Category")
+    Category.create(name: "A Category")
 
     studio = Studio.create(name:        "Studio",
                            description: "Example description.",
@@ -24,7 +24,7 @@ class StudioAdminCanCreatePhotoTest < ActionDispatch::IntegrationTest
     fill_in "Name",        with: "Example Name"
     fill_in "Description", with: "Example Description"
     fill_in "Price",       with: "999"
-    select "Example Category", from: "photo[category_id]"
+    select "A Category", from: "photo[category_id]"
     attach_file "Image", "test/asset_tests/photos/sample_photo.jpg"
     click_on "Create Photo"
 
