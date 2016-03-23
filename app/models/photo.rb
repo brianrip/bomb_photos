@@ -4,8 +4,8 @@ class Photo < ActiveRecord::Base
   validates :price, presence: true, numericality: { greater_than: 0 }
   validates :image, presence: true
   belongs_to :category
-  has_many :order_gifs, dependent: :destroy
-  has_many :orders, through: :order_gifs
+  has_many :order_photos, dependent: :destroy
+  has_many :orders, through: :order_photos
   belongs_to :studio
   attr_accessor :image
 
