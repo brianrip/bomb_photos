@@ -2,19 +2,30 @@ require 'test_helper'
 
 class GuestCannotViewCustomerOrdersTest < ActionDispatch::IntegrationTest
   test "unauthorized attempt to see order renders error page" do
-    user = User.create(username: "Brock", password: "password",
-                       password_confirmation: "password")
+    category = Category.create(name: "Example Category")
 
-    photo = Photo.create(name: "dog in water", image_file_name: "test/asset_tests/photos/dog-swimming.jpeg", price: 200, description: "A happy labrador swims in a beautiful river.")
+    studio = Studio.create(name:        "Studio",
+                           description: "Example description.",
+                           status:      0
+    )
 
-    UserPhoto.create(photo_id: photo.id)
+    user = studio.users.create(email:  "user@example.com",
+                                password: "password",
+                                role:     0
+    )
 
-    order = user.orders.create(total: 200, status: 0)
+    photo = studio.photos.create(name:        "Example Name",
+                                 description: "Example Description",
+                                 image:       "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png",
+                                 price:       999,
+                                 category_id: category.id
+    )
 
-    visit root_path
+    op = OrderPhoto.create(photo_id: photo.id)
+    order = user.orders.create(total_price: 200)
+    order.order_photos << op
+
     visit order_path(order.id)
-
     assert page.has_content? "The page you were looking for doesn't exist."
-
   end
 end
