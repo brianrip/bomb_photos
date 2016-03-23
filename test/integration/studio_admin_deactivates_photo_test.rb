@@ -35,7 +35,7 @@ class StudioAdminDeactivatesPhotoTest < ActionDispatch::IntegrationTest
       refute page.has_content?("Deactivate")
     end
 
-    visit category_path(category.name)
+    visit category_path(category.slug)
 
     refute page.has_content?(photo.name)
   end

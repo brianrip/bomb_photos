@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   resources :charities, only: [:index, :show]
 
   resources :categories, only: [:index]
-  get "/categories/:name", :to => "categories#show", as: :category
+  get "/categories/:slug", :to => "categories#show", as: :category
 
   resources :charges
 end
