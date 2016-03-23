@@ -1,0 +1,19 @@
+
+<div class="col-md-offset-5 col-md-4 col-md-offset-3 text-align-left">
+
+<%= form_for @photo, url: admin_photos_path do |f| %>
+    <h4><%= f.label :name %></h4>
+  <%= f.text_field :name %>
+    <h4><%= f.label :description %></h4>
+  <%= f.text_field :description %>
+    <h4><%= f.label :price %></h4>
+  <%= f.text_field :price %>
+    <h4><%= label_tag :tags %></h4>
+  <%= text_field_tag :tags %>
+    <h4><%= f.label :image %></h4>
+  <%= f.file_field :image %>
+  <%= f.label :category %>
+  <%= f.collection_select(:category_id, @categories, :id, :name, { include_blank: "Select a category" }, { class: 'categorySelect' }) %>
+  <h4><%= f.submit class: "btn btn-primary" %></h4>
+<% end %>
+</div>
