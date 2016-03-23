@@ -10,7 +10,7 @@ class OrderTest < ActiveSupport::TestCase
   should have_many(:photos)
 
   test "order status returns correct order status" do
-    user = User.create(username: "Jade", password: "passsword")
+    user = User.create(email: "Jade", password: "passsword")
     order1 = user.orders.create(status: 2)
     order2 = user.orders.create(status: 3)
     order3 = user.orders.create(status: 0)
