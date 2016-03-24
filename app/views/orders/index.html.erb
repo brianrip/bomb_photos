@@ -1,5 +1,5 @@
 <div class="text-center">
-<h1>your_orders</h1>
+<h1>Your Orders</h1>
   <% @orders.each do |order| %>
     <h4> <%= link_to "Order: #{order.id}", order_path(order) %> </h4>
     <h5> <%= order.total_price %> </h4>
