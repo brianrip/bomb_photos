@@ -1,21 +1,19 @@
 <div class="container">
   <h1 class="text-center">.all_orders for gifs_for_good</h1>
-  <span class="status_breakdown">
-    <table class="table table-striped span:inline">
-      <tr><th>Order Statuses</th></tr>
-      <% if @orders %>
-        <% @orders.status_breakdown.each do |status, amount| %>
-          <tr>
-            <td><%= "#{status.capitalize}: #{amount}" %></td>
-          </tr>
-        <% end %>
-      <% end %>
-    </table>
-  </span>
   <div class="all_orders col-md-offset-1">
-    <%= datagrid_form_for @grid, :method => :get, :url => admin_orders_path %>
-    <%= paginate(@grid.assets) %>
-    <%= datagrid_table @grid %>
-    <%= paginate(@grid.assets) %>
+    <table>
+      <th>
+        <td>Order</td>
+        <td>Placed At</td>
+        <td>Price</td>
+      </th>
+      <tr>
+        <% @orders.each do |order| %>
+          <td> <%= link_to order.id, admin_order_path(order) %></td>
+          <td> <%= order.created_at %></td>
+          <td> <%= order.total_price %></td>
+        <% end %>
+      </tr>
+    </table>
   </div>
 </div>
