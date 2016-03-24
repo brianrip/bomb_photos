@@ -1,0 +1,31 @@
+<h1>Platform Admin</h1>
+<h3>Studios</h3>
+<table class = "table">
+  <tr>
+    <th>ID</th>
+    <th>Studio Name</th>
+    <th>Created On</th>
+    <th>Updated On</th>
+    <th>Status</th>
+    <th>Actions</th>
+    <th>Number of Photos</th>
+  </tr>
+  <% @studios.each do |studio| %>
+    <tr>
+      <td><%= studio.id %></td>
+      <td><%= studio.name %></td>
+      <td><%= studio.created_at %></td>
+      <td><%= studio.updated_at %></td>
+      <td><%= studio.status %></td>
+      <% if studio.active? %>
+        <td><%= button_to "Deactivate", '#' %></td>
+      <% elsif studio.inactive? %>
+        <td><%= button_to "Activate", '#' %></td>
+      <% elsif studio.pending? %>
+        <td><%= button_to "Approve", '#' %>
+        <%= button_to "Deny", '#' %></td>
+      <% end %>
+      <td><%= studio.photos.count %></td>
+    </tr>
+  <% end %>
+</table>

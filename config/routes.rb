@@ -14,6 +14,10 @@ Rails.application.routes.draw do
     patch "/status/:id", to: "photos#change_status"
   end
 
+  namespace :platform_admin do
+    get "/dashboard", to: "studios#index"
+  end
+
   resources :cart_photos, only: [:create]
   get "/cart", to: "cart_photos#show"
   delete "/cart", to: "cart_photos#destroy"
