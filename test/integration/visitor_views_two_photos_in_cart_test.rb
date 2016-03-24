@@ -22,31 +22,28 @@ class VisitorViewsTwoPhotosInCartTest < ActionDispatch::IntegrationTest
                                  price:       999,
                                  category_id: category.id
     )
-    visit category_path(category.name)
+    visit category_path(category.slug)
 
     click_on photo1.name
     click_on "Add to Cart"
 
-    visit category_path(category.name)
+    visit category_path(category.slug)
 
     click_on photo2.name
     click_on "Add to Cart"
 
-    within(".shopping_cart") do
-      click_on "Cart"
-    end
+    click_on "Cart(2)"
 
     assert page.has_link? photo1.name
     assert page.has_link? category.name
-    assert page.has_content? photo1.price
+    assert page.has_content? "$9.99"
 
     assert page.has_link? photo2.name
     assert page.has_link? category.name
-    assert page.has_content? photo2.price
+    assert page.has_content? "$9.99"
+    assert page.has_content? ("19.98")
 
-    assert page.has_content? (photo1.price + photo2.price)
-
-    assert page.has_link? "Continue shopping"
+    assert page.has_link? "Continue Shopping"
     assert page.has_content? "Checkout"
   end
 end
