@@ -12,7 +12,7 @@ class VisitorRegistersForAccountTest < ActionDispatch::IntegrationTest
     assert_equal dashboard_path, current_path
     assert page.has_content?("Thank you for creating an account!")
     assert page.has_content?("adrienne@example.com")
+    assert page.has_content?("My Orders")
     assert page.has_content?("Edit Account Information")
-    assert page.has_content?("View All Orders")
   end
 end
