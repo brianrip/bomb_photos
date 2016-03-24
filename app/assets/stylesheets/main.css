@@ -69,3 +69,11 @@ footer h3 {
 .charity-description {
   min-height: 170px;
 }
+
+.table td {
+  text-align: center;
+}
+
+.table th {
+  text-align: center;
+}
