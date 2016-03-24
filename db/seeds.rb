@@ -11,6 +11,7 @@ class Seed
     generate_categories
     generate_photos
     generate_orders
+    generate_admin
   end
 
   def generate_studios
@@ -32,6 +33,10 @@ class Seed
       studio.users << User.create(email: Faker::Internet.email, password: "password", role: 1)
     end
     puts "generating studio admins"
+  end
+
+  def generate_admin
+    Studio.first.users.create(email: "example@example.com", password: "password", role: 1)
   end
 
   def generate_categories
