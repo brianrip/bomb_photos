@@ -2,67 +2,126 @@ require "test_helper"
 
 class CartTest < ActiveSupport::TestCase
   test "add gif to cart increases contents" do
-    gif_1 = create(:gif)
-    cart = Cart.new(gif_1.id.to_s => 1)
+    category = Category.create(name: "Example Category")
+
+    studio = Studio.create(name:        "Studio",
+                           description: "Example description.",
+                           status:      0
+    )
+
+    photo = studio.photos.create(name:        "Example Name",
+                                 description: "Example Description",
+                                 image:       "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png",
+                                 price:       999,
+                                 category_id: category.id
+    )
+    cart = Cart.new(photo.id.to_s => 1)
 
     assert_equal 1, cart.total_items
 
-    gif_2 = create(:gif)
-    cart.add_gif(gif_2.id)
+    photo2 = studio.photos.create(name:        "Example Name2",
+                                 description: "Example Description2",
+                                 image:       "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png",
+                                 price:       999,
+                                 category_id: category.id
+    )
+    cart.add_photo(photo2.id)
 
-    gif_3 = create(:gif)
-    cart.add_gif(gif_3.id)
+    photo3 = studio.photos.create(name:        "Example Name3",
+                                 description: "Example Description3",
+                                 image:       "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png",
+                                 price:       999,
+                                 category_id: category.id
+    )
+    cart.add_photo(photo3.id)
 
-    assert_equal 3, cart.total_items
-  end
-
-  test "add 2 of a gif increases count of gif" do
-    gif_1 = create(:gif)
-    cart = Cart.new(gif_1.id.to_s => 1)
-
-    cart.add_gif(gif_1.id)
-
-    gif_2 = create(:gif)
-    cart.add_gif(gif_2.id)
-
-    assert_equal 2, cart.cart_gifs.first.quantity
     assert_equal 3, cart.total_items
   end
 
   test "remove_gif removes gif from cart" do
-    gif_1 = create(:gif)
-    cart = Cart.new(gif_1.id.to_s => 1)
+    category = Category.create(name: "Example Category")
 
-    gif_2 = create(:gif)
-    cart.add_gif(gif_2.id)
+    studio = Studio.create(name:        "Studio",
+                           description: "Example description.",
+                           status:      0
+    )
+
+    photo = studio.photos.create(name:        "Example Name",
+                                 description: "Example Description",
+                                 image:       "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png",
+                                 price:       999,
+                                 category_id: category.id
+    )
+    cart = Cart.new(photo.id.to_s => 1)
+
+    photo2 = studio.photos.create(name:        "Example Name2",
+                                 description: "Example Description2",
+                                 image:       "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png",
+                                 price:       999,
+                                 category_id: category.id
+    )
+    cart.add_photo(photo2.id)
 
     assert_equal 2, cart.total_items
 
-    cart.remove_gif(gif_2.id)
+    cart.remove_photo(photo2.id)
 
     assert_equal 1, cart.total_items
   end
 
-  test "cartgifs method returns cartgif objects" do
-    gif_1 = create(:gif)
-    gif_2 = create(:gif)
-    cart = Cart.new(gif_1.id.to_s => 1)
+  test "cartphotos method returns cartphoto objects" do
 
-    cart.add_gif(gif_2.id)
+    category = Category.create(name: "Example Category")
 
-    assert_equal CartGif, cart.cart_gifs.first.class
-    assert_equal 2, cart.cart_gifs.count
+    studio = Studio.create(name:        "Studio",
+                           description: "Example description.",
+                           status:      0
+    )
+
+    photo = studio.photos.create(name:        "Example Name",
+                                 description: "Example Description",
+                                 image:       "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png",
+                                 price:       999,
+                                 category_id: category.id
+    )
+    cart = Cart.new(photo.id.to_s => 1)
+
+    photo2 = studio.photos.create(name:        "Example Name2",
+                                 description: "Example Description2",
+                                 image:       "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png",
+                                 price:       999,
+                                 category_id: category.id
+    )
+    cart.add_photo(photo2.id)
+
+    assert_equal CartPhoto, cart.cart_photos.first.class
+    assert_equal 2, cart.cart_photos.count
   end
 
   test "total price returns total price in cents" do
-    gif_1 = create(:gif)
-    cart = Cart.new(gif_1.id.to_s => 1)
+    category = Category.create(name: "Example Category")
 
-    cart.add_gif(gif_1.id)
+    studio = Studio.create(name:        "Studio",
+                           description: "Example description.",
+                           status:      0
+    )
 
-    gif_2 = create(:gif)
-    cart.add_gif(gif_2.id)
+    photo = studio.photos.create(name:        "Example Name",
+                                 description: "Example Description",
+                                 image:       "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png",
+                                 price:       999,
+                                 category_id: category.id
+    )
+    cart = Cart.new(photo.id.to_s => 1)
 
-    assert_equal 300, cart.total_price
+    photo2 = studio.photos.create(name:        "Example Name2",
+                                 description: "Example Description2",
+                                 image:       "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png",
+                                 price:       999,
+                                 category_id: category.id
+    )
+    cart.add_photo(photo2.id)
+
+    assert_equal 1998, cart.total_price
   end
 end
