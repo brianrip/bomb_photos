@@ -4,17 +4,8 @@ class VisitorViewsPhotosByCategoryTest < ActionDispatch::IntegrationTest
   test "sees photos by category" do
     category_1 = Category.create(name: "Example Category 1")
     category_2 = Category.create(name: "Example Category 2")
-
-    studio = Studio.create(name:        "Studio",
-                           description: "Example description.",
-                           status:      0
-    )
-
-    user = studio.users.create(email:    "admin@example.com",
-                               password: "password",
-                               role:     0
-    )
-
+    studio = create_studio
+    user = create_user
     photo_1 = studio.photos.create(name:      "Example Photo 1",
                                  description: "Example Description",
                                  image:       "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png",

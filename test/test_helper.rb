@@ -50,7 +50,7 @@ class ActionDispatch::IntegrationTest
   end
 
   def create_and_login_user
-    user = User.create(username: "user@example.com", password: "password")
+    user = User.create(email: "user@example.com", password: "password")
     ApplicationController.any_instance.stubs(:current_user).returns(user)
   end
 
