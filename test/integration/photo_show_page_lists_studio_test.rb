@@ -3,7 +3,6 @@ require 'test_helper'
 class PhotoShowPageListsStudioTest < ActionDispatch::IntegrationTest
   test "visitor sees studio on photo show page" do
     category = Category.create(name: "Example Category")
-    Category.create(name: "Other Category")
 
     studio = Studio.create(name:        "Studio",
                            description: "Example description.",
@@ -17,7 +16,7 @@ class PhotoShowPageListsStudioTest < ActionDispatch::IntegrationTest
                                  category_id: category.id
     )
 
-    visit photo_path(photo.id)
+    visit photo_path(photo)
 
     assert page.has_content? studio.name
   end
