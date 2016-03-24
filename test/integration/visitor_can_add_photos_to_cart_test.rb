@@ -24,14 +24,14 @@ class VisitorCanAddPhotosToCartTest < ActionDispatch::IntegrationTest
                                  price:       999,
                                  category_id: category.id
     )
-
     visit categories_path
 
     click_on category.name
     click_on photo.name
     click_on "Add to Cart"
-
     assert page.has_content? "Photo has been added to cart"
+    visit categories_path
+
     assert page.has_content? "Cart(1)"
 
     visit category_path(category.slug)
