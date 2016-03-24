@@ -27,7 +27,7 @@ Rails.application.routes.draw do
 
   resources :photos, only: [:index, :show, :create]
 
-  resources :studios, only: [:index, :show]
+  resources :studios
 
   resources :categories, only: [:index]
   get "/categories/:slug", :to => "categories#show", as: :category

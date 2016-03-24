@@ -1,0 +1,10 @@
+<h1>Apply for Your Own Studio</h1>
+<%= form_for @studio do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+  <%= f.label :promo_image %>
+  <%= f.file_field :promo_image %>
+  <%= f.submit %>
+<% end %>
