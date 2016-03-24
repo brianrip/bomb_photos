@@ -18,8 +18,7 @@ class CartPhotosController < ApplicationController
   def destroy
     photo = find_photo
     @cart.remove_photo(photo.id)
-    flash[:success] = "Successfully removed license for
-    #{view_context.link_to photo.title, photo_path(photo.id)}"
+    flash[:success] = "#{view_context.link_to photo.name, photo_path(photo.id)} has been removed from your cart"
     if @cart.contents.empty?
       redirect_to photos_path
     else
