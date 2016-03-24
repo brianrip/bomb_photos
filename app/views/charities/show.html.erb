@@ -1,6 +1,0 @@
-<div class="container text-center">
-  <h1>all_gifs_supporting <%= @charity.name %></h1>
-  <% @charity.gifs.each do |gif| %>
-  <%= render partial: './gif_column', locals: { gif: gif } %>
-  <% end %>
-</div>

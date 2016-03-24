@@ -1,0 +1,48 @@
+<h1 class="text-center">Your Shopping Cart</h1>
+​
+<div class="container">
+  <% if @cart_photos.empty? %>
+<h2>Your cart is empty</h2>
+  <% else %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Name and Description</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Subtotal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cart_photos.each do |photo| %>
+        <div id="gif-info">
+          <tr>
+            <td><%= image_tag photo.image, width: 80 %></td>
+            <td><%= link_to photo.name, photo_path(photo) %>
+            <p><%= photo.description %></p></td>
+            <td><%= link_to Category.find(photo.category_id).name, category_path(Category.find(photo.category_id).slug) %></td>
+            <td><%= format_price(photo.price) %></td>
+            <td>
+              <%= form_tag(cart_path(id: photo.id), method: :patch) do %>
+                <p><%= select photo.id, photo.quantity, (1..15).to_a, selected: photo.quantity %></p>
+                <p><%= submit_tag "Update Quantity" %></p>
+              <% end %>
+              <p><%= link_to "Remove from Cart", cart_path(id: photo.id), method: :delete %></p>
+            </td>
+            <td><%= number_to_currency(photo.subtotal) %></td>
+          </tr>
+        </div>
+      <% end %>
+      <tr>
+        <td colspan=5 align=right>
+          <p>Total: $<%= @cart.total_price / 100.0 %>.00</p>
+          <p><%= link_to "Checkout", orders_path, method: :post %></p>
+          <p><%= link_to "Continue Shopping", categories_path %></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <% end %>
+</div>

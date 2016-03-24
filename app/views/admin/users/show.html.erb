@@ -1,13 +1,13 @@
 <div class="container text-center">
-  <h1>.admin_dashboard</h1>
+  <h1 class="studio-name"><%= @studio.name %></h1>
   <div class="col-md-6">
-    <h3><%= link_to "View all orders", admin_orders_path, class: "btn btn-primary btn-large" %></h3>
+    <h3><%= link_to "View Orders", admin_orders_path, class: "btn btn-primary btn-large" %></h3>
   </div>
   <div class="col-md-6">
-  <h3><%= link_to "Add New Gif", new_admin_gif_path, class: "btn btn-primary btn-large" %></h3>
+  <h3><%= link_to "Add New Photo", new_admin_photo_path, class: "btn btn-primary btn-large" %></h3>
   </div>
 
   <div class="text-center hero">
-    
+
   </div>
 </div>

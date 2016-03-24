@@ -6,11 +6,11 @@ class OrderTest < ActiveSupport::TestCase
   should validate_numericality_of(:total_price).
     is_greater_than(0)
   should belong_to(:user)
-  should have_many(:order_gifs)
-  should have_many(:gifs)
+  should have_many(:order_photos)
+  should have_many(:photos)
 
   test "order status returns correct order status" do
-    user = User.create(username: "Jade", password: "passsword")
+    user = User.create(email: "Jade", password: "passsword")
     order1 = user.orders.create(status: 2)
     order2 = user.orders.create(status: 3)
     order3 = user.orders.create(status: 0)

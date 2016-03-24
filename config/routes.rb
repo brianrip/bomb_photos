@@ -1,33 +1,34 @@
 Rails.application.routes.draw do
-  root to: "gifs#index"
+  root to: "categories#index"
   get "/login", to: "sessions#new"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
 
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create, :update, :edit]
   get "/dashboard", to: "users#show"
 
   namespace :admin do
     get "/dashboard", to: "users#show"
     resources :orders, only: [:index, :update, :show]
-    resources :gifs, only: [:new, :create, :edit, :update, :destroy]
+    resources :photos, only: [:new, :create, :edit, :update, :destroy]
+    patch "/status/:id", to: "photos#change_status"
   end
 
-  resources :cart_gifs, only: [:create]
-  get "/cart", to: "cart_gifs#show"
-  delete "/cart", to: "cart_gifs#destroy"
-  patch "/cart", to: "cart_gifs#update"
+  resources :cart_photos, only: [:create]
+  get "/cart", to: "cart_photos#show"
+  delete "/cart", to: "cart_photos#destroy"
+  patch "/cart", to: "cart_photos#update"
 
   resources :orders, only: [:index, :show, :create, :new]
 
-  resources :gifs, only: [:index, :show, :create]
+  resources :photos, only: [:index, :show, :create]
 
   put "/retire", to: "gifs#update"
 
-  resources :charities, only: [:index, :show]
+  resources :studios, only: [:index, :show]
 
-  resources :tags, only: [:index]
-  get "/tag/:name", :to => "tags#show", as: :tag
+  resources :categories, only: [:index]
+  get "/categories/:slug", :to => "categories#show", as: :category
 
   resources :charges
 end
