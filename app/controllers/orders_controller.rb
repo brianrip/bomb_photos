@@ -22,6 +22,7 @@ class OrdersController < ApplicationController
       @user = current_user
       @order = OrderProcessor.new(@cart, @user).process_order
       session[:cart].clear
+      flash[:success] = "Your order has been placed."
       redirect_to new_charge_path(order: @order)
     else
       flash[:info] = "Please login or create a new account before checking out."
