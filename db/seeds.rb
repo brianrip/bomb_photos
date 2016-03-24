@@ -3,7 +3,7 @@ class Seed
     @num_studios = 10
     @num_users = 50
     @num_categories = 5
-    @num_photos = 100
+    @num_photos = 20
     @num_orders = 100
     generate_studios
     generate_users
@@ -48,6 +48,7 @@ class Seed
 
   def generate_photos
     @num_photos.times do
+      puts "generated photos"
       studio = Studio.all.shuffle.pop
       studio.photos.create(name:        Faker::Lorem.word,
                            description: Faker::Lorem.sentence,
@@ -56,7 +57,6 @@ class Seed
                            category_id: Random.rand(1..@num_categories)
       )
     end
-    puts "generated photos"
   end
 
   def generate_orders
