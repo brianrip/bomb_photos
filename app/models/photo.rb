@@ -33,4 +33,8 @@ class Photo < ActiveRecord::Base
   def self.all_active
     Gif.all.each { |gif| gif.active }
   end
+
+  def set_price
+    self.price = price * 100
+  end
 end
