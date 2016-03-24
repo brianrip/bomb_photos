@@ -3,7 +3,6 @@ require 'test_helper'
 class CustomerCanOnlyHaveOneOfEachPhotoInCartTest < ActionDispatch::IntegrationTest
   test "customer tries to add same photo to cart two times" do
     category = Category.create(name: "Example Category")
-    Category.create(name: "Other Category")
 
     studio = Studio.create(name:        "Studio",
                            description: "Example description.",
