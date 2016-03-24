@@ -23,12 +23,8 @@ Rails.application.routes.draw do
 
   resources :photos, only: [:index, :show, :create]
 
-  put "/retire", to: "gifs#update"
-
   resources :studios, only: [:index, :show]
 
   resources :categories, only: [:index]
   get "/categories/:slug", :to => "categories#show", as: :category
-
-  resources :charges
 end
