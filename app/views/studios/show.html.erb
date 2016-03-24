@@ -1,6 +1,9 @@
 <div class="container text-center">
-  <h1>all_gifs_supporting <%= @charity.name %></h1>
-  <% @charity.gifs.each do |gif| %>
-  <%= render partial: './gif_column', locals: { gif: gif } %>
+  <h1>Photos by <%= @studio.name %></h1>
+  <p>
+    <%= @studio %>
+  </p>
+  <% @studio.photos.each do |photo| %>
+  <%= render partial: 'partials/photo_column', locals: { photo: photo } %>
   <% end %>
 </div>

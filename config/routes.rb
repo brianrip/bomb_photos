@@ -25,7 +25,7 @@ Rails.application.routes.draw do
 
   put "/retire", to: "gifs#update"
 
-  resources :charities, only: [:index, :show]
+  resources :studios, only: [:index, :show]
 
   resources :categories, only: [:index]
   get "/categories/:slug", :to => "categories#show", as: :category
