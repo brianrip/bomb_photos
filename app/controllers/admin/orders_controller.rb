@@ -1,8 +1,9 @@
 class Admin::OrdersController < Admin::BaseController
   def index
-    @orders = Order.all
-    @grid = OrdersGrid.new(params[:orders_grid]) do |scope|
-      scope.page(params[:page])
+    @orders = Order.all.select do |order|
+      order.order_photos.any? do |order_photo|
+        order_photo.photo.studio == current_user.studio
+      end
     end
   end
 
