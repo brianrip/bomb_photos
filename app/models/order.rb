@@ -27,4 +27,8 @@ class Order < ActiveRecord::Base
   def update_status_paid
     update(status: 1)
   end
+
+  def placed_at
+    created_at.strftime("%B %d, %Y")
+  end
 end

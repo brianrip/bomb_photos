@@ -22,10 +22,10 @@ class CustomerCanViewMultiplePastOrdersTest < ActionDispatch::IntegrationTest
     click_on "My Orders"
 
     assert page.has_content? order1.id
-    assert page.has_content? order1.created_at
+    assert page.has_content? order1.placed_at
     assert page.has_content? order1.total_price
     assert page.has_content? order2.id
-    assert page.has_content? order2.created_at
+    assert page.has_content? order2.placed_at
     assert page.has_content? order2.total_price
   end
 end
