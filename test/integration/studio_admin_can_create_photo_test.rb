@@ -13,8 +13,8 @@ class StudioAdminCanCreatePhotoTest < ActionDispatch::IntegrationTest
 
     fill_in "Name",        with: "Example Name"
     fill_in "Description", with: "Example Description"
-    fill_in "Price",       with: "999"
-    select "Example Category", from: "photo[category_id]"
+    fill_in "Price",       with: "9.99"
+    select "A Category", from: "photo[category_id]"
     attach_file "Image", "test/asset_tests/photos/sample_photo.jpg"
     click_on "Create Photo"
 
@@ -29,5 +29,20 @@ class StudioAdminCanCreatePhotoTest < ActionDispatch::IntegrationTest
     end
 
     assert page.has_content?("Your Photo Has Been Created")
+
+    visit new_admin_photo_path
+
+    fill_in "Name",        with: "Example Name"
+    fill_in "Description", with: "Example Description"
+    fill_in "Price",       with: "10"
+    select "A Category", from: "photo[category_id]"
+    attach_file "Image", "test/asset_tests/photos/sample_photo.jpg"
+    click_on "Create Photo"
+
+    assert page.has_content?("Your Photo Has Been Created")
+
+    visit photo_path(Photo.last)
+
+    assert page.has_content?("$10.00")
   end
 end

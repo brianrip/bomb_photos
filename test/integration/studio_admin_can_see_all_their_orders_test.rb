@@ -20,9 +20,9 @@ class StudioAdminSeesAllTheirOrdersTest < ActionDispatch::IntegrationTest
 
     assert page.has_content?(order.id)
     assert page.has_content?(order.total_price)
-    assert page.has_content?(order.created_at.to_date)
+    assert page.has_content?(order.placed_at)
     assert page.has_content?(order2.id)
     assert page.has_content?(order2.total_price)
-    assert page.has_content?(order2.created_at.to_date)
+    assert page.has_content?(order2.placed_at)
   end
 end
