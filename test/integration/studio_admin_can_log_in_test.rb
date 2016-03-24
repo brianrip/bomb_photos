@@ -2,10 +2,7 @@ require "test_helper"
 
 class AdminCanLogInTest < ActionDispatch::IntegrationTest
   test "login with valid information" do
-    studio = Studio.create(name:        "Studio",
-                           description: "Example description.",
-                           status:      0
-                          )
+    studio = create_studio
 
     admin = studio.users.create(email: "admin@example.com",
                                 password: "password",
