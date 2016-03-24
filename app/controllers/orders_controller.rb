@@ -24,7 +24,7 @@ class OrdersController < ApplicationController
       session[:cart].clear
       redirect_to new_charge_path(order: @order)
     else
-      flash[:info] = "Please login or create a new account before checking out."
+      flash[:info] = "You must log in or register to place an order."
       redirect_to login_path
     end
   end

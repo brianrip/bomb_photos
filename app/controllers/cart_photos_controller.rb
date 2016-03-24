@@ -13,6 +13,7 @@ class CartPhotosController < ApplicationController
   def show
     ids = session[:cart]
     @cart_photos = @cart.cart_photos
+    session[:return_to] = cart_path
   end
 
   def destroy
