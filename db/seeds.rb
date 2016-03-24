@@ -1,15 +1,15 @@
 class Seed
   def initialize
-    # @num_studios = 10
-    # @num_users = 50
-    # @num_categories = 5
-    # @num_photos = 100
+    @num_studios = 10
+    @num_users = 50
+    @num_categories = 5
+    @num_photos = 100
     @num_orders = 100
-    # generate_studios
-    # generate_users
-    # generate_studio_admins
-    # generate_categories
-    # generate_photos
+    generate_studios
+    generate_users
+    generate_studio_admins
+    generate_categories
+    generate_photos
     generate_orders
   end
 
