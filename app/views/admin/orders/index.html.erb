@@ -1,19 +1,19 @@
 <div class="container">
   <h1 class="text-center">.all_orders for gifs_for_good</h1>
   <div class="all_orders col-md-offset-1">
-    <table>
-      <th>
-        <td>Order</td>
-        <td>Placed At</td>
-        <td>Price</td>
-      </th>
+    <table class="table">
       <tr>
-        <% @orders.each do |order| %>
-          <td> <%= link_to order.id, admin_order_path(order) %></td>
-          <td> <%= order.created_at %></td>
-          <td> <%= order.total_price %></td>
-        <% end %>
+        <th>Order</th>
+        <th>Placed At</th>
+        <th>Price</th>
       </tr>
+      <% @orders.each do |order| %>
+      <tr>
+        <td> <%= link_to order.id, admin_order_path(order) %></td>
+        <td> <%= order.created_at %></td>
+        <td> <%= order.total_price %></td>
+      </tr>
+      <% end %>
     </table>
   </div>
 </div>
