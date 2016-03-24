@@ -2,16 +2,28 @@ require 'test_helper'
 
 class VisitorMustLogInBeforeCheckingOutTest < ActionDispatch::IntegrationTest
   test "visitor prompted to log in before checking out" do
-    user = User.create(email: "adrienne@example.com", password: "password", role: 0)
-    business = Business.create(name: "Nature business", description: "Nature photos", status: 0)
-    nature = Category.create(name: "Nature")
-    #WHAT GOES IN THE IMAGE FIELDS?
-    photo = nature.photos.create(name: "photo", desciption: "description", price: 2000, image: "placeholder", status: 0)
-    business << photo
+    category = Category.create(name: "Example Category")
+
+    studio = Studio.create(name:        "Studio",
+                           description: "Example description.",
+                           status:      0
+    )
+
+    user = User.create(email:  "user@example.com",
+                                password: "password",
+                                role:     0
+    )
+
+    photo = studio.photos.create(name:        "Example Name",
+                                 description: "Example Description",
+                                 image:       "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png",
+                                 price:       999,
+                                 category_id: category.id
+    )
 
     visit categories_path
-    click_on "Nature"
-    click_on "photo"
+    click_on "Example Category"
+    click_on "Example Name"
     click_on "Add to Cart"
 
     visit cart_path
@@ -20,8 +32,10 @@ class VisitorMustLogInBeforeCheckingOutTest < ActionDispatch::IntegrationTest
 
     fill_in "Email", with: user.email
     fill_in "Password", with: "password"
-    click_on "Log In"
-    assert_current_path("/cart")
+    within(".login") do
+      click_on "Log In"
+    end
+    assert_equal cart_path, current_path
     assert page.has_content?(photo.name)
   end
 end
