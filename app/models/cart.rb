@@ -30,4 +30,8 @@ class Cart
       CartPhoto.new(photo_id, quantity)
     end
   end
+
+  def double_click?(photo_id)
+    contents[photo_id.to_s] != nil
+  end
 end

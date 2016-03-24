@@ -25,10 +25,6 @@
             <td><%= link_to Category.find(photo.category_id).name, category_path(Category.find(photo.category_id).slug) %></td>
             <td><%= format_price(photo.price) %></td>
             <td>
-              <%= form_tag(cart_path(id: photo.id), method: :patch) do %>
-                <p><%= select photo.id, photo.quantity, (1..15).to_a, selected: photo.quantity %></p>
-                <p><%= submit_tag "Update Quantity" %></p>
-              <% end %>
               <p><%= link_to "Remove from Cart", cart_path(id: photo.id), method: :delete %></p>
             </td>
             <td><%= number_to_currency(photo.subtotal) %></td>
