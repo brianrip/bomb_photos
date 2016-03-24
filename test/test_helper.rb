@@ -26,33 +26,48 @@ class ActionDispatch::IntegrationTest
     super
   end
 
-  def create_and_return_admin
-    admin = User.create(username: "July", password: "password", role: 1)
+  def create_category
+    Category.create(name: "Example Category")
+  end
+
+  def create_studio
+    Studio.create(name:        "Studio",
+                  description: "Example description.",
+                  status:      0
+                  )
+  end
+
+  def create_and_login_studio_admin(studio)
+    admin = studio.users.create(email:  "admin@eample.com",
+                                password: "password",
+                                role:     1
+                                )
     ApplicationController.any_instance.stubs(:current_user).returns(admin)
   end
 
+  def create_user
+    user = User.create(email: "user@example.com", password: "password")
+  end
+
   def create_and_login_user
-    user = User.create(username: "Brock", password: "password")
+    user = User.create(username: "user@example.com", password: "password")
+    ApplicationController.any_instance.stubs(:current_user).returns(user)
+  end
 
-    visit '/'
-
-    click_on "login"
-
-    fill_in "Username", with: "Brock"
-    fill_in "Password", with: "password"
-
-    within ".login" do
-      click_on "Login"
-    end
+  def create_order(user, photo)
+    order_photo = OrderPhoto.create(photo_id: photo.id)
+    order = user.orders.create(total_price: 200)
+    order.order_photos << order_photo
+    order
   end
 
   def create_multiple_orders(num)
     num.times do
-      user = create(:user)
-      gif = create(:gif)
+      user = create_user
+      gif = create(gif)
       OrderGif.create(
         gif_id: gif.id, quantity: 1, subtotal: 100
-      )
+                     )
       order = user.orders.create!(total_price: 100, status: 0)
 
       gif = create(:gif)
@@ -62,16 +77,12 @@ class ActionDispatch::IntegrationTest
     end
   end
 
-  def create_a_gif
-    visit admin_dashboard_path
-    click_on "Add New Gif"
-
-    fill_in "Title", with: "all of teh lulz"
-    fill_in "Description", with: "this is all the lulz you could imagine!!"
-    fill_in "Price", with: "100"
-    fill_in "Tags", with: "lulzy, defeated, dusty"
-    attach_file "Image", "test/asset_tests/gifs/carmer-got-carmed.gif"
-
-    click_on "add new gif!"
+  def create_studio_photo(studio, category)
+    studio.photos.create(name:        "Example Name",
+                         description: "Example Description",
+                         image:       "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png",
+                         price:       999,
+                         category_id: category.id
+                         )
   end
 end
