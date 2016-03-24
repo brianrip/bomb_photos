@@ -1,6 +1,6 @@
 class StudiosController < ApplicationController
   def index
-    @studios = Studio.where(status: "active")
+    @studios = Studio.where(status: 0)
   end
 
   def show
