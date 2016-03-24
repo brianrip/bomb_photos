@@ -1,10 +1,10 @@
 <div class="jumbotron hero">
   <div class="container">
     <div class="col-md-7">
-      <h1 class="brand">gifs_for_good</h1>
+      <h1 class="brand">Bomb Photos</h1>
     </div>
     <div class=" col-md-offset-3 col-md-8">
-      <h3 class="brand">COMMIT_yourself</h3>
+      <h3 class="brand">Professional Images</h3>
     </div>
   </div>
 </div>
@@ -13,7 +13,7 @@
     <ul class="nav navbar-nav navbar-right gif-links">
       <li><%= link_to "View All Photos", root_path, class: "glyphicon" %></li>
       <li><%= link_to "All Categories", categories_path, class: "glyphicon" %></li>
-      <li><%= link_to "Shop By Studio", charities_path, class: "glyphicon" %></li>
+      <li><%= link_to "Shop By Studio", studios_path, class: "glyphicon" %></li>
       <li><%= link_to "Cart(#{@cart.total_items})", cart_path, class: "glyphicon glyphicon-shopping-cart" %></li>
       <% if current_user %>
         <li><%= link_to "#{current_user.email}'s_dashboard", dashboard_path, class: "glyphicon" %></li>

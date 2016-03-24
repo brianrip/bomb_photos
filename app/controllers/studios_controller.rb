@@ -1,9 +1,9 @@
-class CharitiesController < ApplicationController
-  def show
-    @charity = Charity.find(params[:id])
+class StudiosController < ApplicationController
+  def index
+    @studios = Studio.where(status: "active")
   end
 
-  def index
-    @charities = Charity.all
+  def show
+    @studio = Studio.find(params[:id])
   end
 end

@@ -1,13 +1,13 @@
 class SessionsController < ApplicationController
-  def index
-
-  end
-
   def create
     user = User.find_by(email: params[:session][:email])
     if user && user.authenticate(params[:session][:password])
       session[:user_id] = user.id
-      redirect_to dashboard_path
+      if session[:return_to]
+        redirect_to session[:return_to]
+      else
+        redirect_to dashboard_path
+      end
     else
       flash.now[:error] = "Invalid Login"
       render :new

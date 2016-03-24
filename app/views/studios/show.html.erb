@@ -1,6 +1,16 @@
 <div class="container text-center">
-  <h1>all_gifs_supporting <%= @charity.name %></h1>
-  <% @charity.gifs.each do |gif| %>
-  <%= render partial: './gif_column', locals: { gif: gif } %>
+  <h1>Photos by <%= @studio.name %></h1>
+  <p>
+    <%= @studio.description %>
+  </p>
+  <p>
+  <% @studio.photos.each do |photo| %>
+    <%= render partial: 'partials/photo_column', locals: { photo: photo } %>
+    <% if photo.active %>
+      <%= link_to "Add to Cart", cart_photos_path(photo_id: photo.id), method: :post, class: "btn btn-default" %>
+    <% else %>
+      <h3><%= "Sorry, this photo is no longer available" %></h3>
+    <% end %>
   <% end %>
+  </p>
 </div>

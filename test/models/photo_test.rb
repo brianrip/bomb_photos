@@ -1,9 +1,16 @@
-require 'test_helper'
+require "test_helper"
 
-class PhotoShowPageListsStudioTest < ActionDispatch::IntegrationTest
-  test "visitor sees studio on photo show page" do
-    category = Category.create(name: "Example Category")
+class PhotoTest < ActiveSupport::TestCase
+  should validate_presence_of(:name)
+  should validate_presence_of(:description)
+  should validate_presence_of(:price)
+  should validate_numericality_of(:price).
+    is_greater_than(0)
+  should validate_presence_of(:image)
+  should belong_to(:category)
 
+  test "active is default true" do
+    category = Category.create(name: "Nature")
     studio = Studio.create(name:        "Studio",
                            description: "Example description.",
                            status:      0
@@ -15,9 +22,6 @@ class PhotoShowPageListsStudioTest < ActionDispatch::IntegrationTest
                                  price:       999,
                                  category_id: category.id
     )
-
-    visit photo_path(photo)
-
-    assert page.has_content? studio.name
+    assert photo.active
   end
 end
