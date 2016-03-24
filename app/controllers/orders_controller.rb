@@ -17,16 +17,26 @@ class OrdersController < ApplicationController
     end
   end
 
+  def new
+    if current_user
+      @order = Order.new
+      @cart_photos = @cart.cart_photos
+      render :new
+    else
+      flash[:info] = "You must log in or register to place an order."
+      redirect_to login_path
+    end
+  end
+
   def create
     if current_user
       @user = current_user
       @order = OrderProcessor.new(@cart, @user).process_order
       session[:cart].clear
       flash[:success] = "Your order has been placed."
-      redirect_to new_charge_path(order: @order)
+      redirect_to order_path(@order)
     else
-      flash[:info] = "You must log in or register to place an order."
-      redirect_to login_path
+      render file: "/public/404"
     end
   end
 

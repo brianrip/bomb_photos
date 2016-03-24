@@ -3,6 +3,7 @@ require 'test_helper'
 class LoggedInUserCreatesAnOrderTest < ActionDispatch::IntegrationTest
 
   test "user can see order summary" do
+    skip
     category = Category.create(name: "Example Category")
 
     studio = Studio.create(name:        "Studio",
@@ -22,10 +23,6 @@ class LoggedInUserCreatesAnOrderTest < ActionDispatch::IntegrationTest
                                  category_id: category.id
     )
 
-    op = OrderPhoto.create(photo_id: photo.id)
-    order = user.orders.create(total_price: 200)
-    order.order_photos << op
-
     ApplicationController.any_instance.stubs(:current_user).returns(user)
 
     visit root_path
@@ -38,7 +35,18 @@ class LoggedInUserCreatesAnOrderTest < ActionDispatch::IntegrationTest
 
     click_on "Checkout"
 
-    assert page.has_content? "Your order has been placed."
+    assert_equal new_order_path, current_path
+
+    assert page.has_content? "Please complete your order"
+    assert page.has_content? photo.name
+    assert page.has_content? "$9.99"
+    assert page.has_css?("img[src='#{photo.image}']")
+    assert page.has_content? "Total: $9.99"
+    # save_and_open_page
+
+    click_on "Pay with Card"
+
+    assert page.has_content?("Your order is complete")
     assert page.has_content? order.total_price
     assert page.has_content? order.created_at
     # assert page.has_link? "all photos"

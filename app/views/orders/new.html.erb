@@ -1,0 +1,48 @@
+<div class="container text-center">
+  <h1>Please complete your order</h1>
+  <div class="col-md-12 text-center">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @cart_photos.each do |photo| %>
+          <div id="gif-info">
+            <tr>
+              <td><%= image_tag photo.image, width: 80 %></td>
+              <td><%= photo.name %>
+              <td><%= format_price(photo.price) %>
+            </tr>
+          </div>
+        <% end %>
+        <tr>
+          <td colspan=5 align=right>
+            <p>Total: <%= format_price(@cart.total_price) %></p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+<%= form_tag @order do %>
+  <article>
+    <% if flash[:error].present? %>
+      <div id="error_explanation">
+        <p><%= flash[:error] %></p>
+      </div>
+    <% end %>
+    <label class="amount">
+      <span>Amount: <%= format_price(@cart.total_price) %></span>
+    </label>
+  </article>
+
+  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-description="Bomb Photos"
+          data-amount="<%= @amount %>"
+          data-locale="auto"></script>
+<% end %>
+  </div>
+</div>
