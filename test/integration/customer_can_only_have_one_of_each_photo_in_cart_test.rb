@@ -1,7 +1,7 @@
 require 'test_helper'
 
-class VisitorCanAddPhotosToCartTest < ActionDispatch::IntegrationTest
-  test "visitor sees a cart with multiple items" do
+class CustomerCanOnlyHaveOneOfEachPhotoInCartTest < ActionDispatch::IntegrationTest
+  test "customer tries to add same photo to cart two times" do
     category = Category.create(name: "Example Category")
     Category.create(name: "Other Category")
 
@@ -39,6 +39,13 @@ class VisitorCanAddPhotosToCartTest < ActionDispatch::IntegrationTest
     click_on "Add to Cart"
 
     assert page.has_content? "Photo has been added to cart"
+    assert page.has_content? "Cart(2)"
+
+    visit category_path(category.slug)
+
+    click_on photo2.name
+    click_on "Add to Cart"
+    assert page.has_content? "That photo is already in your cart"
     assert page.has_content? "Cart(2)"
   end
 end

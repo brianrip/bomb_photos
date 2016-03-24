@@ -3,10 +3,12 @@ class CartPhotosController < ApplicationController
 
   def create
     photo = Photo.find(params[:photo_id])
-    @cart.add_photo(photo.id)
     session[:cart] = @cart.contents
-    flash[:success] =
-      "Photo has been added to cart"
+    unless @cart.double_click?(photo.id)
+      @cart.add_photo(photo.id)
+      flash[:success] = "Photo has been added to cart"
+    end
+    flash[:alert] = "That photo is already in your cart" if @cart.double_click?(photo.id)
     redirect_to photos_path
   end
 
