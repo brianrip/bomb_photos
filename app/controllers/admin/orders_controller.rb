@@ -1,11 +1,7 @@
 class Admin::OrdersController < Admin::BaseController
   def index
     @studio = Studio.find(params[:studio])
-    @orders = Order.all.select do |order|
-      order.order_photos.any? do |order_photo|
-        order_photo.photo.studio == @studio
-      end
-    end
+    @orders = Order.associated_photos(@studio)
   end
 
   def update
