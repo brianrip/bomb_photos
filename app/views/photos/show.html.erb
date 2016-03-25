@@ -15,11 +15,11 @@
         </p>
         <br>
         <% if current_admin? %>
-          <p><%= link_to "Edit", edit_admin_photo_path(@photo.id), class: "btn btn-default" %>
+          <p><%= link_to "Edit", edit_admin_photo_path(@photo.studio, @photo.id), class: "btn btn-default" %>
           <% if @photo.active %>
-            <p><%= link_to "Deactivate", admin_path(@photo), method: :patch, class: "btn btn-default" %>
+            <p><%= link_to "Deactivate", "/admin/#{@photo.studio.id}/status/#{@photo.id}", method: :patch, class: "btn btn-default" %>
           <% else %>
-            <p><%= link_to "Activate", admin_path(@photo), method: :patch, class: "btn btn-default" %>
+            <p><%= link_to "Activate", "/admin/#{@photo.studio.id}/status/#{@photo.id}", method: :patch, class: "btn btn-default" %>
           <% end %>
         <% end %>
       </div>

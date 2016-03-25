@@ -24,8 +24,7 @@ class StudioAdminCanOnlyViewTheirOrdersTest < ActionDispatch::IntegrationTest
     order = create_order(user, photo)
     order2 = create_order(user, other_photo)
 
-
-    visit admin_orders_path
+    visit admin_orders_path(studio)
     assert page.has_content?(order.id)
     refute page.has_content?(order2.id)
   end

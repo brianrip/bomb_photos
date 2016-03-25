@@ -15,7 +15,7 @@ class StudioAdminSeesAllTheirOrdersTest < ActionDispatch::IntegrationTest
     order = create_order(user, photo)
     order2 = create_order(other_user, photo)
 
-    visit admin_dashboard_path
+    visit admin_path(studio)
     click_on "View Orders"
 
     assert page.has_content?(order.id)

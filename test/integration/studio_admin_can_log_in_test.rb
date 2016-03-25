@@ -18,7 +18,7 @@ class AdminCanLogInTest < ActionDispatch::IntegrationTest
       click_on "Log In"
     end
 
-    assert_equal admin_dashboard_path, current_path
+    assert_equal admin_path(studio), current_path
 
     within(".studio-name") do
       assert page.has_content?(studio.name)
