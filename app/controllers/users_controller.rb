@@ -16,11 +16,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    if current_admin?
-      redirect_to admin_dashboard_path
-    else
-      current_user
-    end
+    current_user
   end
 
 private

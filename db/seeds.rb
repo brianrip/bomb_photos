@@ -16,7 +16,7 @@ class Seed
 
   def generate_studios
     @num_studios.times do
-      Studio.create(name: Faker::Commerce.department, description: Faker::Lorem.sentence, status: 0)
+      Studio.create(name: Faker::Commerce.department, description: Faker::Lorem.sentence, status: 0, promo_image: "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png")
     end
     puts "Generating studios"
   end

@@ -10,7 +10,9 @@ class StudioAdminCanOnlyViewTheirOrdersTest < ActionDispatch::IntegrationTest
 
     other_studio = Studio.create(name:        "Other Studio",
     description:  "Example description2.",
-    status:      0
+    status:      0,
+    promo_image: "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png"
+
     )
     other_photo = other_studio.photos.create(name:        "Example Name 2",
                                              description: "Example Description2",

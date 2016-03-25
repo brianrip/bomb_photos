@@ -5,6 +5,8 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       if session[:return_to]
         redirect_to session[:return_to]
+      elsif current_user.admin?
+        redirect_to admin_dashboard_path
       else
         redirect_to dashboard_path
       end

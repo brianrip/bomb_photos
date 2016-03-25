@@ -7,17 +7,20 @@ class PlatformAdminDashboardExistsTest < ActionDispatch::IntegrationTest
 
     studio2 = Studio.create(name:        "Studio2",
                            description: "Example description2.",
-                           status:      1
+                           status:      1,
+                           promo_image: "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png"
     )
 
     studio3 = Studio.create(name:        "Studio3",
                            description: "Example description3.",
-                           status:      2
+                           status:      2,
+                           promo_image: "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png"
     )
 
     studio4 = Studio.create(name:        "Studio4",
                            description: "Example description4.",
-                           status:      3
+                           status:      3,
+                           promo_image: "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png"
     )
 
     studio.photos.create(name:        "Example Name",
