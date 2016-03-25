@@ -2,27 +2,14 @@ require 'test_helper'
 
 class StudioAdminViewsSpecificOrderTest < ActionDispatch::IntegrationTest
   test "studio admin sees only order photos associated with their studio" do
-    category = Category.create(name: "Example Category")
-
-    studio = Studio.create(name:        "Studio",
-                           description: "Example description.",
-                           status:      0
-    )
-
+    category = create_category
+    studio = create_studio
     other_studio = Studio.create(name:        "Other Studio",
                            description: "Other example description.",
                            status:      0
     )
-
-    admin = studio.users.create(email:  "admin@eample.com",
-                                password: "password",
-                                role:     1
-    )
-
-    user = studio.users.create(email:  "example@eample.com",
-                        password: "password",
-                        role:     0
-    )
+    admin = create_and_login_studio_admin(studio)
+    user = create_user
     other_user = other_studio.users.create(email:  "otherexample@eample.com",
                               password: "password",
                               role:     0
@@ -42,17 +29,12 @@ class StudioAdminViewsSpecificOrderTest < ActionDispatch::IntegrationTest
                                  category_id: category.id
     )
 
-    op = OrderPhoto.create(photo_id: photo.id)
-    order = user.orders.create(total_price: 2000)
-    order.order_photos << op
+    order = create_order(user, photo)
+    order2 = create_order(other_user, photo)
 
-    op3 = OrderPhoto.create(photo_id: photo2.id)
-    op2 = OrderPhoto.create(photo_id: photo.id)
-    order2 = other_user.orders.create(total_price: 2000)
-    order2.order_photos << op2
-    order2.order_photos << op3
+    order_photo3 = OrderPhoto.create(photo_id: photo2.id)
+    order2.order_photos << order_photo3
 
-    ApplicationController.any_instance.stubs(:current_user).returns(admin)
 
     visit admin_orders_path
     click_on order2.id

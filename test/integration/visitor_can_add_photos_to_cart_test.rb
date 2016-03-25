@@ -2,21 +2,10 @@ require 'test_helper'
 
 class VisitorCanAddPhotosToCartTest < ActionDispatch::IntegrationTest
   test "visitor sees a cart with multiple items" do
-    category = Category.create(name: "Example Category")
+    category = create_category
     Category.create(name: "Other Category")
-
-    studio = Studio.create(name:        "Studio",
-                           description: "Example description.",
-                           status:      0
-    )
-
-    photo = studio.photos.create(name:        "Example Name",
-                                 description: "Example Description",
-                                 image:       "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png",
-                                 price:       999,
-                                 category_id: category.id
-    )
-
+    studio = create_studio
+    photo = create_studio_photo(studio, category)
     photo2 = studio.photos.create(name:        "Photo 2",
                                  description: "Example Description 2",
                                  image:       "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png",

@@ -4,24 +4,10 @@ class LoggedInUserCreatesAnOrderTest < ActionDispatch::IntegrationTest
 
   test "user can see order summary" do
     skip
-    category = Category.create(name: "Example Category")
-
-    studio = Studio.create(name:        "Studio",
-                           description: "Example description.",
-                           status:      0
-    )
-
-    user = User.create(email:  "user@example.com",
-                                password: "password",
-                                role:     0
-    )
-
-    photo = studio.photos.create(name:        "Example Name",
-                                 description: "Example Description",
-                                 image:       "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png",
-                                 price:       999,
-                                 category_id: category.id
-    )
+    category = create_category
+    studio = create_studio
+    user = create_user
+    photo = create_studio_photo(studio, category)
 
     ApplicationController.any_instance.stubs(:current_user).returns(user)
 
