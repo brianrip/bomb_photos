@@ -13,7 +13,8 @@ class PhotoTest < ActiveSupport::TestCase
     category = Category.create(name: "Nature")
     studio = Studio.create(name:        "Studio",
                            description: "Example description.",
-                           status:      0
+                           status:      0,
+                          promo_image: "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png"
     )
 
     photo = studio.photos.create(name:        "Example Name",

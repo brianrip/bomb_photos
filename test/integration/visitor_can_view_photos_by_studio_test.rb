@@ -7,7 +7,8 @@ class VisitorCanViewPhotosByStudioTest < ActionDispatch::IntegrationTest
     studio1 = create_studio
     studio2 = Studio.create(name:        "Studio2",
                             description: "Example description2.",
-                            status:      0
+                            status:      0,
+                            promo_image: "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png"
     )
 
     photo1 = studio1.photos.create(name:        "Example Name1",

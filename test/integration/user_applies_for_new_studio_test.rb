@@ -23,9 +23,21 @@ class UserAppliesForNewStudioTest < ActionDispatch::IntegrationTest
     refute page.has_content?("Want to sell photos on our site?")
   end
 
-  # test "visitor must log in before applying" do
-  # end
+  test "user must fill in all fields" do
+    user = User.create(email:  "user@example.com",
+                                password: "password",
+                                role:     0
+    )
 
-  # test "user must fill in all fields" do
-  # end
+    ApplicationController.any_instance.stubs(:current_user).returns(user)
+
+    visit dashboard_path
+
+    click_on "Sign up here!"
+    fill_in "Name", with: "Studio name"
+    click_on "Create Studio"
+
+    assert page.has_content?("You must provide all information.")
+    assert page.has_content?("Promo image")
+  end
 end

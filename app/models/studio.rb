@@ -1,7 +1,9 @@
 class Studio < ActiveRecord::Base
   has_many :photos
   has_many :users
-  # validates :promo_image, presence: true
+  validates :promo_image, presence: true
+  validates :name, presence: true
+  validates :description, presence: true
 
   attr_accessor :promo_image
 

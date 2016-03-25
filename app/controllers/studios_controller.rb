@@ -19,7 +19,8 @@ class StudiosController < ApplicationController
       flash[:success] = "Application submitted!"
       redirect_to dashboard_path
     else
-      flash[:alert] = "Please fill in all application fields"
+      flash[:alert] = "You must provide all information."
+      render :new
     end
   end
 

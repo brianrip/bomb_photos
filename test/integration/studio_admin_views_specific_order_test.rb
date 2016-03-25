@@ -6,7 +6,8 @@ class StudioAdminViewsSpecificOrderTest < ActionDispatch::IntegrationTest
     studio = create_studio
     other_studio = Studio.create(name:        "Other Studio",
                            description: "Other example description.",
-                           status:      0
+                           status:      0,
+                           promo_image: "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png"
     )
     admin = create_and_login_studio_admin(studio)
     user = create_user
