@@ -43,6 +43,7 @@ gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 gem 'aws-sdk', '>= 2.0.0'
 gem 'figaro'
 gem "kaminari"
+gem 'selenium-webdriver'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -54,6 +55,7 @@ group :development, :test do
   gem 'shoulda-matchers', '~> 2.0'
   gem "factory_girl_rails", "~> 4.0"
   gem "mocha"
+  gem 'rspec-rails'
  end
 
 group :development do
