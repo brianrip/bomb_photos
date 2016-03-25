@@ -5,7 +5,7 @@ class StudioAdminEditsStudio < ActionDispatch::IntegrationTest
     studio = create_studio
     create_and_login_studio_admin(studio)
 
-    visit admin_dashboard_path
+    visit admin_path(studio)
 
     click_on "Edit Studio"
     fill_in "Name", with: "Different Name"
@@ -20,7 +20,7 @@ class StudioAdminEditsStudio < ActionDispatch::IntegrationTest
     studio = create_studio
     create_and_login_studio_admin(studio)
 
-    visit admin_dashboard_path
+    visit admin_path(studio)
 
     click_on "Edit Studio"
 
