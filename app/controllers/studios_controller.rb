@@ -25,6 +25,24 @@ class StudiosController < ApplicationController
   end
 
   def edit
+    studio = Studio.find(params[:id])
+    if current_user.studio != studio
+      flash[:alert] = "You can only edit a studio that belongs to you"
+      render file: "/public/404"
+    else
+      @studio = studio
+    end
+  end
+
+  def update
+    @studio = Studio.find(params[:id])
+    if @studio.update(studio_params)
+      flash[:success] = "Your studio has been updated!"
+      redirect_to studio_path(@studio)
+    else
+      flash[:alert] = "You must provide all information."
+      render :edit
+    end
   end
 
   private

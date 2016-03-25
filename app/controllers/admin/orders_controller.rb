@@ -1,8 +1,9 @@
 class Admin::OrdersController < Admin::BaseController
   def index
+    @studio = Studio.find(params[:studio])
     @orders = Order.all.select do |order|
       order.order_photos.any? do |order_photo|
-        order_photo.photo.studio == current_user.studio
+        order_photo.photo.studio == @studio
       end
     end
   end
@@ -15,6 +16,7 @@ class Admin::OrdersController < Admin::BaseController
   end
 
   def show
+    @studio = Studio.find(params[:studio])
     @order = Order.find(params[:id])
   end
 end

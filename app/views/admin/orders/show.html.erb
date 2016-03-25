@@ -28,7 +28,7 @@
 <div class="container">
   <% price = 0 %>
   <% @order.order_photos.each do |order_photo| %>
-    <% if order_photo.photo.studio == current_user.studio %>
+    <% if order_photo.photo.studio == @studio %>
   <div class="col-md-7">
     <div class="row product">
       <div class="col-md-5 col-md-offset-0"><p><%= image_tag order_photo.photo.image, width: 200 %></p>

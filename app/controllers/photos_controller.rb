@@ -4,7 +4,11 @@ class PhotosController < ApplicationController
   end
 
   def show
-    @photo = Photo.find(params[:id])
+    if params[:format]
+      @photo = Photo.find(params[:format])
+    else
+      @photo = Photo.find(params[:id])
+    end
     @studio = @photo.studio
   end
 end
