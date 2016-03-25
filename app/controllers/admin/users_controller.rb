@@ -1,6 +1,5 @@
 class Admin::UsersController < Admin::BaseController
-
   def show
-    @studio = current_user.studio
+    @studio = Studio.find(params[:studio])
   end
 end

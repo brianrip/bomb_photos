@@ -5,8 +5,9 @@ class Admin::PhotosController < Admin::BaseController
   end
 
   def create
+    studio = Studio.find(params[:studio])
     @photo = Photo.new(photo_params)
-    @photo.update_attributes(studio_id: current_user.studio.id)
+    @photo.update_attributes(studio_id: studio.id)
     @photo.set_price
     if @photo.save
       flash[:success] = "Your Photo Has Been Created"

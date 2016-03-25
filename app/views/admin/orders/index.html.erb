@@ -1,5 +1,5 @@
 <div class="container">
-  <h1 class="text-center">All Orders for <%= current_user.studio.name %></h1>
+  <h1 class="text-center">All Orders for <%= @studio.name %></h1>
   <div class="all_orders col-md-offset-1">
     <table class="table">
       <tr>
@@ -9,7 +9,7 @@
       </tr>
       <% @orders.each do |order| %>
       <tr>
-        <td> <%= link_to order.id, admin_order_path(current_user.studio, order) %></td>
+        <td> <%= link_to order.id, admin_order_path(@studio, order) %></td>
         <td> <%= order.placed_at %></td>
         <td> <%= order.total_price %></td>
       </tr>
