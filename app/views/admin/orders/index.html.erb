@@ -9,7 +9,7 @@
       </tr>
       <% @orders.each do |order| %>
       <tr>
-        <td> <%= link_to order.id, admin_order_path(order) %></td>
+        <td> <%= link_to order.id, admin_order_path(current_user.studio, order) %></td>
         <td> <%= order.placed_at %></td>
         <td> <%= order.total_price %></td>
       </tr>

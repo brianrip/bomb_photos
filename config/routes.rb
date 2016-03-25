@@ -8,10 +8,10 @@ Rails.application.routes.draw do
   get "/dashboard", to: "users#show"
 
   namespace :admin do
-    get "/dashboard", to: "users#show"
-    resources :orders, only: [:index, :update, :show]
-    resources :photos, only: [:new, :create, :edit, :update, :destroy]
-    patch "/status/:id", to: "photos#change_status"
+    get ":studio/dashboard", to: "users#show"
+    resources :orders, only: [:index, :update, :show], path: '/:studio/orders'
+    resources :photos, only: [:new, :create, :edit, :update, :destroy], path: '/:studio/photos'
+    patch "/:studio/status/:id", to: "photos#change_status"
   end
 
   namespace :platform_admin do

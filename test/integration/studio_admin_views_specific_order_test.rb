@@ -37,9 +37,9 @@ class StudioAdminViewsSpecificOrderTest < ActionDispatch::IntegrationTest
     order2.order_photos << order_photo3
 
 
-    visit admin_orders_path
+    visit admin_orders_path(studio)
     click_on order2.id
-    assert_equal admin_order_path(order2), current_path
+    assert_equal admin_order_path(studio, order2), current_path
     assert page.has_content?(order2.id)
     assert page.has_content?(order2.created_at)
     assert page.has_content?(other_user.email)
