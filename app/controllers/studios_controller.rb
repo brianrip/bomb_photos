@@ -25,6 +25,17 @@ class StudiosController < ApplicationController
   end
 
   def edit
+    @studio = Studio.find(params[:id])
+  end
+
+  def update
+    @studio = Studio.find(params[:id])
+    if @studio.update(studio_params)
+      flash[:success] = "Your studio has been updated!"
+      redirect_to studio_path(@studio)
+    else
+      render :edit
+    end
   end
 
   private
