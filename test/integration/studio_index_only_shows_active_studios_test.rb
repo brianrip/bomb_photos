@@ -2,10 +2,7 @@ require 'test_helper'
 
 class StudioIndexOnlyShowsActiveStudios < ActionDispatch::IntegrationTest
   test "only active studios show on index" do
-    studio = Studio.create(name:        "Studio",
-                           description: "Example description.",
-                           status:      0
-    )
+    studio = create_studio
 
     studio2 = Studio.create(name:        "Adrienne",
                            description: "Example description.",

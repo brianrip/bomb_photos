@@ -2,20 +2,10 @@ require 'test_helper'
 
 class VisitorViewsTwoPhotosInCartTest < ActionDispatch::IntegrationTest
   test "two photos are present in cart view" do
-    category = Category.create(name: "Example Category")
+    category = create_category
     Category.create(name: "Other Category")
-
-    studio = Studio.create(name:        "Studio",
-                           description: "Example description.",
-                           status:      0
-    )
-
-    photo1 = studio.photos.create(name:        "Example Name1",
-                                 description: "Example Description1",
-                                 image:       "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png",
-                                 price:       999,
-                                 category_id: category.id
-    )
+    studio = create_studio
+    photo1 = create_studio_photo(studio, category)
     photo2 = studio.photos.create(name:        "Example Name2",
                                  description: "Example Description2",
                                  image:       "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png",
@@ -41,7 +31,7 @@ class VisitorViewsTwoPhotosInCartTest < ActionDispatch::IntegrationTest
     assert page.has_link? photo2.name
     assert page.has_link? category.name
     assert page.has_content? "$9.99"
-    assert page.has_content? ("19.98")
+    assert page.has_content? "19.98"
 
     assert page.has_link? "Continue Shopping"
     assert page.has_content? "Checkout"

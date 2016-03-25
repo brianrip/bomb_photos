@@ -2,12 +2,9 @@ require 'test_helper'
 
 class VisitorCanViewPhotosByStudioTest < ActionDispatch::IntegrationTest
   test "visitor sees all photos associated with a studio" do
-    category = Category.create(name: "Example Category")
+    category = create_category
 
-    studio1 = Studio.create(name:        "Studio",
-                            description: "Example description.",
-                            status:      0
-    )
+    studio1 = create_studio
     studio2 = Studio.create(name:        "Studio2",
                             description: "Example description2.",
                             status:      0
