@@ -14,7 +14,7 @@ class StudioAdminCanCreatePhotoTest < ActionDispatch::IntegrationTest
     fill_in "Name",        with: "Example Name"
     fill_in "Description", with: "Example Description"
     fill_in "Price",       with: "9.99"
-    select "A Category", from: "photo[category_id]"
+    select "Example Category", from: "photo[category_id]"
     attach_file "Image", "test/asset_tests/photos/sample_photo.jpg"
     click_on "Create Photo"
 
@@ -35,7 +35,7 @@ class StudioAdminCanCreatePhotoTest < ActionDispatch::IntegrationTest
     fill_in "Name",        with: "Example Name"
     fill_in "Description", with: "Example Description"
     fill_in "Price",       with: "10"
-    select "A Category", from: "photo[category_id]"
+    select "Example Category", from: "photo[category_id]"
     attach_file "Image", "test/asset_tests/photos/sample_photo.jpg"
     click_on "Create Photo"
 
