@@ -16,6 +16,10 @@ class ApplicationController < ActionController::Base
     current_user && current_user.studio_admin?
   end
 
+  def current_platform_admin?
+    current_user && current_user.platform_admin?
+  end
+
   def find_photo
     Photo.find(params[:id])
   end
