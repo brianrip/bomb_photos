@@ -102,12 +102,21 @@ class ActionDispatch::IntegrationTest
     ApplicationController.any_instance.stubs(:current_user).returns(admin)
   end
 
-  def create_and_login_platform_admin(studio)
+  def create_and_login_studio_platform_admin(studio)
     admin = studio.users.create(email:  "admin@eample.com",
                                 password: "password",
                                 )
     admin.roles << customer_role
     admin.roles << studio_admin_role
+    admin.roles << platform_admin_role
+    admin
+    ApplicationController.any_instance.stubs(:current_user).returns(admin)
+  end
+
+  def create_and_login_platform_admin(studio)
+    admin = studio.users.create(email:  "admin@eample.com",
+                                password: "password",
+                                )
     admin.roles << platform_admin_role
     admin
     ApplicationController.any_instance.stubs(:current_user).returns(admin)
