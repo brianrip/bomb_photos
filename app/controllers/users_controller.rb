@@ -18,11 +18,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    current_user
   end
 
   def edit
-    current_user
   end
 
   def update
@@ -40,9 +38,4 @@ private
   def user_params
     params.require(:user).permit(:email, :password)
   end
-
-  def set_current_user
-    current_user
-  end
-
 end
