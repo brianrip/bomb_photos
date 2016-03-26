@@ -46,6 +46,13 @@ class ActionDispatch::IntegrationTest
     ApplicationController.any_instance.stubs(:current_user).returns(admin)
   end
 
+  def create_studio_admin(studio)
+    admin = studio.users.create(email:  "admin@eample.com",
+                                password: "password",
+                                role:     1
+                                )
+  end
+
   def create_user
     user = User.create(email: "user@example.com", password: "password")
   end
