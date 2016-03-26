@@ -12,9 +12,9 @@ class StudioAdminViewsSpecificOrderTest < ActionDispatch::IntegrationTest
     admin = create_and_login_studio_admin(studio)
     user = create_user
     other_user = other_studio.users.create(email:  "otherexample@eample.com",
-                              password: "password",
-                              role:     0
-    )
+                                           password: "password",
+                                          )
+    other_user.roles << customer_role
 
     photo = studio.photos.create(name:        "Example Name",
                                  description: "Example Description",
@@ -45,6 +45,6 @@ class StudioAdminViewsSpecificOrderTest < ActionDispatch::IntegrationTest
     assert page.has_content?(other_user.email)
     assert page.has_content?(photo.name)
     refute page.has_content?(photo2.name)
-    assert page.has_content?("$1,000.00")
+    assert page.has_content?("$10.00")
   end
 end

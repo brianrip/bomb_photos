@@ -2,7 +2,6 @@ class Seed
   def initialize
     @num_studios = 10
     @num_users = 50
-    @num_categories = 5
     @num_photos = 20
     @num_orders = 100
     generate_studios
@@ -11,7 +10,21 @@ class Seed
     generate_categories
     generate_photos
     generate_orders
-    generate_admin
+    generate_studio_admins
+    generate_studio_admin
+    generate_platform_admin
+  end
+
+  def customer_role
+    Role.create(name: "customer")
+  end
+
+  def studio_admin_role
+    Role.create(name: "studio admin")
+  end
+
+  def platform_admin_role
+    Role.create(name: "platform admin")
   end
 
   def generate_studios
@@ -23,25 +36,42 @@ class Seed
 
   def generate_users
     @num_users.times do
-      User.create(email: Faker::Internet.email, password: "password", role: 0)
+      user = User.create(email: Faker::Internet.email, password: "password")
+      user.roles << customer_role
     end
     puts "Generating users"
   end
 
   def generate_studio_admins
     Studio.all.each do |studio|
-      studio.users << User.create(email: Faker::Internet.email, password: "password", role: 1)
+      user = User.create(email: Faker::Internet.email, password: "password")
+      studio.users << user
+      user.roles << studio_admin_role
     end
     puts "generating studio admins"
   end
 
-  def generate_admin
-    Studio.first.users.create(email: "example@example.com", password: "password", role: 1)
+  def generate_studio_admin
+    user = Studio.first.users.create(email: "example@example.com", password: "password")
+    user.roles << studio_admin_role
+  end
+
+  def generate_platform_admin
+    user = Studio.last.users.create(email: "platformadmin@example.com", password: "password", studio_id: 2)
+    user.roles << platform_admin_role
+    user.roles << studio_admin_role
+    user.roles << customer_role
+  end
+
+  def generate_platform_only_admin
+    user = Studio.last.users.create(email: "platformadmin@example.com", password: "password")
+    user.roles << platform_admin_role
   end
 
   def generate_categories
-    @num_categories.times do
-      Category.create(name: Faker::Lorem.word)
+    @categories = ["Nature", "Food", "Travel", "People", "Commerce"]
+    @categories.each do |category|
+      Category.create(name: category)
     end
     puts "generating categories"
   end
@@ -54,7 +84,7 @@ class Seed
                            description: Faker::Lorem.sentence,
                            image:       "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png",
                            price:       Random.rand(1..1000),
-                           category_id: Random.rand(1..@num_categories)
+                           category_id: Random.rand(1..@categories.length)
       )
     end
   end

@@ -19,6 +19,8 @@
   </table>
 </div>
 
+<h1>Photos from Your Studio Included in This Order</h1>
+
 <div class="container">
   <% @order.order_photos.each do |order_photo| %>
     <% if order_photo.photo.studio == @studio %>
@@ -30,4 +32,4 @@
         </div>
       </div>
     <% end %>
-<% end %>
+  <% end %>
