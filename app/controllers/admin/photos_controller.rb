@@ -7,8 +7,8 @@ class Admin::PhotosController < Admin::BaseController
   def create
     studio = Studio.find(params[:studio])
     @photo = Photo.new(photo_params)
+    @photo.convert_price_to_cents
     @photo.update_attributes(studio_id: studio.id)
-    @photo.set_price
     if @photo.save
       flash[:success] = "Your Photo Has Been Created"
       redirect_to photo_path(@photo)
