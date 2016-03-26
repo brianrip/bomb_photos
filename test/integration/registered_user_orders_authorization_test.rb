@@ -6,9 +6,9 @@ class RegisteredUserOrdersAuthorizationTest < ActionDispatch::IntegrationTest
     studio = create_studio
     user = create_user
     other_user = studio.users.create(email:  "other_user@example.com",
-                                password: "password",
-                                role:     0
-    )
+                                     password: "password",
+                                     )
+    other_user.roles << customer_role
     photo = create_studio_photo(studio, category)
     order = create_order(other_user, photo)
     ApplicationController.any_instance.stubs(:current_user).returns(user)

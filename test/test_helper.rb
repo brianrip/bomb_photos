@@ -6,8 +6,6 @@ require "minitest/pride"
 require 'mocha/mini_test'
 
 class ActiveSupport::TestCase
-  include FactoryGirl::Syntax::Methods
-
   DatabaseCleaner.strategy = :transaction
 
   def create_category
@@ -71,6 +69,18 @@ class ActionDispatch::IntegrationTest
     super
   end
 
+  def customer_role
+    Role.create(name: "customer")
+  end
+
+  def studio_admin_role
+    Role.create(name: "studio admin")
+  end
+
+  def platform_admin_role
+    Role.create(name: "platform admin")
+  end
+
   def create_category
     Category.create(name: "Example Category")
   end
@@ -86,17 +96,21 @@ class ActionDispatch::IntegrationTest
   def create_and_login_studio_admin(studio)
     admin = studio.users.create(email:  "admin@eample.com",
                                 password: "password",
-                                role:     1
                                 )
+    admin.roles << studio_admin_role
+    admin
     ApplicationController.any_instance.stubs(:current_user).returns(admin)
   end
 
   def create_user
     user = User.create(email: "user@example.com", password: "password")
+    user.roles << customer_role
+    user
   end
 
   def create_and_login_user
     user = User.create(email: "user@example.com", password: "password")
+    user.roles << customer_role
     ApplicationController.any_instance.stubs(:current_user).returns(user)
   end
 
@@ -105,22 +119,6 @@ class ActionDispatch::IntegrationTest
     order = user.orders.create(total_price: 200)
     order.order_photos << order_photo
     order
-  end
-
-  def create_multiple_orders(num)
-    num.times do
-      user = create_user
-      gif = create(gif)
-      OrderGif.create(
-        gif_id: gif.id, quantity: 1, subtotal: 100
-                     )
-      order = user.orders.create!(total_price: 100, status: 0)
-
-      gif = create(:gif)
-      order.order_gifs.create(
-        gif_id: gif.id, quantity: 2, subtotal: 100
-      )
-    end
   end
 
   def create_studio_photo(studio, category)

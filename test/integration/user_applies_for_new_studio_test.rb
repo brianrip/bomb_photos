@@ -3,9 +3,9 @@ require 'test_helper'
 class UserAppliesForNewStudioTest < ActionDispatch::IntegrationTest
   test "registered user applies for studio" do
     user = User.create(email:  "user@example.com",
-                                password: "password",
-                                role:     0
-    )
+                       password: "password",
+                      )
+    user.roles << customer_role
 
     ApplicationController.any_instance.stubs(:current_user).returns(user)
 
@@ -26,8 +26,8 @@ class UserAppliesForNewStudioTest < ActionDispatch::IntegrationTest
   test "user must fill in all fields" do
     user = User.create(email:  "user@example.com",
                                 password: "password",
-                                role:     0
     )
+    user.roles << customer_role
 
     ApplicationController.any_instance.stubs(:current_user).returns(user)
 

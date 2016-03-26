@@ -3,7 +3,8 @@ require 'test_helper'
 class VisitorLogsInAsCustomer < ActionDispatch::IntegrationTest
 
   test "visitor logs in" do
-    user = User.create(email: "adrienne@example.com", password: "password", role: 0)
+    user = User.create(email: "adrienne@example.com", password: "password")
+    user.roles << customer_role
     visit '/'
     refute page.has_content?("Log Out")
     refute page.has_content?(user.email)
