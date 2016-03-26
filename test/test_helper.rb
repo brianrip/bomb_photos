@@ -29,11 +29,11 @@ class ActiveSupport::TestCase
   end
 
   def create_user
-    user = User.create(email: "user@example.com", password: "password")
+    User.create(email: "user@example.com", password: "password")
   end
 
   def create_and_login_user
-    user = User.create(email: "user@example.com", password: "password")
+    User.create(email: "user@example.com", password: "password")
     ApplicationController.any_instance.stubs(:current_user).returns(user)
   end
 
