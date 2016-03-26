@@ -63,6 +63,11 @@ class Seed
     user.roles << customer_role
   end
 
+  def generate_platform_only_admin
+    user = Studio.last.users.create(email: "platformadmin@example.com", password: "password")
+    user.roles << platform_admin_role
+  end
+
   def generate_categories
     @categories = ["Nature", "Food", "Travel", "People", "Commerce"]
     @categories.each do |category|
