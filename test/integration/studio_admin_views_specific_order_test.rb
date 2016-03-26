@@ -12,9 +12,9 @@ class StudioAdminViewsSpecificOrderTest < ActionDispatch::IntegrationTest
     admin = create_and_login_studio_admin(studio)
     user = create_user
     other_user = other_studio.users.create(email:  "otherexample@eample.com",
-                              password: "password",
-                              role:     0
-    )
+                                           password: "password",
+                                          )
+    other_user.roles << customer_role
 
     photo = studio.photos.create(name:        "Example Name",
                                  description: "Example Description",

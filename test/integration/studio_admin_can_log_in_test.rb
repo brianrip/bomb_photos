@@ -3,12 +3,10 @@ require "test_helper"
 class AdminCanLogInTest < ActionDispatch::IntegrationTest
   test "login with valid information" do
     studio = create_studio
-
     admin = studio.users.create(email: "admin@example.com",
                                 password: "password",
-                                role:     1
                                 )
-
+    admin.roles << studio_admin_role
     visit login_path
 
     fill_in  "Email", with: "admin@example.com"

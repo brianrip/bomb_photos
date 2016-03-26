@@ -9,6 +9,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
+      @user.roles << Role.find_or_create_by(name: "customer")
       flash[:success] = "Thank you for creating an account!"
       redirect_to dashboard_path
     else

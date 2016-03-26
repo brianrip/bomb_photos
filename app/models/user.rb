@@ -5,8 +5,19 @@ class User < ActiveRecord::Base
   validates :password, presence: true
 
   has_many :orders
-  has_many :order_gifs, through: :orders
   belongs_to :studio
+  has_many :user_roles
+  has_many :roles, through: :user_roles
 
-  enum role: %w(default admin)
+  def platform_admin?
+    roles.exists?(name: "platform admin")
+  end
+
+  def customer?
+    roles.exists?(name: "customer")
+  end
+
+  def studio_admin?
+    roles.exists?(name: "studio admin")
+  end
 end

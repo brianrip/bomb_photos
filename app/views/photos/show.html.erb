@@ -14,7 +14,7 @@
           <% end %>
         </p>
         <br>
-        <% if current_admin? %>
+        <% if current_studio_admin? %>
           <p><%= link_to "Edit", edit_admin_photo_path(@photo.studio, @photo.id), class: "btn btn-default" %>
           <% if @photo.active %>
             <p><%= link_to "Deactivate", "/admin/#{@photo.studio.id}/status/#{@photo.id}", method: :patch, class: "btn btn-default" %>

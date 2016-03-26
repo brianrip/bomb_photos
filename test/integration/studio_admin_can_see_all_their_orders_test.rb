@@ -8,8 +8,8 @@ class StudioAdminSeesAllTheirOrdersTest < ActionDispatch::IntegrationTest
     user = create_user
     other_user = User.create(email:  "otherexample@eample.com",
                               password: "password",
-                              role:     0
     )
+    other_user.roles << studio_admin_role
     photo = create_studio_photo(studio, category)
 
     order = create_order(user, photo)
