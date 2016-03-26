@@ -16,6 +16,11 @@ class Studio < ActiveRecord::Base
     }
 
   validates_attachment_content_type :promo_image, :content_type => /\Aimage\/.*\Z/
+  before_create :set_slug
 
   enum status: %w(active inactive pending denied)
+
+  def set_slug
+    self.slug = name.parameterize
+  end
 end

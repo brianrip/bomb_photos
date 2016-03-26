@@ -39,4 +39,14 @@ class Order < ActiveRecord::Base
       end
     end
   end
+
+  def studio_price(studio)
+    price = 0
+    order_photos.each do |order_photo|
+      if order_photo.photo.studio == studio
+        price += order_photo.photo.price
+      end
+    end
+    price
+  end
 end

@@ -20,10 +20,9 @@ class Cart
   end
 
   def total_price
-    prices = cart_photos.map do |cart_photo|
+    cart_photos.map do |cart_photo|
       cart_photo.price
-    end
-    prices.reduce(:+)
+    end.reduce(:+)
   end
 
   def cart_photos
