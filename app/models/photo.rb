@@ -19,7 +19,7 @@ class Photo < ActiveRecord::Base
 
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
-  def set_price
-    self.price = price * 100
+  def convert_price_to_cents
+    self.update(price: price * 100)
   end
 end
