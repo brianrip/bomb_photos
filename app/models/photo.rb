@@ -35,6 +35,6 @@ class Photo < ActiveRecord::Base
   end
 
   def convert_price_to_cents
-    self.price = price * 100
+    self.update(price: price * 100)
   end
 end

@@ -7,9 +7,9 @@ class Admin::PhotosController < Admin::BaseController
   def create
     studio = Studio.find(params[:studio])
     @photo = Photo.new(photo_params)
-    @photo.convert_price_to_cents
     @photo.update_attributes(studio_id: studio.id)
     if @photo.save
+      @photo.convert_price_to_cents
       flash[:success] = "Your Photo Has Been Created"
       redirect_to photo_path(@photo)
     else
@@ -26,6 +26,7 @@ class Admin::PhotosController < Admin::BaseController
   def update
     @photo = find_photo
     if @photo.update(photo_params)
+      @photo.convert_price_to_cents
       flash[:success] = "Photo Has Been Updated"
       redirect_to photo_path(@photo.id)
     else

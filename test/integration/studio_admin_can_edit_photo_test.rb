@@ -14,18 +14,20 @@ class StudioAdminCanEditPhotoTest < ActionDispatch::IntegrationTest
 
     fill_in "Name",        with: "New Name"
     fill_in "Description", with: "New Description"
-    fill_in "Price",       with: "999"
+    fill_in "Price",       with: "8.99"
     select "Other Category", from: "photo[category_id]"
     attach_file "Image", "test/asset_tests/photos/sample_photo.jpg"
 
     click_on "Update Photo"
+
     assert_equal photo_path(photo), current_path
+    assert page.has_content?("Photo Has Been Updated")
+    
     within(".photo-show") do
       assert page.has_content?("New Name")
       assert page.has_content?("New Description")
       assert page.has_content?("Other Category")
+      assert page.has_content?("$8.99")
     end
-
-    assert page.has_content?("Photo Has Been Updated")
   end
 end
