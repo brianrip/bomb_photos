@@ -4,9 +4,9 @@ class Photo < ActiveRecord::Base
   validates :price, presence: true, numericality: { greater_than: 0 }
   validates :image, presence: true
   belongs_to :category
+  belongs_to :studio
   has_many :order_photos, dependent: :destroy
   has_many :orders, through: :order_photos
-  belongs_to :studio
   attr_accessor :image
 
   has_attached_file :image, :path => ":rails_root/public/system/:attachment/:id/:style/:filename",

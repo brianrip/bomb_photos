@@ -28,7 +28,7 @@ class StudioAdminCanCreatePhotoTest < ActionDispatch::IntegrationTest
       assert page.has_content?(photo.category.name)
     end
 
-    # assert page.has_content?("$9.99")
+    assert page.has_content?("$9.99")
     assert page.has_content?("Your Photo Has Been Created")
   end
 end
