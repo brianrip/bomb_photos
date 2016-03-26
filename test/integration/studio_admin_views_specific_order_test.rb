@@ -45,6 +45,6 @@ class StudioAdminViewsSpecificOrderTest < ActionDispatch::IntegrationTest
     assert page.has_content?(other_user.email)
     assert page.has_content?(photo.name)
     refute page.has_content?(photo2.name)
-    assert page.has_content?("$1,000.00")
+    assert page.has_content?("$10.00")
   end
 end
