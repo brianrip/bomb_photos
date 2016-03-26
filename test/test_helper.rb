@@ -9,6 +9,51 @@ class ActiveSupport::TestCase
   include FactoryGirl::Syntax::Methods
 
   DatabaseCleaner.strategy = :transaction
+
+  def create_category
+    Category.create(name: "Example Category")
+  end
+
+  def create_studio
+    Studio.create(name:        "Studio",
+                  description: "Example description.",
+                  status:      0,
+                  promo_image: "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png"
+                  )
+  end
+
+  def create_and_login_studio_admin(studio)
+    admin = studio.users.create(email:  "admin@eample.com",
+                                password: "password",
+                                role:     1
+                                )
+    ApplicationController.any_instance.stubs(:current_user).returns(admin)
+  end
+
+  def create_user
+    user = User.create(email: "user@example.com", password: "password")
+  end
+
+  def create_and_login_user
+    user = User.create(email: "user@example.com", password: "password")
+    ApplicationController.any_instance.stubs(:current_user).returns(user)
+  end
+
+  def create_order(user, photo)
+    order_photo = OrderPhoto.create(photo_id: photo.id)
+    order = user.orders.create(total_price: 200)
+    order.order_photos << order_photo
+    order
+  end
+
+  def create_studio_photo(studio, category)
+    studio.photos.create(name:        "Example Name",
+                         description: "Example Description",
+                         image:       "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png",
+                         price:       999,
+                         category_id: category.id
+                         )
+  end
 end
 
 class ActionDispatch::IntegrationTest
