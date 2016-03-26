@@ -4,7 +4,7 @@ class PlatformAdminDashboardExistsTest < ActionDispatch::IntegrationTest
   test "user visits platform admin dashboard" do
     category = create_category
     studio = create_studio
-    platform_admin = create_and_login_platform_admin(studio)
+    platform_admin = create_and_login_platform_admin
 
     studio2 = Studio.create(name:        "Studio2",
                            description: "Example description2.",

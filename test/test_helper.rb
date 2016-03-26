@@ -113,8 +113,8 @@ class ActionDispatch::IntegrationTest
     ApplicationController.any_instance.stubs(:current_user).returns(admin)
   end
 
-  def create_and_login_platform_admin(studio)
-    admin = studio.users.create(email:  "admin@eample.com",
+  def create_and_login_platform_admin
+    admin = User.create(email:  "admin@eample.com",
                                 password: "password",
                                 )
     admin.roles << platform_admin_role

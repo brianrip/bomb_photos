@@ -8,7 +8,7 @@ class PlatformAdminCanViewVariousStudioDashboardsTest < ActionDispatch::Integrat
                                  status:      0,
                                  promo_image: "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png"
                                  )
-    create_and_login_platform_admin(studio)
+    create_and_login_platform_admin
     visit platform_admin_dashboard_path
     click_on studio.name
     assert page.has_content?("#{studio.name}: Admin Dashboard")
