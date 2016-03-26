@@ -23,4 +23,15 @@ class Studio < ActiveRecord::Base
   def set_slug
     self.slug = name.parameterize
   end
+
+  def studio_created_on
+    created_at.strftime("%B %d, %Y")
+  end
+
+  def revenue
+    Order.associated_photos(self).each do |order|
+      require "pry"
+      binding.pry
+    end
+  end
 end

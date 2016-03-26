@@ -19,4 +19,7 @@ class OrderTest < ActiveSupport::TestCase
     assert_equal "Order cancelled on #{order2.updated_at}", order2.order_status
     assert_equal "In progress", order3.order_status
   end
+
+  test "revenue returns studio revenue"
+end
 end
