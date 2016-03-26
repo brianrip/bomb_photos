@@ -19,21 +19,6 @@ class Photo < ActiveRecord::Base
 
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
-  def create_tags(gif_tags)
-    gif_tags.each do |tag|
-      gifs_tag = Tag.find_or_create_by(name: "#{tag}")
-      gifs_tag.gifs << self
-    end
-  end
-
-  def self.favorite_gifs
-    joins(:tags).where(tags: {name: "faves"})
-  end
-
-  def self.all_active
-    Gif.all.each { |gif| gif.active }
-  end
-
   def convert_price_to_cents
     self.update(price: price * 100)
   end

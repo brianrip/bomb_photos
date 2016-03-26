@@ -20,9 +20,9 @@
       <td><%= studio.studio_created_on %></td>
       <td><%= studio.status %></td>
       <% if studio.active? %>
-        <td><%= button_to "Deactivate", '#' %></td>
+        <td><%= button_to "Deactivate", platform_admin_studio_path(studio), method: :patch %></td>
       <% elsif studio.inactive? %>
-        <td><%= button_to "Activate", '#' %></td>
+        <td><%= button_to "Activate", platform_admin_studio_path(studio), method: :patch %></td>
       <% elsif studio.pending? %>
         <td><%= button_to "Approve", '#' %>
         <%= button_to "Deny", '#' %></td>

@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   namespace :platform_admin do
     get "/dashboard", to: "studios#index"
+    resources :studios, only: [:update]
   end
 
   resources :cart_photos, only: [:create]

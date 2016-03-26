@@ -40,6 +40,18 @@ class Studio < ActiveRecord::Base
     "$#{'%.02f' % (revenue / 100.0)}"
   end
 
+  def deactivate_all_photos
+    photos.each do |photo|
+      photo.update(active: false)
+    end
+  end
+
+  def activate_all_photos
+    photos.each do |photo|
+      photo.update(active: true)
+    end
+  end
+
   def to_param
     slug
   end
