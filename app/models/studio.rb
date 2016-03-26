@@ -37,6 +37,14 @@ class Studio < ActiveRecord::Base
         end
       end
     end
-    "$#{'%.02f' % (revenue / 100.0)}" 
+    "$#{'%.02f' % (revenue / 100.0)}"
+  end
+
+  def to_param
+    slug
+  end
+
+  def self.find(input)
+    find_by_slug(input)
   end
 end
