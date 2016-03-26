@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160324221246) do
+ActiveRecord::Schema.define(version: 20160326163335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,12 @@ ActiveRecord::Schema.define(version: 20160324221246) do
   add_index "photos", ["category_id"], name: "index_photos_on_category_id", using: :btree
   add_index "photos", ["studio_id"], name: "index_photos_on_studio_id", using: :btree
 
+  create_table "roles", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "studios", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
@@ -72,14 +78,24 @@ ActiveRecord::Schema.define(version: 20160324221246) do
     t.string   "promo_image_content_type"
     t.integer  "promo_image_file_size"
     t.datetime "promo_image_updated_at"
+    t.string   "slug"
   end
+
+  create_table "user_roles", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "user_roles", ["role_id"], name: "index_user_roles_on_role_id", using: :btree
+  add_index "user_roles", ["user_id"], name: "index_user_roles_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email"
     t.string   "password_digest"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.integer  "role",            default: 0
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.integer  "studio_id"
   end
 
@@ -90,5 +106,7 @@ ActiveRecord::Schema.define(version: 20160324221246) do
   add_foreign_key "orders", "users"
   add_foreign_key "photos", "categories"
   add_foreign_key "photos", "studios"
+  add_foreign_key "user_roles", "roles"
+  add_foreign_key "user_roles", "users"
   add_foreign_key "users", "studios"
 end

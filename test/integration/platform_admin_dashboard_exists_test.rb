@@ -4,6 +4,7 @@ class PlatformAdminDashboardExistsTest < ActionDispatch::IntegrationTest
   test "user visits platform admin dashboard" do
     category = create_category
     studio = create_studio
+    platform_admin = create_and_login_platform_admin(studio)
 
     studio2 = Studio.create(name:        "Studio2",
                            description: "Example description2.",
@@ -53,14 +54,10 @@ class PlatformAdminDashboardExistsTest < ActionDispatch::IntegrationTest
     assert page.has_content?(studio2.id)
     assert page.has_content?(studio3.id)
     assert page.has_content?(studio4.id)
-    assert page.has_content?(studio.created_at)
-    assert page.has_content?(studio.created_at)
-    assert page.has_content?(studio2.created_at)
-    assert page.has_content?(studio2.created_at)
-    assert page.has_content?(studio.updated_at)
-    assert page.has_content?(studio2.updated_at)
-    assert page.has_content?(studio3.updated_at)
-    assert page.has_content?(studio4.updated_at)
+    assert page.has_content?(studio.studio_created_on)
+    assert page.has_content?(studio2.studio_created_on)
+    assert page.has_content?(studio3.studio_created_on)
+    assert page.has_content?(studio4.studio_created_on)
     assert page.has_content?(studio.status)
     assert page.has_content?(studio2.status)
     assert page.has_content?(studio3.status)
@@ -72,5 +69,6 @@ class PlatformAdminDashboardExistsTest < ActionDispatch::IntegrationTest
     assert page.has_content?("Number of Photos")
     assert page.has_content?("1")
     assert page.has_content?("2")
+    assert page.has_content?(studio.revenue)
   end
 end

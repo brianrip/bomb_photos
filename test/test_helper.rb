@@ -6,25 +6,7 @@ require "minitest/pride"
 require 'mocha/mini_test'
 
 class ActiveSupport::TestCase
-  include FactoryGirl::Syntax::Methods
-
   DatabaseCleaner.strategy = :transaction
-end
-
-class ActionDispatch::IntegrationTest
-  include Capybara::DSL
-
-  def setup
-    reset_session!
-    DatabaseCleaner.start
-    super
-  end
-
-  def teardown
-    reset_session!
-    DatabaseCleaner.clean
-    super
-  end
 
   def create_category
     Category.create(name: "Example Category")
@@ -46,13 +28,6 @@ class ActionDispatch::IntegrationTest
     ApplicationController.any_instance.stubs(:current_user).returns(admin)
   end
 
-  def create_studio_admin(studio)
-    admin = studio.users.create(email:  "admin@eample.com",
-                                password: "password",
-                                role:     1
-                                )
-  end
-
   def create_user
     user = User.create(email: "user@example.com", password: "password")
   end
@@ -69,20 +44,108 @@ class ActionDispatch::IntegrationTest
     order
   end
 
-  def create_multiple_orders(num)
-    num.times do
-      user = create_user
-      gif = create(gif)
-      OrderGif.create(
-        gif_id: gif.id, quantity: 1, subtotal: 100
-                     )
-      order = user.orders.create!(total_price: 100, status: 0)
+  def create_studio_photo(studio, category)
+    studio.photos.create(name:        "Example Name",
+                         description: "Example Description",
+                         image:       "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png",
+                         price:       999,
+                         category_id: category.id
+                         )
+  end
+end
 
-      gif = create(:gif)
-      order.order_gifs.create(
-        gif_id: gif.id, quantity: 2, subtotal: 100
-      )
-    end
+class ActionDispatch::IntegrationTest
+  include Capybara::DSL
+
+  def setup
+    reset_session!
+    DatabaseCleaner.start
+    super
+  end
+
+  def teardown
+    reset_session!
+    DatabaseCleaner.clean
+    super
+  end
+
+  def customer_role
+    Role.create(name: "customer")
+  end
+
+  def studio_admin_role
+    Role.create(name: "studio admin")
+  end
+
+  def platform_admin_role
+    Role.create(name: "platform admin")
+  end
+
+  def create_category
+    Category.create(name: "Example Category")
+  end
+
+  def create_studio
+    Studio.create(name:        "Studio",
+                  description: "Example description.",
+                  status:      0,
+                  promo_image: "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png"
+                  )
+  end
+
+  def create_and_login_studio_admin(studio)
+    admin = studio.users.create(email:  "admin@eample.com",
+                                password: "password",
+                                )
+    admin.roles << studio_admin_role
+    admin
+    ApplicationController.any_instance.stubs(:current_user).returns(admin)
+  end
+
+  def create_and_login_studio_platform_admin(studio)
+    admin = studio.users.create(email:  "admin@eample.com",
+                                password: "password",
+                                )
+    admin.roles << customer_role
+    admin.roles << studio_admin_role
+    admin.roles << platform_admin_role
+    admin
+    ApplicationController.any_instance.stubs(:current_user).returns(admin)
+  end
+
+  def create_and_login_platform_admin(studio)
+    admin = studio.users.create(email:  "admin@eample.com",
+                                password: "password",
+                                )
+    admin.roles << platform_admin_role
+    admin
+    ApplicationController.any_instance.stubs(:current_user).returns(admin)
+  end
+
+  def create_studio_admin(studio)
+    admin = studio.users.create(email:  "admin@eample.com",
+                                password: "password",
+                                role:     1
+                                )
+  end
+
+  def create_user
+    user = User.create(email: "user@example.com", password: "password")
+    user.roles << customer_role
+    user
+  end
+
+  def create_and_login_user
+    user = User.create(email: "user@example.com", password: "password")
+    user.roles << customer_role
+    ApplicationController.any_instance.stubs(:current_user).returns(user)
+  end
+
+  def create_order(user, photo)
+    order_photo = OrderPhoto.create(photo_id: photo.id)
+    order = user.orders.create(total_price: 200)
+    order.order_photos << order_photo
+    order
   end
 
   def create_studio_photo(studio, category)

@@ -8,8 +8,8 @@ class StudioAdminSeesAllTheirOrdersTest < ActionDispatch::IntegrationTest
     user = create_user
     other_user = User.create(email:  "otherexample@eample.com",
                               password: "password",
-                              role:     0
     )
+    other_user.roles << studio_admin_role
     photo = create_studio_photo(studio, category)
 
     order = create_order(user, photo)
@@ -19,10 +19,10 @@ class StudioAdminSeesAllTheirOrdersTest < ActionDispatch::IntegrationTest
     click_on "View Orders"
 
     assert page.has_content?(order.id)
-    assert page.has_content?(order.total_price)
+    assert page.has_content?(order.format_total_price)
     assert page.has_content?(order.placed_at)
     assert page.has_content?(order2.id)
-    assert page.has_content?(order2.total_price)
+    assert page.has_content?(order2.format_total_price)
     assert page.has_content?(order2.placed_at)
   end
 end

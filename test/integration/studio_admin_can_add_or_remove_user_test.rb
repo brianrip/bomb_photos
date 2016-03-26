@@ -1,4 +1,4 @@
-require 'test_helper'
+git require 'test_helper'
 
 class StudioAdminCanAddOrRemoveUserTest < ActionDispatch::IntegrationTest
   test "studio admin changes status of standard user to appear as studio admin" do

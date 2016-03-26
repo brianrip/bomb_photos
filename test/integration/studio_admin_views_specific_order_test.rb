@@ -12,9 +12,9 @@ class StudioAdminViewsSpecificOrderTest < ActionDispatch::IntegrationTest
     admin = create_and_login_studio_admin(studio)
     user = create_user
     other_user = other_studio.users.create(email:  "otherexample@eample.com",
-                              password: "password",
-                              role:     0
-    )
+                                           password: "password",
+                                          )
+    other_user.roles << customer_role
 
     photo = studio.photos.create(name:        "Example Name",
                                  description: "Example Description",
@@ -41,10 +41,10 @@ class StudioAdminViewsSpecificOrderTest < ActionDispatch::IntegrationTest
     click_on order2.id
     assert_equal admin_order_path(studio, order2), current_path
     assert page.has_content?(order2.id)
-    assert page.has_content?(order2.created_at)
+    assert page.has_content?(order2.placed_at)
     assert page.has_content?(other_user.email)
     assert page.has_content?(photo.name)
     refute page.has_content?(photo2.name)
-    assert page.has_content?("$1,000.00")
+    assert page.has_content?("$10.00")
   end
 end

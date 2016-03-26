@@ -7,14 +7,13 @@
   background-size: contain;
 }
 
-
-.gif-title {
+.photo-title {
   min-height: 50px;
   margin-top: 60px;
   margin-bottom: 0;
   color: black;
 }
-a.gif-title {
+a.photo-title {
   color: black;
 }
 
@@ -23,22 +22,8 @@ h1 {
   /*Shouldnt use important, but not working otherwise*/
 }
 
-.gif-show-photo {
-  padding-top: 100px;
-}
-
-.charity-column {
+.studio-column {
   padding-top: 35px;
-}
-
-.charity-message {
-  border-style: dotted;
-  border-right: 2px;
-  border-left: 2px;
-  border-color: #dddddd;
-  text-align: center;
-  padding: 10px 0px 10px 0px;
-  margin: 20px 0px 40px 0px;
 }
 
 html, body {
@@ -59,14 +44,11 @@ footer h3 {
   color: #FFA500;
 }
 
-.charity-name {
+.studio-name {
   min-height: 60px;
 }
-.charity-image {
-  min-height: 150px;
-}
 
-.charity-description {
+.studio-description {
   min-height: 170px;
 }
 
