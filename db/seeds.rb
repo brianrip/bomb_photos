@@ -60,6 +60,7 @@ class Seed
     user = Studio.last.users.create(email: "platformadmin@example.com", password: "password", studio_id: 2)
     user.roles << platform_admin_role
     user.roles << studio_admin_role
+    user.roles << customer_role
   end
 
   def generate_categories
