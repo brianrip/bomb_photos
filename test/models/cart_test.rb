@@ -9,14 +9,14 @@ class CartTest < ActiveSupport::TestCase
                            status:      0,
                            promo_image: "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png"
     )
-    
+
     photo = studio.photos.create(name:        "Example Name",
                                  description: "Example Description",
                                  image:       "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png",
                                  price:       999,
                                  category_id: category.id
     )
-    cart = Cart.new(photo.id.to_s => 1)
+    cart = Cart.new([photo.id.to_s])
 
     assert_equal 1, cart.total_items
 
@@ -54,7 +54,7 @@ class CartTest < ActiveSupport::TestCase
                                  price:       999,
                                  category_id: category.id
     )
-    cart = Cart.new(photo.id.to_s => 1)
+    cart = Cart.new([photo.id.to_s])
 
     photo2 = studio.photos.create(name:        "Example Name2",
                                  description: "Example Description2",
@@ -87,7 +87,7 @@ class CartTest < ActiveSupport::TestCase
                                  price:       999,
                                  category_id: category.id
     )
-    cart = Cart.new(photo.id.to_s => 1)
+    cart = Cart.new([photo.id.to_s])
 
     photo2 = studio.photos.create(name:        "Example Name2",
                                  description: "Example Description2",
@@ -117,7 +117,7 @@ class CartTest < ActiveSupport::TestCase
                                  price:       999,
                                  category_id: category.id
     )
-    cart = Cart.new(photo.id.to_s => 1)
+    cart = Cart.new([photo.id.to_s])
 
     photo2 = studio.photos.create(name:        "Example Name2",
                                  description: "Example Description2",

@@ -3,9 +3,9 @@
 <div class="container">
     <% @studios.each do |studio| %>
       <div class="col-md-4">
-        <h3 class="text-center charity-name"><%= studio.name %></h3>
+        <h3 class="text-center studio-name"><%= studio.name %></h3>
         <br>
-        <p class="charity-description"><%= studio.description %></p>
+        <p class="studio-description"><%= studio.description %></p>
         <p><%= link_to studio.name, studio_path(studio), class: "btn btn-default btn-font-size center-block" %></p>
       </div>
     <% end %>

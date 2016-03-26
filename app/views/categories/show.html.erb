@@ -4,7 +4,7 @@
     <% @category.photos.each do |photo| %>
       <%= render partial: "partials/photo_column", locals: { photo: photo } %>
     <% end %>
-    <% else %>
-     <h3>No photos for this category</h3>
+  <% else %>
+   <h3>No photos for this category</h3>
   <% end %>
 </div>

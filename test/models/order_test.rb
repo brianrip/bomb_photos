@@ -2,9 +2,9 @@ require 'test_helper'
 
 class OrderTest < ActiveSupport::TestCase
   should validate_presence_of(:status)
-  should validate_presence_of(:total_price)
-  should validate_numericality_of(:total_price).
-    is_greater_than(0)
+  # should validate_presence_of(:total_price)
+  # should validate_numericality_of(:total_price).
+    # is_greater_than(0)
   should belong_to(:user)
   should have_many(:order_photos)
   should have_many(:photos)

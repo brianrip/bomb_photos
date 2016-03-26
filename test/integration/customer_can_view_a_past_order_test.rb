@@ -13,10 +13,9 @@ class CustomerCanViewAPastOrderTest < ActionDispatch::IntegrationTest
     visit orders_path
     click_on "Order: #{order.id}"
     assert page.has_content? order.id
-    assert page.has_content? order.created_at
+    assert page.has_content? order.placed_at
     assert page.has_content? order.photos.first.name
     assert page.has_css?("img[src='#{order.photos.first.image}']")
-    assert page.has_content? order.photos.first.price
     assert page.has_content?("$2.00")
   end
 end

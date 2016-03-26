@@ -4,21 +4,15 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Status</th>
-        <!-- <th>Total Price</th> -->
+        <th>Studio Price</th>
         <th>Created At</th>
-        <th>Updated At</th>
-        <th>Order Status</th>
       </tr>
     </thead>
     <tbody>
         <div id="gif-info">
           <tr>
-            <td><%= @order.status %></td>
-            <td><%#= number_to_currency(@order.studio_total) %></td>
-            <td><%= @order.created_at %></td>
-            <td><%= @order.updated_at %></td>
-            <td><%= @order.order_status %></td>
+            <td><%= number_to_currency(@order.studio_price(@studio)) %></td>
+            <td><%= @order.placed_at %></td>
           </tr>
         </div>
     </tbody>
@@ -26,17 +20,14 @@
 </div>
 
 <div class="container">
-  <% price = 0 %>
   <% @order.order_photos.each do |order_photo| %>
     <% if order_photo.photo.studio == @studio %>
-  <div class="col-md-7">
-    <div class="row product">
-      <div class="col-md-5 col-md-offset-0"><p><%= image_tag order_photo.photo.image, width: 200 %></p>
+      <div class="col-md-7">
+        <div class="row product">
+          <div class="col-md-5 col-md-offset-0"><p><%= image_tag order_photo.photo.image, width: 200 %></p>
+          </div>
+          <h4><%= link_to order_photo.photo.name, photo_path(order_photo.photo) %></h4>
+        </div>
       </div>
-      <h4><%= link_to order_photo.photo.name, photo_path(order_photo.photo) %></h4>
-      <% price += order_photo.photo.price%>
-    </div>
-  </div>
-  <% end %>
+    <% end %>
 <% end %>
-Your total: <%= number_to_currency(price) %>
