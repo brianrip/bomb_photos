@@ -125,8 +125,9 @@ class ActionDispatch::IntegrationTest
   def create_studio_admin(studio)
     admin = studio.users.create(email:  "admin@eample.com",
                                 password: "password",
-                                role:     1
                                 )
+    admin.roles << studio_admin_role
+    admin
   end
 
   def create_user

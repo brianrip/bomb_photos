@@ -10,7 +10,7 @@
     </tr>
     <% @users.each do |user| %>
     <tr>
-      <% if user.admin? %>
+      <% if user.studio_admin? && user.platform_admin? == false && user.studio == current_user.studio%>
       <td><%= user.id %></td>
       <td><%= user.email %></td>
       <td><%= link_to "Revoke admin status for user #{user.id}", "/admin/status/#{user.id}", method: :patch, class: "btn btn-warning" %></td>
@@ -26,11 +26,11 @@
     <tr>
       <th> User ID </th>
       <th> User email </th>
-      <th> Remove admin</th>
+      <th> Add Admin</th>
     </tr>
     <% @users.each do |user| %>
     <tr>
-      <% if !user.admin? %>
+      <% if user.studio == nil && user.platform_admin? == false %>
       <td><%= user.id %></td>
       <td><%= user.email %></td>
       <td><%= link_to "Grant admin status for user #{user.id}", "/admin/status/#{user.id}", method: :patch, class: "btn btn-success" %></td>
