@@ -29,9 +29,14 @@ class Studio < ActiveRecord::Base
   end
 
   def revenue
+    revenue = 0
     Order.associated_photos(self).each do |order|
-      require "pry"
-      binding.pry
+      order.order_photos.each do |order_photo|
+        if order_photo.photo.studio == self
+          revenue += order_photo.photo.price
+        end
+      end
     end
+    "$#{'%.02f' % (revenue / 100.0)}" 
   end
 end
