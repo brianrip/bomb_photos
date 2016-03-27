@@ -44,15 +44,14 @@ class Seed
 
   def generate_studio_admins
     Studio.all.each do |studio|
-      user = User.create(email: Faker::Internet.email, password: "password")
-      studio.users << user
+      user = User.create(email: Faker::Internet.email, password: "password", studio_id: studio.id)
       user.roles << studio_admin_role
     end
     puts "generating studio admins"
   end
 
   def generate_studio_admin
-    user = Studio.first.users.create(email: "example@example.com", password: "password")
+    user = User.create(email: "example@example.com", password: "password", studio_id: 1)
     user.roles << studio_admin_role
   end
 
