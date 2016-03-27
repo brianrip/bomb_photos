@@ -1,5 +1,6 @@
 <div class="container text-center">
   <h1>Photos by <%= @studio.name %></h1>
+  <h4>Status: <%= @studio.status %></h4>
   <p>
     <%= @studio.description %>
   </p>
@@ -8,4 +9,8 @@
     <%= render partial: 'partials/photo_column', locals: { photo: photo } %>
   <% end %>
   </p>
+  <% if @studio.pending? && current_user && current_user.platform_admin? %>
+    <%= button_to "Deny", platform_admin_studio_path(@studio), method: :patch, params: { status: "deny" } %>
+    <%= button_to "Approve", platform_admin_studio_path(@studio), method: :patch, params: { status: "approve"} %>
+  <% end %>
 </div>

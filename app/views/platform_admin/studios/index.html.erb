@@ -24,8 +24,9 @@
       <% elsif studio.inactive? %>
         <td><%= button_to "Activate", platform_admin_studio_path(studio), method: :patch %></td>
       <% elsif studio.pending? %>
-        <td><%= button_to "Approve", '#' %>
-        <%= button_to "Deny", '#' %></td>
+        <td><%= link_to "Approve/Deny", studio_path(studio) %></td>
+      <% else %>
+        <td></td>
       <% end %>
       <td><%= studio.photos.count %></td>
       <td><%= Order.associated_photos(studio).count %></td>
