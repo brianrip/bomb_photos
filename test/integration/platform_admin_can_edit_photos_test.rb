@@ -1,17 +1,17 @@
-require "test_helper"
+require 'test_helper'
 
-class StudioAdminCanEditPhotoTest < ActionDispatch::IntegrationTest
-  test "edit photo with valid attributes" do
-    category = create_category
-    Category.create(name: "Other Category")
-    studio = create_studio
-    admin = create_and_login_studio_admin(studio)
-    photo = create_studio_photo(studio, category)
-
-    refute_equal admin.studio, studio
+class PlatformAdminCanEditPhotosTest < ActionDispatch::IntegrationTest
+  test "platform admin can edit photos" do
+    studio         = create_studio
+    category       = create_category
+    other_category = create_category.update(name: "Other Category")
+    photo          = create_studio_photo(studio, category)
+    admin          = create_and_login_platform_admin
 
     visit photo_path(studio, photo)
+
     click_on "Edit"
+
     assert_equal edit_admin_photo_path(studio, photo), current_path
 
     fill_in "Name",        with: "New Name"
