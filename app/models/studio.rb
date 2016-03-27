@@ -51,4 +51,12 @@ class Studio < ActiveRecord::Base
       photo.update(active: true)
     end
   end
+
+  def to_param
+    slug
+  end
+
+  def self.find(input)
+    find_by_slug(input)
+  end
 end
