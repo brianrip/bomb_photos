@@ -31,7 +31,7 @@ class StudioAdminEditsStudio < ActionDispatch::IntegrationTest
   end
 
   test "studio admin cannot edit another studio" do
-    other_studio = Studio.create(name:        "Studio",
+    other_studio = Studio.create(name:        "Other Studio",
                   description: "Example description.",
                   status:      0,
                   promo_image: "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png"
