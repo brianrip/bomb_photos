@@ -8,8 +8,6 @@ class StudioAdminCanEditPhotoTest < ActionDispatch::IntegrationTest
     admin = create_and_login_studio_admin(studio)
     photo = create_studio_photo(studio, category)
 
-    refute_equal admin.studio, studio
-
     visit photo_path(studio, photo)
     click_on "Edit"
     assert_equal edit_admin_photo_path(studio, photo), current_path
