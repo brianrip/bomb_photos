@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :set_cart
-  helper_method :current_user,            :current_studio_admin?, 
+  helper_method :current_user,            :current_studio_admin?,
                 :current_platform_admin?, :format_price
 
   def set_cart
@@ -11,6 +11,10 @@ class ApplicationController < ActionController::Base
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
+
+  def current_user_studio
+    current_user.st
   end
 
   def current_studio_admin?
