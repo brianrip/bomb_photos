@@ -91,9 +91,10 @@ class Seed
 
   def generate_orders
     @num_orders.times do
+      subtotal = Random.rand(1..10)
       puts "generating an order"
       user = User.all.shuffle.pop
-      order = user.orders.create(total_price: 1000)
+      order = user.orders.create(total_price: subtotal)
       Random.rand(1..5).times do
         photo_id = Photo.all.shuffle.pop.id
         op = OrderPhoto.create(photo_id: photo_id)

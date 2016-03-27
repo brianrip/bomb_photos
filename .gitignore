@@ -22,5 +22,6 @@
 /config/database.yml
 /config/secrets.yml
 /config/app_environment_variables.rb
+/coverage/*
 
 .DS_Store
