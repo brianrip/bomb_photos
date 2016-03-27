@@ -98,8 +98,8 @@ class ActionDispatch::IntegrationTest
                                 password: "password",
                                 )
     admin.roles << studio_admin_role
-    admin
     ApplicationController.any_instance.stubs(:current_user).returns(admin)
+    admin
   end
 
   def create_and_login_studio_platform_admin(studio)

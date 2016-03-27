@@ -14,7 +14,7 @@
           <% end %>
         </p>
         <br>
-        <% if current_studio_admin? %>
+        <% if current_studio_admin? || current_platform_admin? %>
           <p><%= link_to "Edit", edit_admin_photo_path(@photo.studio, @photo.id), class: "btn btn-default" %>
           <% if @photo.active %>
             <p><%= link_to "Deactivate", "/admin/#{@photo.studio.id}/status/#{@photo.id}", method: :patch, class: "btn btn-default" %>
@@ -22,11 +22,6 @@
             <p><%= link_to "Activate", "/admin/#{@photo.studio.id}/status/#{@photo.id}", method: :patch, class: "btn btn-default" %>
           <% end %>
         <% end %>
-      </div>
-      <div class="container col-md-2 studio-column">
-        <%# if @charity %>
-          <p><%#= link_to (image_tag @charity.logo, width: 150), charity_path(@charity), class: "charity-link"%>
-        <%# end %>
       </div>
     </div>
 </div>
