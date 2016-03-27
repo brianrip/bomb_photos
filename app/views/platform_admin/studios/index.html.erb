@@ -1,5 +1,23 @@
+<div class="container">
 <h1>Platform Admin</h1>
 <h3>Studios</h3>
+
+<h4>Jump to:</h4>
+<div class="row">
+  <div class="col-md-3">
+    <%= link_to "Active", "#active_studios", class: "btn btn-primary btn-large" %></li>
+  </div>
+  <div class="col-md-3">
+    <%= link_to "Inactive", "#inactive_studios", class: "btn btn-primary btn-large" %></li>
+  </div>
+  <div class="col-md-3">
+    <%= link_to "Pending", "#pending_studios", class: "btn btn-primary btn-large" %></li>
+  </div>
+  <div class="col-md-3">
+    <%= link_to "Denied", "#denied_studios", class: "btn btn-primary btn-large" %></li>
+  </div>
+</div>
+<br/>
 <table class = "table">
   <tr>
     <th>ID</th>
@@ -12,25 +30,58 @@
     <th>Number of Orders</th>
     <th>Studio Revenue</th>
   </tr>
-  <% @studios.each do |studio| %>
-    <tr>
-      <td><%= link_to studio.id, admin_path(studio) %></td>
-      <td><%= link_to studio.name, admin_path(studio) %></td>
-      <td><%= link_to "View/Edit", admin_path(studio), class: "btn btn-primary btn-large" %></td>
-      <td><%= studio.studio_created_on %></td>
-      <td><%= studio.status %></td>
+  <%= render partial: "partials/studio_type_header", locals: { status: "Active" } %>
+  <div id="active_studios">
+    <% @studios.each do |studio| %>
       <% if studio.active? %>
-        <td><%= button_to "Deactivate", platform_admin_studio_path(studio), method: :patch, class: "btn btn-primary btn-large" %></td>
-      <% elsif studio.inactive? %>
-        <td><%= button_to "Activate", platform_admin_studio_path(studio), method: :patch, class: "btn btn-primary btn-large" %></td>
-      <% elsif studio.pending? %>
-        <td><%= link_to "Approve/Deny", studio_path(studio), class: "btn btn-primary btn-large" %></td>
-      <% else %>
-        <td></td>
+        <%= render partial: "partials/studio_data", locals: { studio: studio, button_text: "Deactivate", path: platform_admin_studio_path(studio) } %>
       <% end %>
-      <td><%= studio.photos.count %></td>
-      <td><%= Order.associated_photos(studio).count %></td>
-      <td><%= studio.revenue %></td>
-    </tr>
-  <% end %>
+    <% end %>
+  </div>
+  <%= render partial: "partials/studio_type_header", locals: { status: "Inactive" } %>
+  <div id="inactive_studios">
+    <% @studios.each do |studio| %>
+      <% if studio.inactive? %>
+        <%= render partial: "partials/studio_data", locals: { studio: studio, button_text: "Activate", path: platform_admin_studio_path(studio) } %>
+      <% end %>
+    <% end %>
+  </div>
+  <%= render partial: "partials/studio_type_header", locals: { status: "Pending" } %>
+  <div id="pending_studios">
+    <% @studios.each do |studio| %>
+      <% if studio.pending? %>
+      <tr>
+        <td><%= link_to studio.id, admin_path(studio) %></td>
+        <td><%= link_to studio.name, admin_path(studio) %></td>
+        <td><%= link_to "View/Edit", admin_path(studio), class: "btn btn-primary btn-large" %></td>
+        <td><%= studio.studio_created_on %></td>
+        <td><%= studio.status %></td>
+        <td><%= link_to "Approve/Deny", studio_path(studio), class: "btn btn-primary btn-large" %></td>
+        <td><%= studio.photos.count %></td>
+        <td><%= Order.associated_photos(studio).count %></td>
+        <td><%= studio.revenue %></td>
+      <tr>
+      <% end %>
+    <% end %>
+  </div>
+  <%= render partial: "partials/studio_type_header", locals: { status: "Denied" } %>
+  <div id="denied_studios">
+    <% @studios.each do |studio| %>
+      <% if studio.denied? %>
+        <tr>
+          <td><%= link_to studio.id, admin_path(studio) %></td>
+          <td><%= link_to studio.name, admin_path(studio) %></td>
+          <td><%= link_to "View/Edit", admin_path(studio), class: "btn btn-primary btn-large" %></td>
+          <td><%= studio.studio_created_on %></td>
+          <td><%= studio.status %></td>
+          <td></td>
+          <td><%= studio.photos.count %></td>
+          <td><%= Order.associated_photos(studio).count %></td>
+          <td><%= studio.revenue %></td>
+        <tr>
+      <% end %>
+    <% end %>
+  </div>
 </table>
+
+</div>
