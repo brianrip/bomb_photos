@@ -10,14 +10,14 @@ class RegisteredUserCannotSeeInactivePhotosTest < ActionDispatch::IntegrationTes
 
     ApplicationController.any_instance.stubs(:current_user).returns(user)
 
-    visit category_path(category.slug)
+    visit category_path(category)
 
     assert page.has_content?("Photo 1")
     assert page.has_content?("Photo 2")
 
     photo_2 = Photo.last.update(active: false)
 
-    visit category_path(category.slug)
+    visit category_path(category)
 
     assert page.has_content?("Photo 1")
     refute page.has_content?("Photo 2")

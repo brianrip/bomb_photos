@@ -21,7 +21,7 @@ class CustomerCanOnlyHaveOneOfEachPhotoInCartTest < ActionDispatch::IntegrationT
 
     assert page.has_content? "Cart(1)"
 
-    visit category_path(category.slug)
+    visit category_path(category)
 
     click_on photo2.name
     click_on "Add to Cart"
@@ -29,7 +29,7 @@ class CustomerCanOnlyHaveOneOfEachPhotoInCartTest < ActionDispatch::IntegrationT
     assert page.has_content? "Photo has been added to cart"
     assert page.has_content? "Cart(2)"
 
-    visit category_path(category.slug)
+    visit category_path(category)
 
     click_on photo2.name
     click_on "Add to Cart"

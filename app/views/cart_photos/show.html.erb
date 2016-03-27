@@ -22,7 +22,7 @@
             <td><%= image_tag photo.image, width: 80 %></td>
             <td><%= link_to photo.name, photo_path(photo) %>
             <p><%= photo.description %></p></td>
-            <td><%= link_to Category.find(photo.category_id).name, category_path(Category.find(photo.category_id).slug) %></td>
+            <td><%= link_to Category.find_by(id: photo.category_id).name, category_path(Category.find_by(id: photo.category_id)) %></td>
             <td><%= format_price(photo.price) %></td>
             <td>
               <p><%= link_to "Remove from Cart", cart_path(id: photo.id), method: :delete %></p>
