@@ -1,16 +1,23 @@
-<div class="container text-center">
-  <h1>Photos by <%= @studio.name %></h1>
-  <h4>Status: <%= @studio.status %></h4>
-  <p>
-    <%= @studio.description %>
-  </p>
-  <p>
-  <% @studio.photos.each do |photo| %>
-    <%= render partial: 'partials/photo_column', locals: { photo: photo } %>
-  <% end %>
-  </p>
-  <% if @studio.pending? && current_user && current_user.platform_admin? %>
-    <%= button_to "Deny", platform_admin_studio_path(@studio), method: :patch, params: { status: "deny" } %>
-    <%= button_to "Approve", platform_admin_studio_path(@studio), method: :patch, params: { status: "approve"} %>
-  <% end %>
+<div class="container">  
+  <div class="row product photo-show-photo">
+    <div class="col-md-offset-1 col-md-5">
+      <%= image_tag @studio.promo_image, width: 400 %>
+    </div>
+    <div class="container col-md-offset-1 col-xs-12 col-md-4 photo-show">
+      <h1>Photos by <%= @studio.name %></h1>
+      <h4>Status: <%= @studio.status %></h4>
+      <p><%= @studio.description %></p>
+    </div>
+    <div class="gifs">
+      <p>
+      <% @studio.photos.each do |photo| %>
+        <%= render partial: 'partials/photo_column', locals: { photo: photo } %>
+      <% end %>
+      </p>
+      <% if @studio.pending? && current_user && current_user.platform_admin? %>
+        <%= button_to "Deny", platform_admin_studio_path(@studio), method: :patch, params: { status: "deny" } %>
+        <%= button_to "Approve", platform_admin_studio_path(@studio), method: :patch, params: { status: "approve"} %>
+      <% end %>
+    </div>
+  </div>
 </div>
