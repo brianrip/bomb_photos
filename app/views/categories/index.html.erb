@@ -3,6 +3,12 @@
     <h1>All Categories</h1>
     <% @categories.each do |category| %>
       <div class="col-md-4">
+        <% if !category.photos.empty? %>
+          <% photo = Photo.where(category_id: Category.find_by(name: category.name).id).shuffle.pop %>
+        <% else %>
+          <% photo = Photo.first %>
+        <% end %>
+        <%= link_to image_tag(photo.image, class: "gifs", width: "250", height: "200"), photo_path(photo.id) %>
         <h4> <%= link_to "#{category.name}", category_path(category) %></h2>
       </div>
     <% end %>
