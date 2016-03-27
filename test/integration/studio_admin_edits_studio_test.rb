@@ -6,7 +6,6 @@ class StudioAdminEditsStudio < ActionDispatch::IntegrationTest
     create_and_login_studio_admin(studio)
 
     visit admin_path(studio)
-
     click_on "Edit Studio"
     fill_in "Name", with: "Different Name"
 
