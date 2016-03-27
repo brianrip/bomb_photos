@@ -1,10 +1,13 @@
 class Admin::UsersController < Admin::BaseController
   def show
+    require_correct_studio_admin
     @studio = Studio.find(params[:studio])
   end
 
   def index
+    require_correct_studio_admin
     @users = User.all
+    @studio = params[:studio].to_i
   end
 
   def change_admin_status
@@ -21,7 +24,7 @@ class Admin::UsersController < Admin::BaseController
       flash[:success] = "You have removed admin status for #{@user.email}"
     else
       @user.roles << Role.find_or_create_by(name: "studio admin")
-      @user.update_attribute(:studio_id, current_user.studio.id)
+      @user.update_attribute(:studio_id, params[:studio_id])
       flash[:success] = "#{@user.email} has been granted admin status!"
     end
     redirect_to :back

@@ -80,7 +80,7 @@ class Seed
                            image:       "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png",
                            price:       Random.rand(1..1000),
                            category_id: Random.rand(1..@categories.length)
-      )
+                           )
     end
   end
 
