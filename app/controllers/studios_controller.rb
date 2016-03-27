@@ -5,6 +5,7 @@ class StudiosController < ApplicationController
 
   def show
     @studio = Studio.find(params[:id])
+    render file: "/public/404" unless @studio.active? || current_platform_admin? || current_user && current_user.studio == @studio
   end
 
   def new
