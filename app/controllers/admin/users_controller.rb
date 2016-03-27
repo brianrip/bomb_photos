@@ -4,21 +4,26 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def index
+    require "pry"
+    binding.pry
     @users = User.all
   end
 
   def change_admin_status
     @user = User.find(params[:id])
     if @user.studio_admin?
-      @user.roles.first.update_attributes(name: "customer")
-      @user.update_attributes(studio_id: nil)
-      flash[:success] = "#{@user.email} no longer has admin status!"
+      @user.update_attribute(:studio_id, nil)
+      @user.user_roles.each do |user_role|
+        if user_role.role.name == "studio admin"
+          @user.user_roles.find(user_role.id).delete
+        end
+      end
+      flash[:success] = "User's admin privileges have been revoked"
     else
-      @user.roles.first.update_attributes(name: "studio admin")
-      current_user.studio.users << @user
-      flash[:success] = "#{@user.email} has been granted admin status!"
+      @user.roles << Role.find_or_create_by(name: "studio admin")
+      @user.update_attribute(:studio_id, current_user.studio.id)
+      flash[:success] = "User has been granted admin status!"
     end
     redirect_to :back
   end
-
 end
