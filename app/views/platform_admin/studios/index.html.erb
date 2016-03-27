@@ -2,9 +2,9 @@
 <h3>Studios</h3>
 <table class = "table">
   <tr>
-    <th> View/Edit </th>
     <th>ID</th>
     <th>Studio Name</th>
+    <th> View/Edit </th>
     <th>Created On</th>
     <th>Status</th>
     <th>Actions</th>
@@ -14,9 +14,9 @@
   </tr>
   <% @studios.each do |studio| %>
     <tr>
-      <td><%= link_to "View/Edit", admin_path(studio) %></td>
       <td><%= link_to studio.id, admin_path(studio) %></td>
       <td><%= link_to studio.name, admin_path(studio) %></td>
+      <td><%= button_to "View/Edit", admin_path(studio) %></td>
       <td><%= studio.studio_created_on %></td>
       <td><%= studio.status %></td>
       <% if studio.active? %>
