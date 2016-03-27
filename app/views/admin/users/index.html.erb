@@ -1,5 +1,5 @@
 <div class="container">
-  <h1 class="text-center">Manage <%= current_user.studio.name %>'s admins</h1>
+  <h1 class="text-center">Manage <%= @studio.slug  %>'s admin</h1>
   <div class="col-md-6">
   <h3 class="text-center">All Admin</h3>
   <table class = "table admin-table">
@@ -10,7 +10,7 @@
     </tr>
     <% @users.each do |user| %>
     <tr>
-      <% if user.studio_admin? && user.platform_admin? == false && user.studio == current_user.studio%>
+      <% if user.studio_admin? && user.platform_admin? == false && user.studio == @studio %>
       <td><%= user.id %></td>
       <td><%= user.email %></td>
       <td><%= button_to "Revoke admin status for user #{user.id}", "/admin/status/#{user.id}", method: :patch, params: { studio_id: @studio }, class: "btn btn-warning" %></td>

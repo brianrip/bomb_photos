@@ -23,7 +23,7 @@ class Admin::UsersController < Admin::BaseController
       end
       flash[:success] = "You have removed admin status for #{@user.email}"
     else
-      @user.roles << Role.find_or_create_by(name: "studio admin") 
+      @user.roles << Role.find_or_create_by(name: "studio admin")
       @user.update_attribute(:studio_id, Studio.find_by(slug: params[:studio_id]).id)
       flash[:success] = "#{@user.email} has been granted admin status!"
     end
