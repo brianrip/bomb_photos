@@ -20,4 +20,12 @@ class User < ActiveRecord::Base
   def studio_admin?
     roles.exists?(name: "studio admin")
   end
+
+  def delete_studio_admin_role
+    self.user_roles.each do |user_role|
+      if user_role.role.name == "studio admin"
+        self.user_roles.find(user_role.id).delete
+      end
+    end
+  end
 end
