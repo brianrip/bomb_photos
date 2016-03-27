@@ -27,7 +27,7 @@ class StudiosController < ApplicationController
 
   def edit
     studio = Studio.find(params[:id])
-    if current_user.studio != studio
+    if (!current_platform_admin?) && (current_user.studio != studio)
       flash[:alert] = "You can only edit a studio that belongs to you"
       render file: "/public/404"
     else
