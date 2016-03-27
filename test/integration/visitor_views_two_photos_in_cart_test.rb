@@ -12,12 +12,12 @@ class VisitorViewsTwoPhotosInCartTest < ActionDispatch::IntegrationTest
                                  price:       999,
                                  category_id: category.id
     )
-    visit category_path(category.slug)
+    visit category_path(category)
 
     click_on photo1.name
     click_on "Add to Cart"
 
-    visit category_path(category.slug)
+    visit category_path(category)
 
     click_on photo2.name
     click_on "Add to Cart"

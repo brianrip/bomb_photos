@@ -32,6 +32,5 @@ Rails.application.routes.draw do
 
   resources :studios
 
-  resources :categories, only: [:index]
-  get "/categories/:slug", :to => "categories#show", as: :category
+  resources :categories, only: [:index, :show]
 end
