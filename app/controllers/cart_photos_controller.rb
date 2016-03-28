@@ -13,7 +13,6 @@ class CartPhotosController < ApplicationController
   end
 
   def show
-    ids = session[:cart]
     @cart_photos = @cart.cart_photos
     session[:return_to] = cart_path
   end
@@ -27,13 +26,5 @@ class CartPhotosController < ApplicationController
     else
       redirect_to cart_path
     end
-  end
-
-  def update
-    photo = find_photo
-    quantity = params[params[:id]].values.first.to_i
-    @cart.contents[params[:id]] = quantity
-    redirect_to cart_path
-    flash[:success] = "Successfully updated quantity for #{photo.title} to #{quantity}"
   end
 end

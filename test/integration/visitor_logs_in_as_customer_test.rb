@@ -2,7 +2,7 @@ require 'test_helper'
 
 class VisitorLogsInAsCustomer < ActionDispatch::IntegrationTest
 
-  test "visitor logs in" do
+  test "visitor logs in and out" do
     user = User.create(email: "adrienne@example.com", password: "password")
     user.roles << customer_role
     visit '/'
@@ -24,5 +24,10 @@ class VisitorLogsInAsCustomer < ActionDispatch::IntegrationTest
     assert page.has_content?("Log Out")
     refute page.has_content?("Log In")
     assert page.has_content?(user.email)
+
+    click_on "Log Out"
+    refute page.has_content?("Log Out")
+    assert page.has_content?("Log In")
+    refute page.has_content?(user.email)
   end
 end
