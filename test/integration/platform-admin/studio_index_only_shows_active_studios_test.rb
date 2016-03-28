@@ -3,7 +3,7 @@ require 'test_helper'
 class StudioIndexOnlyShowsActiveStudios < ActionDispatch::IntegrationTest
   test "only active studios show on index" do
     studio = create_studio
-
+    category = create_category
     studio2 = Studio.create(name:        "Adrienne",
                            description: "Example description.",
                            status:      1
@@ -18,6 +18,8 @@ class StudioIndexOnlyShowsActiveStudios < ActionDispatch::IntegrationTest
                            description: "Example description.",
                            status:      3
     )
+
+    create_studio_photo(studio, category)
 
     visit studios_path
 
