@@ -10,7 +10,7 @@
     </tr>
     <% @users.each do |user| %>
     <tr>
-      <% if user.studio_admin? && user.platform_admin? == false && user.studio == @studio %>
+      <% if user.relevent_studio_admin(@studio) %>
       <td><%= user.id %></td>
       <td><%= user.email %></td>
       <td><%= button_to "Revoke admin status for user #{user.id}", "/admin/status/#{user.id}", method: :patch, params: { studio_id: @studio }, class: "btn btn-warning" %></td>
@@ -30,7 +30,7 @@
     </tr>
     <% @users.each do |user| %>
     <tr>
-      <% if user.studio == nil && user.platform_admin? == false %>
+      <% if user.non_admin %>
       <td><%= user.id %></td>
       <td><%= user.email %></td>
       <td><%= button_to "Grant admin status for user #{user.id}", "/admin/status/#{user.id}", method: :patch, params: { studio_id: @studio }, class: "btn btn-success" %></td>

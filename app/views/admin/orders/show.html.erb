@@ -19,17 +19,18 @@
   </table>
 </div>
 
-<h1>Photos from Your Studio Included in This Order</h1>
-
+<div class="container">
+  <h1>Photos from Your Studio Included in This Order</h1>
+</div>
 <div class="container">
   <% @order.order_photos.each do |order_photo| %>
     <% if order_photo.photo.studio == @studio %>
       <div class="col-md-7">
         <div class="row product">
-          <div class="col-md-5 col-md-offset-0"><p><%= image_tag order_photo.photo.image, width: 200 %></p>
-          </div>
+          <div class="col-md-5 col-md-offset-0"><p><%= image_tag order_photo.photo.image, width: 200 %></p></div>
           <h4><%= link_to order_photo.photo.name, photo_path(order_photo.photo) %></h4>
         </div>
       </div>
-    <% end %>
   <% end %>
+    <% end %>
+</div>

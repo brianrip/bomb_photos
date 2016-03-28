@@ -5,7 +5,6 @@ class Category < ActiveRecord::Base
   scope :alpha, -> { order("name asc") }
 
   before_create :set_slug
-
   def set_slug
     self.slug = name.parameterize
   end

@@ -15,9 +15,7 @@ class StudiosController < ApplicationController
   def create
     @studio = Studio.new(studio_params)
     if @studio.save
-      @studio.update(status: 2)
-      current_user.update_attribute(:studio_id, @studio.id)
-      current_user.roles << Role.find_or_create_by(name: "studio admin")
+      StudioRelationships.build(@studio, current_user)
       flash[:success] = "Application submitted!"
       redirect_to dashboard_path
     else
