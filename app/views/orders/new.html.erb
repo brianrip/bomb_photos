@@ -28,9 +28,9 @@
     </table>
 <%= form_tag @order do %>
   <article>
-    <% if flash[:error].present? %>
+    <% if flash[:danger].present? %>
       <div id="error_explanation">
-        <p><%= flash[:error] %></p>
+        <p><%= flash[:danger] %></p>
       </div>
     <% end %>
     <label class="amount">
