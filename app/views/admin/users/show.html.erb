@@ -2,6 +2,9 @@
   <h1 class="studio-name"><%= @studio.name %>: Admin Dashboard</h1>
 
   <div class="col-md-4">
+    <h3><%= link_to "Manage Photos", admin_photos_path(@studio), class: "btn btn-primary btn-large" %></h3>
+  </div>
+  <div class="col-md-4">
     <h3><%= link_to "View Orders", admin_orders_path(@studio), class: "btn btn-primary btn-large" %></h3>
   </div>
   <div class="col-md-4">

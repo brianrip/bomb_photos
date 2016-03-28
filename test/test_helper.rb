@@ -53,6 +53,7 @@ class ActiveSupport::TestCase
                          price:       999,
                          category_id: category.id
                          )
+
   end
 end
 
