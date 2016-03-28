@@ -12,7 +12,6 @@
         <th>Category</th>
         <th>Price</th>
         <th>Remove</th>
-        <th>Subtotal</th>
       </tr>
     </thead>
     <tbody>
@@ -27,13 +26,12 @@
             <td>
               <p><%= link_to "Remove from Cart", cart_path(id: photo.id), method: :delete %></p>
             </td>
-            <td><%= number_to_currency(photo.subtotal) %></td>
           </tr>
         </div>
       <% end %>
       <tr>
         <td colspan=5 align=right>
-          <p>Total: $<%= @cart.total_price / 100.0 %>.00</p>
+          <p>Total: <%= @cart.total_price %></p>
           <p><%= link_to "Checkout", new_order_path %></p>
           <p><%= link_to "Continue Shopping", categories_path %></p>
         </td>
