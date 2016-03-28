@@ -36,6 +36,12 @@ class Admin::PhotosController < Admin::BaseController
   end
 
   def change_status
+    studio = Studio.find_by(id: params[:studio])
+    unless studio.status == "active"
+      flash[:error] = "That action is prohibited."
+      redirect_to :back and return
+    end
+
     @photo = Photo.find(params[:id])
     if @photo.active
       @photo.update_attributes(active: false)
