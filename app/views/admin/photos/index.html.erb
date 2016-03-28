@@ -1,0 +1,27 @@
+<div class="container">
+  <h1 class="text-center">All Photos for <%= @studio.name %></h1>
+  <div class="all_orders col-md-offset-1">
+    <table class="table">
+      <tr>
+        <th>Photo</th>
+        <th>Name</th>
+        <th>Edit Photo</th>
+        <th>Status</th>
+        <th>Change Status</th>
+      </tr>
+      <% @studio.photos.each do |photo| %>
+      <tr>
+        <td> <%= link_to photo.id, photo_path(photo) %></td>
+        <td> <%= link_to photo.name, photo_path(photo) %></td>
+        <td><%= link_to "Edit", edit_admin_photo_path(photo.studio, photo.id), class: "btn btn-default" %>
+        <td> <%= photo.status %></td>
+        <% if photo.active %>
+          <td><%= link_to "Deactivate", "/admin/#{photo.studio.id}/status/#{photo.id}", method: :patch, class: "btn btn-default" %></td>
+        <% else %>
+          <td><%= link_to "Activate", "/admin/#{photo.studio.id}/status/#{photo.id}", method: :patch, class: "btn btn-default" %></td>
+        <% end %>
+      <% end %>
+      </tr>
+    </table>
+  </div>
+</div>

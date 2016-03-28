@@ -1,4 +1,8 @@
 class Admin::PhotosController < Admin::BaseController
+  def index
+    @studio = Studio.find(params[:studio])
+  end
+
   def new
     @photo = Photo.new
     @categories = Category.all
