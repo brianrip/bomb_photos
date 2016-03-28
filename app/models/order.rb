@@ -12,7 +12,6 @@ class Order < ActiveRecord::Base
   end
 
   def self.associated_photos(studio)
-    binding.pry
     #one thing we need to look at is creating a join table.
     all.select do |order|
       order.order_photos.any? do |order_photo|

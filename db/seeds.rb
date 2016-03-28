@@ -60,7 +60,7 @@ class Seed
     user.roles << platform_admin_role
     user.roles << studio_admin_role
     user.roles << customer_role
-  end
+  endgit 
 
   def generate_platform_only_admin
     user = Studio.last.users.create(email: "platformadmin@example.com", password: "password")
