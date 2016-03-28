@@ -12,8 +12,13 @@
 }
 
 a.photo-title {
-      min-height: 30px;
-  color: #366fc1;
+  min-height: 30px;
+  color: #0b0b0b;
+}
+
+h3.photo-title {
+  min-height: 30px;
+  color: #0b0b0b;
 }
 
 h1 {
