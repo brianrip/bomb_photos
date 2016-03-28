@@ -24,10 +24,15 @@ class Photo < ActiveRecord::Base
   end
 
   def status
-    if active
-      "Active"
+    active ? "Active" : "Inactive"
+  end
+
+  def self.random_category_photo(category)
+    if !category.photos.empty?
+      photo = where(category_id: Category.find_by(name: category.name).id).shuffle.pop
     else
-      "Inactive"
+      photo = first
     end
+    photo
   end
 end

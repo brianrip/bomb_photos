@@ -1,6 +1,7 @@
 <h1 class="text-center"><%= @category.name %></h1>
 <div class="container">
   <% if @category.photos %>
+  <br>
     <% @category.photos.each do |photo| %>
       <%= render partial: "partials/photo_column", locals: { photo: photo } %>
     <% end %>

@@ -3,13 +3,10 @@
     <h1>All Categories</h1>
     <% @categories.each do |category| %>
       <div class="col-md-4">
-        <% if !category.photos.empty? %>
-          <% photo = Photo.where(category_id: Category.find_by(name: category.name).id).shuffle.pop %>
-        <% else %>
-          <% photo = Photo.first %>
-        <% end %>
+        <% photo = Photo.random_category_photo(category) %>
         <%= link_to image_tag(photo.image, class: "gifs", width: "250", height: "200"), photo_path(photo.id) %>
         <h4> <%= link_to "#{category.name}", category_path(category) %></h2>
+        <%= link_to image_tag("https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png", width: "250"), category_path(category) %>
       </div>
     <% end %>
   </div>

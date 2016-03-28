@@ -3,22 +3,21 @@
 }
 
 .jumbotron {
-  background-image: url(https://images.unsplash.com/uploads/14127101912749510b8ed/82743738?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=16c62adec1b18de2eea1e656fdd197e9);
-  background-size: contain;
+  background-image: url(https://images.unsplash.com/photo-1416339426675-1f96fd81b653?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=4fb0b2c934659936c6dbf789225ee220);
+  background-size: cover;
 }
 
 .photo-title {
-  min-height: 50px;
   margin-top: 60px;
-  margin-bottom: 0;
-  color: black;
 }
+
 a.photo-title {
-  color: black;
+      min-height: 30px;
+  color: #366fc1;
 }
 
 h1 {
-  color: orange !important;
+  color: #CC1010 !important;
   /*Shouldnt use important, but not working otherwise*/
 }
 
@@ -37,11 +36,11 @@ footer {
  bottom: 0;
  width: 100%;
  height: 60px;
- background-color: #818181;
+ background-color: #222222;
 }
 
 footer h3 {
-  color: #FFA500;
+  color: #CC1010;
 }
 
 .studio-name {

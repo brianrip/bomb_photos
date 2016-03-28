@@ -8,4 +8,12 @@ class UserTest < ActiveSupport::TestCase
   should_not allow_value("foo@bar").for(:email)
   should_not allow_value("@bar.com").for(:email)
   should_not allow_value("bar.com").for(:email)
+
+  test "customer? returns true for customer" do
+    customer_role = Role.create(name: "customer")
+    user = User.create(email: "example@example.com", password: "password")
+    user.roles << customer_role
+
+    assert user.customer?
+  end
 end
