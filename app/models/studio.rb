@@ -1,6 +1,8 @@
 class Studio < ActiveRecord::Base
   has_many :photos
   has_many :users
+  has_many :studio_orders
+  has_many :orders, through: :studio_orders
   validates :promo_image, presence: true
   validates :name, presence: true, uniqueness: true
   validates :description, presence: true
@@ -30,6 +32,8 @@ class Studio < ActiveRecord::Base
 
   def revenue
     revenue = 0
+      # require "pry"
+      # binding.pry
     Order.associated_photos(self).each do |order|
       order.order_photos.each do |order_photo|
         if order_photo.photo.studio == self
