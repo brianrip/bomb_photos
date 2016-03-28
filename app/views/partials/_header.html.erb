@@ -14,16 +14,16 @@
       <li><%= link_to "All Categories", categories_path %></li>
       <li><%= link_to "Shop By Studio", studios_path%></li>
       <li><%= link_to "Cart(#{@cart.total_items})", cart_path %></li>
-      <% if current_user.customer? %>
-        <li><%= link_to "Customer account", dashboard_path %></li>
-      <% end %>
-      <% if current_user.studio_admin? %>
-        <li><%= link_to "#{current_user.studio.name} admin account", admin_path(Studio.find_by(id: current_user.studio_id)) %></li>
-      <% end %>
-      <% if current_user.platform_admin? %>
-        <li><%= link_to "Platform admin account", platform_admin_dashboard_path %></li>
-      <% end %>
       <% if current_user %>
+        <% if current_user.customer? %>
+          <li><%= link_to "Customer account", dashboard_path %></li>
+        <% end %>
+        <% if current_user.studio_admin? %>
+          <li><%= link_to "#{current_user.studio.name} admin account", admin_path(Studio.find_by(id: current_user.studio_id)) %></li>
+        <% end %>
+        <% if current_user.platform_admin? %>
+          <li><%= link_to "Platform admin account", platform_admin_dashboard_path %></li>
+        <% end %>
           <li><%= link_to "Log Out", logout_path, method: :delete %></li>
         <% else %>
           <li><%= link_to "Log In", login_path %><li>

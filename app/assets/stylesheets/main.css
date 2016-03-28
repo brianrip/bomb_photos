@@ -8,13 +8,12 @@
 }
 
 .photo-title {
-  min-height: 50px;
   margin-top: 60px;
-  margin-bottom: 0;
-  color: black;
 }
+
 a.photo-title {
-  color: black;
+      min-height: 30px;
+  color: #366fc1;
 }
 
 h1 {
