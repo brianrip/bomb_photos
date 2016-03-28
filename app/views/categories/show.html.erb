@@ -1,11 +1,13 @@
 <h1 class="text-center"><%= @category.name %></h1>
 <div class="container">
+  <div class="gif">
+
   <% if @category.photos %>
-  <br>
     <% @category.photos.each do |photo| %>
       <%= render partial: "partials/photo_column", locals: { photo: photo } %>
     <% end %>
   <% else %>
    <h3>No photos for this category</h3>
   <% end %>
+  </div>
 </div>

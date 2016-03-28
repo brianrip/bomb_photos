@@ -1,12 +1,11 @@
-<h1 class="text-center">Studios</h1>
 
-<div class="container">
+<div class="container text-center">
+  <h1>Studios</h1>
     <% @studios.each do |studio| %>
       <div class="col-md-4">
-        <h3 class="text-center studio-name"><%= studio.name %></h3>
-        <br>
-        <p class="studio-description"><%= studio.description %></p>
-        <p><%= link_to studio.name, studio_path(studio), class: "btn btn-default btn-font-size center-block" %></p>
+        <h3><%= link_to studio.name, studio_path(studio), class: "photo-title" %></h3>
+        <% photo = Photo.random_studio_photo(studio) %>
+        <%= link_to image_tag(photo.image, class: "gifs", width: "250", height: "200"), studio_path(studio) %>
       </div>
     <% end %>
 </div>
