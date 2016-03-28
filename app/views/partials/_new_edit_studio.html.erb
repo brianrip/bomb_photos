@@ -1,9 +1,7 @@
-<%= form_for @studio do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :description %>
-  <%= f.text_field :description %>
-  <%= f.label :promo_image %>
-  <%= f.file_field :promo_image %>
-  <%= f.submit %>
-<% end %>
+  <%= form_for @studio do |f| %>
+  <h3><%= f.label :name %>   <%= f.text_field :name, class: "form-control" %></h3>
+  <h3><%= f.label :description %>   <%= f.text_field :description,  class: "form-control" %></h3>
+  <h3><%= f.label :promo_image %></h3>   <%= f.file_field :promo_image, class: "form-control btn btn-default"%>
+  <br>
+  <%= f.submit "Update studio", class: "btn btn-default btn-lg" %>
+  <% end %>
