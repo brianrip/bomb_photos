@@ -13,10 +13,6 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
 
-  def current_user_studio
-    current_user.st
-  end
-
   def current_studio_admin?
     current_user && current_user.studio_admin?
   end
