@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :update, :edit]
   get "/dashboard", to: "users#show"
 
+  namespace :users do
+    resources :photos, only: [:index], path: ':id/photos'
+  end
+
   namespace :admin do
     get ":studio/dashboard", to: "users#show"
     resources :orders, only: [:index, :update, :show], path: '/:studio/orders'

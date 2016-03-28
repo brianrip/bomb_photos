@@ -18,6 +18,9 @@ class OrdersController < ApplicationController
   end
 
   def new
+    if current_user && current_user.pre_owned_photos?(@cart)
+      flash[:danger] = "You have already purchased one of the photos in your cart. Please go back and remove it, unless you would like to purchase it again."
+    end
     if current_user
       @order = Order.new
       @cart_photos = @cart.cart_photos

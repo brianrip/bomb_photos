@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   belongs_to :studio
   has_many :user_roles
   has_many :roles, through: :user_roles
+  has_many :user_photos
+  has_many :photos, through: :user_photos
 
   def platform_admin?
     roles.exists?(name: "platform admin")
@@ -35,5 +37,16 @@ class User < ActiveRecord::Base
         self.user_roles.find(user_role.id).delete
       end
     end
+  end
+
+  def pre_owned_photos?(cart)
+    cart.cart_photos.each do |cart_photo|
+      photos.each do |photo|
+        if cart_photo == photo
+          return true
+        end
+      end
+    end
+    false
   end
 end

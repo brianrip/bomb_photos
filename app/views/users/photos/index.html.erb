@@ -1,0 +1,13 @@
+<div class="container">
+  <h1>Photos You've Purchased</h1>
+  <% if current_user.photos.empty? %>
+    <h3>You haven't bought any photos!</h3>
+  <% else %>
+    <% current_user.photos.each do |photo| %>
+      <div class="text-center col-xs-9 col-sm-6 col-md-4 col-lg-3 gif">
+        <h3 class = "photo-title"><%= link_to "#{photo.name}", photo_path(photo.id), class: "photo-title" %></h3>
+        <%= link_to image_tag(photo.image, class: "gifs", width: "250", height: "200"), photo_path(photo.id) %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
