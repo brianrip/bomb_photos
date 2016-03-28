@@ -21,6 +21,14 @@ class User < ActiveRecord::Base
     roles.exists?(name: "studio admin")
   end
 
+  def non_admin
+    studio == nil && !platform_admin?
+  end
+
+  def relevent_studio_admin(query_studio)
+    studio_admin? && platform_admin? == false && studio == query_studio
+  end
+
   def delete_studio_admin_role
     self.user_roles.each do |user_role|
       if user_role.role.name == "studio admin"
