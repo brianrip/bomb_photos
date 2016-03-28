@@ -16,14 +16,10 @@ class Admin::UsersController < Admin::BaseController
       flash[:error] = "You cannot remove yourself at this time, please contact Bomb Photos to perform this action."
     elsif @user.studio_admin?
       @user.update_attribute(:studio_id, nil)
-      @user.user_roles.each do |user_role|
-        if user_role.role.name == "studio admin"
-          @user.user_roles.find(user_role.id).delete
-        end
-      end
+      @user.delete_studio_admin_role
       flash[:success] = "You have removed admin status for #{@user.email}"
     else
-      @user.roles << Role.find_or_create_by(name: "studio admin") 
+      @user.roles << Role.find_or_create_by(name: "studio admin")
       @user.update_attribute(:studio_id, Studio.find_by(slug: params[:studio_id]).id)
       flash[:success] = "#{@user.email} has been granted admin status!"
     end

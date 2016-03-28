@@ -1,5 +1,5 @@
 require 'simplecov'
-SimpleCov.start 'rails'
+SimpleCov.start
 ENV["RAILS_ENV"] ||= "test"
 require File.expand_path('../../config/environment', __FILE__)
 require "rails/test_help"
@@ -83,6 +83,7 @@ class ActionDispatch::IntegrationTest
     Role.create(name: "platform admin")
   end
 
+
   def create_category
     Category.create(name: "Example Category")
   end
@@ -117,11 +118,19 @@ class ActionDispatch::IntegrationTest
 
   def create_and_login_platform_admin
     admin = User.create(email:  "admin@eample.com",
-                                password: "password",
-                                )
+                        password: "password",
+                       )
+    admin.roles << platform_admin_role
+    ApplicationController.any_instance.stubs(:current_user).returns(admin)
+    admin
+  end
+
+  def create_platform_admin
+    admin = User.create(email:  "admin@eample.com",
+                        password: "password",
+                       )
     admin.roles << platform_admin_role
     admin
-    ApplicationController.any_instance.stubs(:current_user).returns(admin)
   end
 
   def create_studio_admin(studio)

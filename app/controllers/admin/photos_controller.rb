@@ -35,13 +35,6 @@ class Admin::PhotosController < Admin::BaseController
     end
   end
 
-  def destroy
-    @photo = find_photo
-    @photo.destroy
-    flash[:success] = "This photo was successfully deleted."
-    redirect_to root_url
-  end
-
   def change_status
     @photo = Photo.find(params[:id])
     if @photo.active
