@@ -5,8 +5,6 @@ class Category < ActiveRecord::Base
   scope :alpha, -> { order("name asc") }
 
   before_create :set_slug
-  attr_reader :category
-
   def set_slug
     self.slug = name.parameterize
   end
@@ -17,9 +15,5 @@ class Category < ActiveRecord::Base
 
   def self.find(input)
     find_by_slug(input)
-  end
-
-  def category
-    Category.find(self.category_id)
   end
 end

@@ -18,6 +18,7 @@ class Photo < ActiveRecord::Base
     }
 
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+  attr_reader :category
 
   def convert_price_to_cents
     self.update(price: price * 100)
@@ -34,5 +35,9 @@ class Photo < ActiveRecord::Base
       photo = first
     end
     photo
+  end
+
+  def category
+    Category.find_by(id: self.category_id)
   end
 end
