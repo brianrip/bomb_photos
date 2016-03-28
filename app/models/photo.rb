@@ -22,4 +22,12 @@ class Photo < ActiveRecord::Base
   def convert_price_to_cents
     self.update(price: price * 100)
   end
+
+  def status
+    if active
+      "Active"
+    else
+      "Inactive"
+    end
+  end
 end
