@@ -26,6 +26,6 @@ class ApplicationController < ActionController::Base
   end
 
   def format_price(number)
-    "$#{sprintf('%.2f', number.to_f/100)}"
+    "$#{sprintf('%.2f', number.to_f/100.0)}"
   end
 end

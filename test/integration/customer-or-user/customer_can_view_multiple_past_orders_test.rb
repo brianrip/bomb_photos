@@ -23,9 +23,9 @@ class CustomerCanViewMultiplePastOrdersTest < ActionDispatch::IntegrationTest
 
     assert page.has_content? order1.id
     assert page.has_content? order1.placed_at
-    assert page.has_content? order1.total_price
+    assert page.has_content? "$2.00"
     assert page.has_content? order2.id
     assert page.has_content? order2.placed_at
-    assert page.has_content? order2.total_price
+    assert page.has_content? "$2.00"
   end
 end
