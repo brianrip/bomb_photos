@@ -17,7 +17,7 @@ class Admin::PhotosController < Admin::BaseController
       flash[:success] = "Your Photo Has Been Created"
       redirect_to photo_path(@photo)
     else
-      flash.now[:error] = "Invalid Entry, Try again."
+      flash.now[:danger] = "Invalid Entry, Try again."
       render new_admin_photo_path
     end
   end
@@ -34,7 +34,7 @@ class Admin::PhotosController < Admin::BaseController
       flash[:success] = "Photo Has Been Updated"
       redirect_to photo_path(@photo.id)
     else
-      flash.now[:error] = "Invalid input"
+      flash.now[:danger] = "Invalid input"
       render :edit
     end
   end
@@ -42,7 +42,7 @@ class Admin::PhotosController < Admin::BaseController
   def change_status
     studio = Studio.find_by(id: params[:studio])
     unless studio.status == "active"
-      flash[:error] = "That action is prohibited."
+      flash[:danger] = "That action is prohibited."
       redirect_to :back and return
     end
 
