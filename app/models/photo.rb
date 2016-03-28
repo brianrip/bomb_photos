@@ -40,4 +40,13 @@ class Photo < ActiveRecord::Base
   def category
     Category.find_by(id: self.category_id)
   end
+
+  def self.random_studio_photo(studio)
+    if !studio.photos.empty?
+      photo = where(studio_id: Studio.find_by(name: studio.name).id).shuffle.pop
+    else
+      photo = first
+    end
+    photo
+  end
 end

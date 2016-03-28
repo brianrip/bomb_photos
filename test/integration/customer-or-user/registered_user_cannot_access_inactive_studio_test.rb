@@ -4,6 +4,8 @@ class RegisteredUserCannotAccessInactiveStudioTest < ActionDispatch::Integration
   test "registered user tries to access inactive studio" do
     user = create_user
     active = create_studio
+    category = create_category
+    create_studio_photo(active, category)
     inactive_studio = Studio.create(name:        "inactive",
                                     description: "Example description.",
                                     status:      1,
