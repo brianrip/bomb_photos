@@ -1,7 +1,8 @@
 class Admin::OrdersController < Admin::BaseController
   def index
     @studio = Studio.find(params[:studio])
-    @orders = Order.associated_photos(@studio)
+    @orders = Order.joins(photos: :studio).where("studios.id = #{@studio.id}").distinct
+
   end
 
   def show

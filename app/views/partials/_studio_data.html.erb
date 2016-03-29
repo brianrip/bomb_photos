@@ -6,6 +6,6 @@
   <td><%= studio.status %></td>
   <td><%= button_to "#{button_text}", path, method: :patch, class: "btn btn-primary btn-large" %></td>
   <td><%= studio.photos.count %></td>
-  <td><%= Order.associated_photos(studio).count %></td>
+  <td><%= studio.order_count %></td>
   <td><%= studio.revenue %></td>
 <tr>

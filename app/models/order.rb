@@ -4,16 +4,9 @@ class Order < ActiveRecord::Base
   has_many :order_photos
   has_many :photos, through: :order_photos
 
+
   def placed_at
     created_at.strftime("%B %d, %Y")
-  end
-
-  def self.associated_photos(studio)
-    all.select do |order|
-      order.order_photos.any? do |order_photo|
-        order_photo.photo.studio == studio
-      end
-    end
   end
 
   def studio_price(studio)
