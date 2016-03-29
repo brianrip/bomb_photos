@@ -2,22 +2,11 @@ class Order < ActiveRecord::Base
   validates :status, presence: true
   belongs_to :user
   has_many :order_photos
-  has_many :studio_orders
   has_many :photos, through: :order_photos
-  has_many :studios, through: :studio_orders
 
 
   def placed_at
     created_at.strftime("%B %d, %Y")
-  end
-
-  def self.associated_photos(studio)
-    #one thing we need to look at is creating a join table.
-    all.select do |order|
-      order.order_photos.any? do |order_photo|
-        order_photo.photo.studio == studio
-      end
-    end
   end
 
   def studio_price(studio)

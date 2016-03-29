@@ -1,8 +1,6 @@
 class Studio < ActiveRecord::Base
   has_many :photos
   has_many :users
-  has_many :studio_orders
-  has_many :orders, through: :studio_orders
   validates :promo_image, presence: true
   validates :name, presence: true, uniqueness: true
   validates :description, presence: true
@@ -31,17 +29,20 @@ class Studio < ActiveRecord::Base
   end
 
   def revenue
-    revenue = 0
-      # require "pry"
-      # binding.pry
-    Order.associated_photos(self).each do |order|
-      order.order_photos.each do |order_photo|
-        if order_photo.photo.studio == self
-          revenue += order_photo.photo.price
-        end
-      end
-    end
+    revenue = Photo
+      .joins(:studio)
+      .joins(:orders)
+      .where(studio_id: self.id)
+      .sum(:price)
     "$#{'%.02f' % (revenue / 100.0)}"
+  end
+
+  def order_count
+    Order
+      .joins(photos: :studio)
+      .where("studios.id = #{self.id}")
+      .distinct
+      .count
   end
 
   def deactivate_all_photos
