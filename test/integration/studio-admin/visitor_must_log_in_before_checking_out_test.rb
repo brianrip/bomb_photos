@@ -11,7 +11,6 @@ class VisitorMustLogInBeforeCheckingOutTest < ActionDispatch::IntegrationTest
     click_on "Example Category"
     click_on "Example Name"
     click_on "Add to Cart"
-
     visit cart_path
     click_on "Checkout"
     assert page.has_content?("You must log in or register to place an order.")

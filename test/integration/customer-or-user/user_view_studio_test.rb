@@ -17,7 +17,7 @@ class UserViewStudioTest < ActionDispatch::IntegrationTest
                                    category_id: category.id
     )
 
-    visit studio_path(studio)
+    visit "/#{studio.slug}"
 
     assert page.has_content? studio.name
     assert page.has_content? studio.description

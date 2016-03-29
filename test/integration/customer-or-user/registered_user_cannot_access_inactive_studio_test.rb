@@ -28,11 +28,11 @@ class RegisteredUserCannotAccessInactiveStudioTest < ActionDispatch::Integration
     refute page.has_content?(inactive_studio.name)
     refute page.has_content?(pending_studio.name)
     refute page.has_content?(denied_studio.name)
-    visit studio_path(inactive_studio)
+    visit "/#{inactive_studio.slug}"
     assert page.has_content?("The page you were looking for doesn't exist")
-    visit studio_path(pending_studio)
+    visit "/#{pending_studio.slug}"
     assert page.has_content?("The page you were looking for doesn't exist")
-    visit studio_path(denied_studio)
+    visit "/#{denied_studio.slug}"
     assert page.has_content?("The page you were looking for doesn't exist")
   end
 end

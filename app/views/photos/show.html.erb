@@ -3,7 +3,7 @@
       <div class="container col-md-offset-1 col-xs-12 col-md-3 photo-show">
         <h2><%= @photo.name %></h2>
         <p><%= @photo.description %></p>
-        <p>Studio: <%= link_to @photo.studio.name, studio_path(@photo.studio) %></p>
+        <p>Studio: <%= link_to @photo.studio.name, "/#{@photo.studio.slug}" %></p>
         <h3><%= format_price(@photo.price) %></h3>
         <h3><%= link_to @photo.category.name, category_path(@photo.category) %></h3>
         <p>

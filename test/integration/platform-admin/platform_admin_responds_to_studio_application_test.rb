@@ -14,7 +14,7 @@ class PlatformAdminRespondsToStudioApplicationTest < ActionDispatch::Integration
     assert page.has_content?("Photos by #{other_studio.name}")
     click_on "Deny"
     assert page.has_content?("#{other_studio.name} has been denied")
-    visit studio_path(other_studio)
+    visit "/#{other_studio.slug}"
     assert page.has_content?("Status: denied")
    end
 
@@ -30,7 +30,7 @@ class PlatformAdminRespondsToStudioApplicationTest < ActionDispatch::Integration
     assert page.has_content?("Photos by #{other_studio.name}")
     click_on "Approve"
     assert page.has_content?("#{other_studio.name} has been approved and activated")
-    visit studio_path(other_studio)
+    visit "/#{other_studio.slug}"
     assert page.has_content?("Status: active")
   end
 
@@ -40,7 +40,7 @@ class PlatformAdminRespondsToStudioApplicationTest < ActionDispatch::Integration
                                  status:      2,
                                  promo_image: "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png"
                                  )
-    visit studio_path(studio)
+    visit "/#{studio.slug}"
     refute page.has_content?("Deny")
     refute page.has_content?("Approve")
   end
