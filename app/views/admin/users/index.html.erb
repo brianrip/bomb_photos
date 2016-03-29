@@ -1,5 +1,5 @@
 <div class="container">
-  <h1 class="text-center">Manage <%= @studio.slug  %>'s admin</h1>
+  <h1 class="text-center">Manage <%= @studio.name %>'s admin</h1>
   <div class="col-md-6">
   <h3 class="text-center">All Admin</h3>
   <table class = "table admin-table">
@@ -13,30 +13,20 @@
       <% if user.relevent_studio_admin(@studio) %>
       <td><%= user.id %></td>
       <td><%= user.email %></td>
-      <td><%= button_to "Revoke admin status for user #{user.id}", "/admin/status/#{user.id}", method: :patch, params: { studio_id: @studio }, class: "btn btn-warning" %></td>
+      <td><%= button_to "Revoke admin status for user #{user.id}", "/admin/status", method: :patch, params: { studio_id: @studio, user_id: user.id }, class: "btn btn-default" %></td>
       <% end %>
     </tr>
     <% end %>
   </table>
   </div>
 
-  <div class="col-md-6">
-  <h3 class="text-center">All Users</h3>
-  <table class = "table customer-table">
-    <tr>
-      <th> User ID </th>
-      <th> User email </th>
-      <th> Add Admin</th>
-    </tr>
-    <% @users.each do |user| %>
-    <tr>
-      <% if user.non_admin %>
-      <td><%= user.id %></td>
-      <td><%= user.email %></td>
-      <td><%= button_to "Grant admin status for user #{user.id}", "/admin/status/#{user.id}", method: :patch, params: { studio_id: @studio }, class: "btn btn-success" %></td>
+  <div class="col-md-offset-1 col-md-5">
+    <h3 class="text-center">Grant a User Admin Status</h3>
+      <%= form_for :admin_users, url: "/admin/status", method: "patch" do |f| %>
+        <%= f.label       :email %>
+        <%= f.email_field :email, class: "form-control" %>
+        <%= f.hidden_field :studio_slug, value: "#{@studio.slug}" %>
+        <%= f.submit "Grant admin status", class: "btn btn-default" %>
       <% end %>
-    </tr>
-    <% end %>
-  </table>
   </div>
 </div>

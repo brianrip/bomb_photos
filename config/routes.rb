@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     get ":studio/dashboard", to: "users#show"
     resources :orders, only: [:index, :update, :show], path: '/:studio/orders'
     resources :users, only: [:index], path: '/:studio/users'
-    patch "/status/:id", to: "users#change_admin_status"
+    patch "/status", to: "users#change_admin_status"
     resources :photos, only: [:index, :new, :create, :edit, :update, :destroy], path: '/:studio/photos'
     patch "/:studio/status/:id", to: "photos#change_status"
   end
@@ -40,5 +40,6 @@ Rails.application.routes.draw do
 
   resources :studios, except: [:show]
   resources :categories, only: [:index, :show]
+
   get '/:id', to: "studios#show"
 end
