@@ -1,35 +1,10 @@
 <div class="container text-center">
 <h1>Platform Admin</h1>
 <h3>Denied Studios</h3>
-
-<h4>Jump to:</h4>
-<div class="row">
-  <div class="col-md-3">
-    <%= link_to "Active", "active", class: "btn btn-default" %></li>
-  </div>
-  <div class="col-md-3">
-    <%= link_to "Inactive", "inactive", class: "btn btn-default" %></li>
-  </div>
-  <div class="col-md-3">
-    <%= link_to "Pending", "pending", class: "btn btn-default" %></li>
-  </div>
-  <div class="col-md-3">
-    <%= link_to "Denied", "denied", class: "btn btn-default" %></li>
-  </div>
-</div>
-<br/>
+<%= render partial: "partials/studio_links" %>
+<br>
 <table class = "table">
-  <tr>
-    <th>ID</th>
-    <th>Studio Name</th>
-    <th> View/Edit </th>
-    <th>Created On</th>
-    <th>Status</th>
-    <th>Actions</th>
-    <th>Number of Photos</th>
-    <th>Number of Orders</th>
-    <th>Studio Revenue</th>
-  </tr>
+  <%= render partial: "partials/studio_table_headers" %>
   <div id="denied_studios">
     <% @studios.each do |studio| %>
       <% if studio.denied? %>
