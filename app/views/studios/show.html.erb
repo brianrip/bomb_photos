@@ -1,4 +1,4 @@
-<div class="container">  
+<div class="container">
   <div class="row product photo-show-photo">
     <div class="col-md-offset-1 col-md-5">
       <%= image_tag @studio.promo_image, width: 400 %>
@@ -8,6 +8,8 @@
       <h4>Status: <%= @studio.status %></h4>
       <p><%= @studio.description %></p>
     </div>
+  </div>
+  <div class="row">
     <div class="gifs">
       <p>
       <% @studio.photos.each do |photo| %>
