@@ -5,7 +5,9 @@
     </div>
     <div class="container col-md-offset-1 col-xs-12 col-md-4 photo-show">
       <h1>Photos by <%= @studio.name %></h1>
-      <h4>Status: <%= @studio.status %></h4>
+      <% if current_user && (current_user.platform_admin? || current_user.relevent_studio_admin(@studio)) %>
+        <h4>Status: <%= @studio.status %></h4>
+      <% end %>
       <p><%= @studio.description %></p>
     </div>
   </div>
