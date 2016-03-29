@@ -1,7 +1,1 @@
-Thank you for your order from Bomb Photos. Please find the photos you purchased here.
-<br>
-<% @cart.contents.each do |photo_id| %>
-  <% photo = Photo.find_by(id: photo_id) %>
-  <%= image_tag photo.image %>
-  <br/>
-<% end %>
+Thank you for your order from Bomb Photos. In order to see all of the photos that you have purchased please click <%= link_to "here", "http://abs-pivot.herokuapp.com/users/#{@user.id}/photos" %>

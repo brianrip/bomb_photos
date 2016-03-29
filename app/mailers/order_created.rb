@@ -1,7 +1,6 @@
 class OrderCreated < ApplicationMailer
-  def order_success(user, cart)
+  def order_success(user)
     @user = user
-    @cart = cart
     mail(to: user.email, subject: "Your order from Bomb Photos")
     number = 0
 

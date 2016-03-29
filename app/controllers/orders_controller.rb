@@ -35,7 +35,7 @@ class OrdersController < ApplicationController
     if current_user
       @user = current_user
       @order = OrderProcessor.new(@cart, @user).process_order
-      OrderCreated.order_success(current_user, @cart).deliver_now
+      OrderCreated.order_success(current_user).deliver_now
       session[:cart].clear
       flash[:success] = "Your order has been placed. Check your email to receive your photos"
       redirect_to order_path(@order)
