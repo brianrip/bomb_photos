@@ -1,35 +1,10 @@
-<div class="container">
+<div class="container text-center">
 <h1>Platform Admin</h1>
-<h3>Studios</h3>
-
-<h4>Jump to:</h4>
-<div class="row">
-  <div class="col-md-3">
-    <%= link_to "Active", "#active_studios", class: "btn btn-primary btn-large" %></li>
-  </div>
-  <div class="col-md-3">
-    <%= link_to "Inactive", "#inactive_studios", class: "btn btn-primary btn-large" %></li>
-  </div>
-  <div class="col-md-3">
-    <%= link_to "Pending", "#pending_studios", class: "btn btn-primary btn-large" %></li>
-  </div>
-  <div class="col-md-3">
-    <%= link_to "Denied", "#denied_studios", class: "btn btn-primary btn-large" %></li>
-  </div>
-</div>
+<h3>Manage All Studios</h3>
+<%= render partial: "partials/studio_links" %>
 <br/>
 <table class = "table">
-  <tr>
-    <th>ID</th>
-    <th>Studio Name</th>
-    <th> View/Edit </th>
-    <th>Created On</th>
-    <th>Status</th>
-    <th>Actions</th>
-    <th>Number of Photos</th>
-    <th>Number of Orders</th>
-    <th>Studio Revenue</th>
-  </tr>
+  <%= render partial: "partials/studio_table_headers" %>
   <%= render partial: "partials/studio_type_header", locals: { status: "Active" } %>
   <div id="active_studios">
     <% @studios.each do |studio| %>
@@ -53,10 +28,10 @@
       <tr>
         <td><%= link_to studio.id, admin_path(studio) %></td>
         <td><%= link_to studio.name, admin_path(studio) %></td>
-        <td><%= link_to "View/Edit", admin_path(studio), class: "btn btn-primary btn-large" %></td>
+        <td><%= link_to "View/Edit", admin_path(studio), class: "btn btn-default" %></td>
         <td><%= studio.studio_created_on %></td>
         <td><%= studio.status %></td>
-        <td><%= link_to "Approve/Deny", "/#{studio.slug}", class: "btn btn-primary btn-large" %></td>
+        <td><%= link_to "Approve/Deny", "/#{studio.slug}", class: "btn btn-default" %></td>
         <td><%= studio.photos.count %></td>
         <td><%= studio.order_count %></td>
         <td><%= studio.revenue %></td>
@@ -71,7 +46,7 @@
         <tr>
           <td><%= link_to studio.id, admin_path(studio) %></td>
           <td><%= link_to studio.name, admin_path(studio) %></td>
-          <td><%= link_to "View/Edit", admin_path(studio), class: "btn btn-primary btn-large" %></td>
+          <td><%= link_to "View/Edit", admin_path(studio), class: "btn btn-default" %></td>
           <td><%= studio.studio_created_on %></td>
           <td><%= studio.status %></td>
           <td></td>
