@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index], path: '/:studio/users'
     patch "/status/:id", to: "users#change_admin_status"
     resources :photos, only: [:index, :new, :create, :edit, :update, :destroy], path: '/:studio/photos'
-    patch "/:studio/status/:id", to: "photos#change_status"
+    patch "/:studio/status", to: "photos#change_status"
   end
 
   namespace :platform_admin do
@@ -36,6 +36,6 @@ Rails.application.routes.draw do
 
   resources :studios, except: [:show]
   resources :categories, only: [:index, :show]
-  
+
   get '/:id', to: "studios#show"
 end

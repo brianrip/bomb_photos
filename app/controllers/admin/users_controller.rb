@@ -11,7 +11,8 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def change_admin_status
-    @user = User.find(params[:id])
+    binding.pry
+    @user = User.find_by(email: params[:email])
     studio = Studio.find_by(slug: params[:studio_id])
     message = UserStatus.update(@user, current_user, studio)
     flash[:success] = message

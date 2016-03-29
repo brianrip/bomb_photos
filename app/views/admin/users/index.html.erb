@@ -21,22 +21,12 @@
   </div>
 
   <div class="col-md-6">
-  <h3 class="text-center">All Users</h3>
-  <table class = "table customer-table">
-    <tr>
-      <th> User ID </th>
-      <th> User email </th>
-      <th> Add Admin</th>
-    </tr>
-    <% @users.each do |user| %>
-    <tr>
-      <% if user.non_admin %>
-      <td><%= user.id %></td>
-      <td><%= user.email %></td>
-      <td><%= button_to "Grant admin status for user #{user.id}", "/admin/status/#{user.id}", method: :patch, params: { studio_id: @studio }, class: "btn btn-success" %></td>
+    <h3 class="text-center">Grant a User Admin Status</h3>
+      <%= form_for :user, url: "/admin/#{@studio.slug}/status", method: "patch", params: { studio_id: @studio.id } do |f| %>
+        <%= f.label        :email %>
+        <%= f.email_field  :email %>
+        <%#= f.hidden_field :studio_slug, "#{@studio.slug}" %>
+        <%= f.submit "Grant admin status" %>
       <% end %>
-    </tr>
-    <% end %>
-  </table>
   </div>
 </div>
