@@ -1,10 +1,10 @@
 <tr>
   <td><%= link_to studio.id, admin_path(studio) %></td>
   <td><%= link_to studio.name, admin_path(studio) %></td>
-  <td><%= link_to "View/Edit", admin_path(studio), class: "btn btn-primary btn-large" %></td>
+  <td><%= link_to "View/Edit", admin_path(studio), class: "btn btn-default" %></td>
   <td><%= studio.studio_created_on %></td>
   <td><%= studio.status %></td>
-  <td><%= button_to "#{button_text}", path, method: :patch, class: "btn btn-primary btn-large" %></td>
+  <td><%= button_to "#{button_text}", path, method: :patch, class: "btn btn-default" %></td>
   <td><%= studio.photos.count %></td>
   <td><%= studio.order_count %></td>
   <td><%= studio.revenue %></td>

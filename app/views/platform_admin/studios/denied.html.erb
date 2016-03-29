@@ -1,0 +1,26 @@
+<div class="container text-center">
+<h1>Platform Admin</h1>
+<h3>Denied Studios</h3>
+<%= render partial: "partials/studio_links" %>
+<br>
+<table class = "table">
+  <%= render partial: "partials/studio_table_headers" %>
+  <div id="denied_studios">
+    <% @studios.each do |studio| %>
+      <% if studio.denied? %>
+        <tr>
+          <td><%= link_to studio.id, admin_path(studio) %></td>
+          <td><%= link_to studio.name, admin_path(studio) %></td>
+          <td><%= link_to "View/Edit", admin_path(studio), class: "btn btn-default" %></td>
+          <td><%= studio.studio_created_on %></td>
+          <td><%= studio.status %></td>
+          <td></td>
+          <td><%= studio.photos.count %></td>
+          <td><%= studio.order_count %></td>
+          <td><%= studio.revenue %></td>
+        <tr>
+      <% end %>
+    <% end %>
+  </div>
+</table>
+</div>
