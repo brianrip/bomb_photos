@@ -31,8 +31,8 @@ class VisitorCanViewPhotosByStudioTest < ActionDispatch::IntegrationTest
     )
 
     visit root_path
-
-    click_on "Shop By Studio"
+    click_on "Shop"
+    click_on "By Studio"
 
     assert page.has_link? studio1.name
     assert page.has_link? studio2.name
