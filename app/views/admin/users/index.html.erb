@@ -13,7 +13,7 @@
       <% if user.relevent_studio_admin(@studio) %>
       <td><%= user.id %></td>
       <td><%= user.email %></td>
-      <td><%= button_to "Revoke admin status for user #{user.id}", "/admin/status/#{user.id}", method: :patch, params: { studio_id: @studio }, class: "btn btn-warning" %></td>
+      <td><%= button_to "Revoke admin status for user #{user.id}", "/admin/status", method: :patch, params: { studio_id: @studio, user_id: user.id }, class: "btn btn-warning" %></td>
       <% end %>
     </tr>
     <% end %>
@@ -22,11 +22,14 @@
 
   <div class="col-md-6">
     <h3 class="text-center">Grant a User Admin Status</h3>
-      <%= form_for :user, url: "/admin/#{@studio.slug}/status", method: "patch", params: { studio_id: @studio.id } do |f| %>
-        <%= f.label        :email %>
-        <%= f.email_field  :email %>
-        <%#= f.hidden_field :studio_slug, "#{@studio.slug}" %>
+      <%#= form_tag url_for(:controller => 'admin_users', :action => 'change_admin_status'), :method => 'patch' do %>
+      <%= form_for :admin_users, url: "/admin/status", method: "patch" do |f| %>
+        <%= f.label       :email %>
+        <%= f.email_field :email %>
+        <%= f.hidden_field :studio_slug, value: "#{@studio.slug}" %>
         <%= f.submit "Grant admin status" %>
       <% end %>
   </div>
 </div>
+
+<!-- "/admin/#{@studio.slug}/status" -->
