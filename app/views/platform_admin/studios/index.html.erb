@@ -1,20 +1,23 @@
-<div class="container">
+<div class="container text-center">
 <h1>Platform Admin</h1>
-<h3>Studios</h3>
+<h3>Manage All Studios</h3>
 
-<h4>Jump to:</h4>
+<h4>click to view by current status:</h4>
 <div class="row">
-  <div class="col-md-3">
-    <%= link_to "Active", "#active_studios", class: "btn btn-primary btn-large" %></li>
+  <div class="col-md-offset-1 col-md-2">
+    <%= link_to "All Studios", "active", class: "btn btn-default" %></li>
   </div>
-  <div class="col-md-3">
-    <%= link_to "Inactive", "#inactive_studios", class: "btn btn-primary btn-large" %></li>
+  <div class="col-md-2">
+    <%= link_to "Active Studios", "active", class: "btn btn-default" %></li>
   </div>
-  <div class="col-md-3">
-    <%= link_to "Pending", "#pending_studios", class: "btn btn-primary btn-large" %></li>
+  <div class="col-md-2">
+    <%= link_to "Inactive Studios", "inactive", class: "btn btn-default" %></li>
   </div>
-  <div class="col-md-3">
-    <%= link_to "Denied", "#denied_studios", class: "btn btn-primary btn-large" %></li>
+  <div class="col-md-2">
+    <%= link_to "Pending Studios", "pending", class: "btn btn-default" %></li>
+  </div>
+  <div class="col-md-2">
+    <%= link_to "Denied Studios", "denied", class: "btn btn-default" %></li>
   </div>
 </div>
 <br/>
@@ -53,10 +56,10 @@
       <tr>
         <td><%= link_to studio.id, admin_path(studio) %></td>
         <td><%= link_to studio.name, admin_path(studio) %></td>
-        <td><%= link_to "View/Edit", admin_path(studio), class: "btn btn-primary btn-large" %></td>
+        <td><%= link_to "View/Edit", admin_path(studio), class: "btn btn-default" %></td>
         <td><%= studio.studio_created_on %></td>
         <td><%= studio.status %></td>
-        <td><%= link_to "Approve/Deny", "/#{studio.slug}", class: "btn btn-primary btn-large" %></td>
+        <td><%= link_to "Approve/Deny", "/#{studio.slug}", class: "btn btn-default" %></td>
         <td><%= studio.photos.count %></td>
         <td><%= studio.order_count %></td>
         <td><%= studio.revenue %></td>
@@ -71,7 +74,7 @@
         <tr>
           <td><%= link_to studio.id, admin_path(studio) %></td>
           <td><%= link_to studio.name, admin_path(studio) %></td>
-          <td><%= link_to "View/Edit", admin_path(studio), class: "btn btn-primary btn-large" %></td>
+          <td><%= link_to "View/Edit", admin_path(studio), class: "btn btn-default" %></td>
           <td><%= studio.studio_created_on %></td>
           <td><%= studio.status %></td>
           <td></td>

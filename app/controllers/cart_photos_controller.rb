@@ -5,7 +5,7 @@ class CartPhotosController < ApplicationController
     photo = Photo.find(params[:photo_id])
     session[:cart] = @cart.contents
     if @cart.double_click?(photo.id)
-      flash[:alert] = "That photo is already in your cart" if @cart.double_click?(photo.id)
+      flash[:danger] = "That photo is already in your cart" if @cart.double_click?(photo.id)
     else
       @cart.add_photo(photo.id)
       flash[:success] = "Photo has been added to cart"

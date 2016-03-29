@@ -1,0 +1,51 @@
+<div class="container text-center">
+<h1>Platform Admin</h1>
+<h3>Denied Studios</h3>
+
+<h4>Jump to:</h4>
+<div class="row">
+  <div class="col-md-3">
+    <%= link_to "Active", "active", class: "btn btn-default" %></li>
+  </div>
+  <div class="col-md-3">
+    <%= link_to "Inactive", "inactive", class: "btn btn-default" %></li>
+  </div>
+  <div class="col-md-3">
+    <%= link_to "Pending", "pending", class: "btn btn-default" %></li>
+  </div>
+  <div class="col-md-3">
+    <%= link_to "Denied", "denied", class: "btn btn-default" %></li>
+  </div>
+</div>
+<br/>
+<table class = "table">
+  <tr>
+    <th>ID</th>
+    <th>Studio Name</th>
+    <th> View/Edit </th>
+    <th>Created On</th>
+    <th>Status</th>
+    <th>Actions</th>
+    <th>Number of Photos</th>
+    <th>Number of Orders</th>
+    <th>Studio Revenue</th>
+  </tr>
+  <div id="denied_studios">
+    <% @studios.each do |studio| %>
+      <% if studio.denied? %>
+        <tr>
+          <td><%= link_to studio.id, admin_path(studio) %></td>
+          <td><%= link_to studio.name, admin_path(studio) %></td>
+          <td><%= link_to "View/Edit", admin_path(studio), class: "btn btn-default" %></td>
+          <td><%= studio.studio_created_on %></td>
+          <td><%= studio.status %></td>
+          <td></td>
+          <td><%= studio.photos.count %></td>
+          <td><%= studio.order_count %></td>
+          <td><%= studio.revenue %></td>
+        <tr>
+      <% end %>
+    <% end %>
+  </div>
+</table>
+</div>
