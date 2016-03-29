@@ -5,13 +5,13 @@ class StudioStatusHiddenForNonAdminsTest < ActionDispatch::IntegrationTest
     category = create_category
     studio   = create_studio
 
-    visit studio_path(studio)
+    visit "/#{studio.slug}"
 
     refute page.has_content?("Status")
 
     studio.update_attribute(:status, "pending")
 
-    visit studio_path(studio)
+    visit "/#{studio.slug}"
 
     refute page.has_content?("Status")
   end
@@ -21,7 +21,7 @@ class StudioStatusHiddenForNonAdminsTest < ActionDispatch::IntegrationTest
     studio   = create_studio
     user     = create_and_login_user
 
-    visit studio_path(studio)
+    visit "/#{studio.slug}"
 
     refute page.has_content?("Status")
   end
@@ -37,11 +37,11 @@ class StudioStatusHiddenForNonAdminsTest < ActionDispatch::IntegrationTest
 
     user     = create_and_login_studio_admin(studio_1)
 
-    visit studio_path(studio_2)
+    visit "/#{studio_2.slug}"
 
     refute page.has_content?("Status")
 
-    visit studio_path(studio_1)
+    visit "/#{studio_1.slug}"
 
     assert page.has_content?("Status")
   end
