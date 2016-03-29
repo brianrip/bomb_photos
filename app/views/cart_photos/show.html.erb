@@ -11,8 +11,7 @@
         <th>Name and Description</th>
         <th>Category</th>
         <th>Price</th>
-        <th>Quantity</th>
-        <th>Subtotal</th>
+        <th>Remove</th>
       </tr>
     </thead>
     <tbody>
@@ -22,18 +21,17 @@
             <td><%= image_tag photo.image, width: 80 %></td>
             <td><%= link_to photo.name, photo_path(photo) %>
             <p><%= photo.description %></p></td>
-            <td><%= link_to Category.find_by(id: photo.category_id).name, category_path(Category.find_by(id: photo.category_id)) %></td>
+            <td><%= link_to photo.category.name, category_path(photo.category) %></td>
             <td><%= format_price(photo.price) %></td>
             <td>
               <p><%= link_to "Remove from Cart", cart_path(id: photo.id), method: :delete %></p>
             </td>
-            <td><%= number_to_currency(photo.subtotal) %></td>
           </tr>
         </div>
       <% end %>
       <tr>
         <td colspan=5 align=right>
-          <p>Total: $<%= @cart.total_price / 100.0 %>.00</p>
+          <p>Total: <%= @cart.total_price %></p>
           <p><%= link_to "Checkout", new_order_path %></p>
           <p><%= link_to "Continue Shopping", categories_path %></p>
         </td>

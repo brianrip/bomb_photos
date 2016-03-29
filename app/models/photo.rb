@@ -7,6 +7,8 @@ class Photo < ActiveRecord::Base
   belongs_to :studio
   has_many :order_photos, dependent: :destroy
   has_many :orders, through: :order_photos
+  has_many :user_photos
+  has_many :users, through: :user_photos
   attr_accessor :image
 
   has_attached_file :image, :path => ":rails_root/public/system/:attachment/:id/:style/:filename",
@@ -18,6 +20,7 @@ class Photo < ActiveRecord::Base
     }
 
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+  attr_reader :category
 
   def convert_price_to_cents
     self.update(price: price * 100)
@@ -34,6 +37,10 @@ class Photo < ActiveRecord::Base
       photo = first
     end
     photo
+  end
+
+  def category
+    Category.find_by(id: self.category_id)
   end
 
   def self.random_studio_photo(studio)

@@ -13,7 +13,7 @@ class UsersController < ApplicationController
       flash[:success] = "Thank you for creating an account!"
       redirect_to dashboard_path
     else
-      flash.now[:error] = "Invalid Input"
+      flash.now[:danger] = "Invalid Input"
       render :new
     end
   end
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
       flash[:success] = "Your account has been updated!"
       redirect_to dashboard_path
     else
-      flash.now[:error] = "Invalid Input"
+      flash.now[:danger] = "Invalid Input"
       render :edit
     end
   end

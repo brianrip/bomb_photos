@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160327212456) do
+ActiveRecord::Schema.define(version: 20160328213854) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,14 @@ ActiveRecord::Schema.define(version: 20160327212456) do
     t.string   "slug"
   end
 
+  create_table "user_photos", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "photo_id"
+  end
+
+  add_index "user_photos", ["photo_id"], name: "index_user_photos_on_photo_id", using: :btree
+  add_index "user_photos", ["user_id"], name: "index_user_photos_on_user_id", using: :btree
+
   create_table "user_roles", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "role_id"
@@ -105,6 +113,8 @@ ActiveRecord::Schema.define(version: 20160327212456) do
   add_foreign_key "orders", "users"
   add_foreign_key "photos", "categories"
   add_foreign_key "photos", "studios"
+  add_foreign_key "user_photos", "photos"
+  add_foreign_key "user_photos", "users"
   add_foreign_key "user_roles", "roles"
   add_foreign_key "user_roles", "users"
   add_foreign_key "users", "studios"

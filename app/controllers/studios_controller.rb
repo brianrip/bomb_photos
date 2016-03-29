@@ -4,7 +4,7 @@ class StudiosController < ApplicationController
   end
 
   def show
-    @studio = Studio.find(params[:id])
+    @studio = Studio.find_by(slug: params[:id])
     render file: "/public/404" unless @studio.active? || current_platform_admin? || current_user && current_user.studio == @studio
   end
 
@@ -15,9 +15,7 @@ class StudiosController < ApplicationController
   def create
     @studio = Studio.new(studio_params)
     if @studio.save
-      @studio.update(status: 2)
-      current_user.update_attribute(:studio_id, @studio.id)
-      current_user.roles << Role.find_or_create_by(name: "studio admin")
+      StudioRelationships.build(@studio, current_user)
       flash[:success] = "Application submitted!"
       redirect_to dashboard_path
     else
@@ -40,7 +38,7 @@ class StudiosController < ApplicationController
     @studio = Studio.find(params[:id])
     if @studio.update(studio_params)
       flash[:success] = "Your studio has been updated!"
-      redirect_to studio_path(@studio)
+      redirect_to "/#{@studio.slug}"
     else
       flash[:alert] = "You must provide all information."
       render :edit

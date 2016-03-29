@@ -20,9 +20,10 @@ class Cart
   end
 
   def total_price
-    cart_photos.map do |cart_photo|
+    result = cart_photos.map do |cart_photo|
       cart_photo.price
     end.reduce(:+)
+    "$#{'%.02f' % (result / 100.0)}"
   end
 
   def cart_photos

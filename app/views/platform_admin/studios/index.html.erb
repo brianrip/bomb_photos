@@ -56,7 +56,7 @@
         <td><%= link_to "View/Edit", admin_path(studio), class: "btn btn-primary btn-large" %></td>
         <td><%= studio.studio_created_on %></td>
         <td><%= studio.status %></td>
-        <td><%= link_to "Approve/Deny", studio_path(studio), class: "btn btn-primary btn-large" %></td>
+        <td><%= link_to "Approve/Deny", "/#{studio.slug}", class: "btn btn-primary btn-large" %></td>
         <td><%= studio.photos.count %></td>
         <td><%= studio.order_count %></td>
         <td><%= studio.revenue %></td>

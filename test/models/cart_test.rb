@@ -127,6 +127,6 @@ class CartTest < ActiveSupport::TestCase
     )
     cart.add_photo(photo2.id)
 
-    assert_equal 1998, cart.total_price
+    assert_equal "$19.98", cart.total_price
   end
 end
