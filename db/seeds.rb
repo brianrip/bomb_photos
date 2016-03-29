@@ -96,7 +96,7 @@ class Seed
       order = user.orders.create(total_price: subtotal)
       Random.rand(1..5).times do
         photo_id = Photo.all.shuffle.pop.id
-        UserPhoto.create(user_id: user, photo_id: photo_id)
+        UserPhoto.create(user_id: user.id, photo_id: photo_id)
         op = OrderPhoto.create(photo_id: photo_id)
         order.order_photos << op
       end
