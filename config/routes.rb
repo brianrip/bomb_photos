@@ -34,7 +34,8 @@ Rails.application.routes.draw do
 
   resources :photos, only: [:index, :show, :create]
 
-  resources :studios
-
+  resources :studios, except: [:show]
   resources :categories, only: [:index, :show]
+  
+  get '/:id', to: "studios#show"
 end
