@@ -1,29 +1,40 @@
 <div class="jumbotron hero">
   <div class="container">
     <div class="col-md-7">
-      <h1 class="bomb-photos">Bomb Photos</h1>
+      <a href="/"><h1 class="bomb-photos">Bomb Photos</h1></a>
     </div>
     <div class=" col-md-offset-3 col-md-8">
-        <h3 class="brand">Professional Images</h3>
+        <a href="/"><h3 class="brand">Professional Images</h3></a>
     </div>
   </div>
 </div>
 <nav class="navbar navbar-inverse col-md-12">
   <div class="container">
     <ul class="nav navbar-nav navbar-right gif-links">
-      <li><%= link_to "All Categories", categories_path %></li>
-      <li><%= link_to "Shop By Studio", studios_path%></li>
+      <div class="btn-group">
+        <a href="#" data-toggle="dropdown" class="dropdown-links">Shop <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <li><%= link_to "All Photos", photos_path %></li>
+          <li><%= link_to "By Categories", categories_path %></li>
+          <li><%= link_to "By Studio", studios_path%></li>
+        </ul>
+      </div>
       <li><%= link_to "Cart(#{@cart.total_items})", cart_path %></li>
       <% if current_user %>
-        <% if current_user.customer? %>
-          <li><%= link_to "Customer account", dashboard_path %></li>
-        <% end %>
-        <% if current_user.studio_admin? %>
-          <li><%= link_to "#{current_user.studio.name} admin account", admin_path(Studio.find_by(id: current_user.studio_id)) %></li>
-        <% end %>
-        <% if current_user.platform_admin? %>
-          <li><%= link_to "Platform admin account", platform_admin_dashboard_path %></li>
-        <% end %>
+      <div class="btn-group">
+        <a href="#" data-toggle="dropdown" class="dropdown-links">Dashboards <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          <% if current_user.customer? %>
+            <li><%= link_to "Customer account", dashboard_path %></li>
+          <% end %>
+          <% if current_user.studio_admin? %>
+            <li><%= link_to "#{current_user.studio.name} admin account", admin_path(Studio.find_by(id: current_user.studio_id)) %></li>
+          <% end %>
+          <% if current_user.platform_admin? %>
+            <li><%= link_to "Platform admin account", platform_admin_dashboard_path %></li>
+          <% end %>
+        </ul>
+      </div>
           <li><%= link_to "Log Out", logout_path, method: :delete %></li>
         <% else %>
           <li><%= link_to "Log In", login_path %><li>

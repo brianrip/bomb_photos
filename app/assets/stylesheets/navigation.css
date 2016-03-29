@@ -21,3 +21,18 @@ div.jumbotron.hero {
   font-size: larger;
   bacground-color: #fff;
 }
+
+.dropdown-links, .dropdown-links:visited {
+  font-size: larger;
+  color: #777475;
+}
+
+.dropdown-links:hover {
+  text-decoration: none;
+  color: #fff;
+}
+
+.btn-group {
+  margin-top: 13px;
+  margin-left: 15px;
+}
