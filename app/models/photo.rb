@@ -7,6 +7,8 @@ class Photo < ActiveRecord::Base
   belongs_to :studio
   has_many :order_photos, dependent: :destroy
   has_many :orders, through: :order_photos
+  has_many :user_photos
+  has_many :users, through: :user_photos
   attr_accessor :image
 
   has_attached_file :image, :path => ":rails_root/public/system/:attachment/:id/:style/:filename",

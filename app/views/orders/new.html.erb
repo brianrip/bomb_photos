@@ -19,11 +19,6 @@
             </tr>
           </div>
         <% end %>
-        <tr>
-          <td colspan=5 align=right>
-            <p>Total: <%= format_price(@cart.total_price) %></p>
-          </td>
-        </tr>
       </tbody>
     </table>
 <%= form_tag @order do %>
@@ -34,7 +29,7 @@
       </div>
     <% end %>
     <label class="amount">
-      <span>Amount: <%= format_price(@cart.total_price) %></span>
+      <span>Amount: <%= @cart.total_price %></span>
     </label>
   </article>
 
