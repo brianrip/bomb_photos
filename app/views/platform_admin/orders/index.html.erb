@@ -1,0 +1,15 @@
+<table class = "table">
+  <tr>
+    <th>Order</th>
+    <th>Photos</th>
+    <th>Total</th>
+  </tr>
+  <% @orders.each do |order| %>
+    <tr>
+      <td><%= order.id %></td>
+      <td><%= order.order_photos.count %></td>
+      <td><%= order.format_total_price %></td>
+    </tr>
+  <% end %>
+
+</table>
