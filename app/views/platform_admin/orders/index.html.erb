@@ -1,3 +1,4 @@
+<h1 class="text-center"> All Orders </h1>
 <table class = "table">
   <tr>
     <th>Order</th>
@@ -6,7 +7,7 @@
   </tr>
   <% @orders.each do |order| %>
     <tr>
-      <td><%= order.id %></td>
+      <td><%= link_to order.id, platform_admin_order_path(order) %></td>
       <td><%= order.order_photos.count %></td>
       <td><%= order.format_total_price %></td>
     </tr>
