@@ -169,4 +169,13 @@ class ActionDispatch::IntegrationTest
                          category_id: category.id
                          )
   end
+
+  def create_studio_photo_with_price(studio, category, price)
+    studio.photos.create(name:        "Example Name",
+                         description: "Example Description",
+                         image:       "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png",
+                         price:       price,
+                         category_id: category.id
+                         )
+  end
 end
