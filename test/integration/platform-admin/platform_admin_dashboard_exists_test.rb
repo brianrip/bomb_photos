@@ -1,4 +1,4 @@
-require 'test_helper'
+  require 'test_helper'
 
 class PlatformAdminDashboardExistsTest < ActionDispatch::IntegrationTest
   test "user visits platform admin dashboard" do
@@ -64,7 +64,7 @@ class PlatformAdminDashboardExistsTest < ActionDispatch::IntegrationTest
     assert page.has_content?(studio4.status)
     assert page.has_button?("Activate")
     assert page.has_button?("Deactivate")
-    assert page.has_content?("Approve/Deny")
+    assert page.has_button?("Approve/Deny")
     assert page.has_content?("Number of Photos")
     assert page.has_content?("1")
     assert page.has_content?("2")
