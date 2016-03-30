@@ -1,10 +1,12 @@
 class StudiosController < ApplicationController
+  before_action :find_studio, only: [:show, :edit, :update]
+  before_action :require_correct_admin, only: [:edit]
+
   def index
     @studios = Studio.where(status: 0)
   end
 
   def show
-    @studio = Studio.find_by(slug: params[:id])
     render file: "/public/404" unless @studio.active? || current_platform_admin? || current_user && current_user.studio == @studio
   end
 
@@ -24,30 +26,23 @@ class StudiosController < ApplicationController
     end
   end
 
-  def edit
-    studio = Studio.find(params[:id])
-    if (!current_platform_admin?) && (current_user.studio != studio)
-      flash[:danger] = "You can only edit a studio that belongs to you"
-      render file: "/public/404"
-    else
-      @studio = studio
-    end
-  end
-
   def update
-    @studio = Studio.find(params[:id])
     if @studio.update(studio_params)
       flash[:success] = "Your studio has been updated!"
-      redirect_to "/#{@studio.slug}"
+      redirect_to studio_show_path(@studio)
     else
       flash[:danger] = "You must provide all information."
       render :edit
     end
   end
 
-  private
+private
 
-    def studio_params
-      params.require(:studio).permit(:name, :description, :promo_image)
-    end
+  def studio_params
+    params.require(:studio).permit(:name, :description, :promo_image)
+  end
+
+  def find_studio
+    @studio = Studio.find(params[:id])
+  end
 end

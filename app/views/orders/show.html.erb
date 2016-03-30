@@ -8,12 +8,10 @@
       </tr>
     </thead>
     <tbody>
-        <div id="gif-info">
-          <tr>
-            <td><%= format_price(@order.total_price) %></td>
-            <td><%= @order.placed_at %></td>
-          </tr>
-        </div>
+      <tr>
+        <td><%= format_price(@order.total_price) %></td>
+        <td><%= @order.placed_at %></td>
+      </tr>
     </tbody>
   </table>
 </div>
@@ -24,7 +22,8 @@
   <% @order.order_photos.each do |order_photo| %>
   <div class="col-md-offset-2 col-md-7">
     <div class="row product">
-      <div class="col-md-5 col-md-offset-0"><p><%= image_tag order_photo.photo.image, width: 200 %></p>
+      <div class="col-md-5 col-md-offset-0">
+        <p><%= image_tag order_photo.photo.image, width: 200 %></p>
       </div>
       <h4><%= link_to order_photo.photo.name, photo_path(order_photo.photo) %></h4>
       <h4><%= format_price(order_photo.photo.price) %></h4>

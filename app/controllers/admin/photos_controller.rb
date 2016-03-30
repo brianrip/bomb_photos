@@ -1,7 +1,6 @@
 class Admin::PhotosController < Admin::BaseController
-  def index
-    @studio = Studio.find(params[:studio])
-  end
+  before_action :find_studio, only: [:index, :create, :change_status]
+  before_action :find_photo,  only: [:edit,  :update, :change_status]
 
   def new
     @photo = Photo.new
@@ -9,9 +8,8 @@ class Admin::PhotosController < Admin::BaseController
   end
 
   def create
-    studio = Studio.find(params[:studio])
     @photo = Photo.new(photo_params)
-    @photo.update_attributes(studio_id: studio.id)
+    @photo.update_attributes(studio_id: @studio.id)
     if @photo.save
       @photo.convert_price_to_cents
       flash[:success] = "Your Photo Has Been Created"
@@ -23,12 +21,10 @@ class Admin::PhotosController < Admin::BaseController
   end
 
   def edit
-    @photo = Photo.find(params[:id])
     @categories = Category.all
   end
 
   def update
-    @photo = find_photo
     if @photo.update(photo_params)
       @photo.convert_price_to_cents
       flash[:success] = "Photo Has Been Updated"
@@ -40,13 +36,11 @@ class Admin::PhotosController < Admin::BaseController
   end
 
   def change_status
-    studio = Studio.find_by(id: params[:studio])
-    unless studio.status == "active"
+    unless @studio.status == "active"
       flash[:danger] = "That action is prohibited."
       redirect_to :back and return
     end
 
-    @photo = Photo.find(params[:id])
     if @photo.active
       @photo.update_attributes(active: false)
       flash[:success] = "Photo Has Been Deactivated"

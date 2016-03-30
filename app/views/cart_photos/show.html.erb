@@ -16,18 +16,16 @@
     </thead>
     <tbody>
       <% @cart_photos.each do |photo| %>
-        <div id="gif-info">
-          <tr>
-            <td><%= image_tag photo.image, width: 80 %></td>
-            <td><%= link_to photo.name, photo_path(photo) %>
-            <p><%= photo.description %></p></td>
-            <td><%= link_to photo.category.name, category_path(photo.category) %></td>
-            <td><%= format_price(photo.price) %></td>
-            <td>
-              <p><%= link_to "Remove from Cart", cart_path(id: photo.id), method: :delete %></p>
-            </td>
-          </tr>
-        </div>
+        <tr>
+          <td><%= image_tag photo.image, width: 80 %></td>
+          <td><%= link_to photo.name, photo_path(photo) %>
+          <p><%= photo.description %></p></td>
+          <td><%= link_to photo.category.name, category_path(photo.category) %></td>
+          <td><%= format_price(photo.price) %></td>
+          <td>
+            <p><%= link_to "Remove from Cart", cart_path(id: photo.id), method: :delete %></p>
+          </td>
+        </tr>
       <% end %>
       <tr>
         <td colspan=5 align=right>

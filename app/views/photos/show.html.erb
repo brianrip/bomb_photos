@@ -8,7 +8,7 @@
         <h3><%= link_to @photo.category.name, category_path(@photo.category) %></h3>
         <p>
           <% if @photo.active %>
-          <%= link_to "Add to Cart", cart_photos_path(photo_id: @photo.id), method: :post, class: "btn btn-default" %>
+          <%= link_to "Add to Cart", cart_photos_path(id: @photo.id), method: :post, class: "btn btn-default" %>
           <% else %>
           <h3><%= "Sorry, this photo is no longer available" %></h3>
           <% end %>
@@ -17,9 +17,9 @@
         <% if current_studio_admin? || current_platform_admin? %>
           <p><%= link_to "Edit", edit_admin_photo_path(@photo.studio, @photo.id), class: "btn btn-default" %>
           <% if @photo.active %>
-            <p><%= link_to "Deactivate", "/admin/#{@photo.studio.id}/status/#{@photo.id}", method: :patch, class: "btn btn-default" %>
+            <p><%= link_to "Deactivate", admin_change_photo_status_path(@photo.studio, @photo), method: :patch, class: "btn btn-default" %>
           <% else %>
-            <p><%= link_to "Activate", "/admin/#{@photo.studio.id}/status/#{@photo.id}", method: :patch, class: "btn btn-default" %>
+            <p><%= link_to "Activate", admin_change_photo_status_path(@photo.studio, @photo), method: :patch, class: "btn btn-default" %>
           <% end %>
         <% end %>
       </div>

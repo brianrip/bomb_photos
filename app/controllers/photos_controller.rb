@@ -1,14 +1,10 @@
 class PhotosController < ApplicationController
   def index
-    @photos = Photo.all.page params[:page]
+    @photos = Photo.all
   end
 
   def show
-    if params[:format]
-      @photo = Photo.find(params[:format])
-    else
-      @photo = Photo.find(params[:id])
-    end
+    @photo = Photo.find(params[:id])
     @studio = @photo.studio
   end
 end
