@@ -8,7 +8,7 @@
         <h3><%= link_to @photo.category.name, category_path(@photo.category) %></h3>
         <p>
           <% if @photo.active %>
-          <%= link_to "Add to Cart", cart_photos_path(photo_id: @photo.id), method: :post, class: "btn btn-default" %>
+          <%= link_to "Add to Cart", cart_photos_path(id: @photo.id), method: :post, class: "btn btn-default" %>
           <% else %>
           <h3><%= "Sorry, this photo is no longer available" %></h3>
           <% end %>

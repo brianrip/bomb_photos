@@ -1,5 +1,6 @@
 class Admin::PhotosController < Admin::BaseController
   before_action :find_studio, only: [:index, :create, :change_status]
+  before_action :find_photo,  only: [:edit,  :update, :change_status]
 
   def new
     @photo = Photo.new
@@ -20,12 +21,10 @@ class Admin::PhotosController < Admin::BaseController
   end
 
   def edit
-    @photo = Photo.find(params[:id])
     @categories = Category.all
   end
 
   def update
-    @photo = find_photo
     if @photo.update(photo_params)
       @photo.convert_price_to_cents
       flash[:success] = "Photo Has Been Updated"
@@ -42,7 +41,6 @@ class Admin::PhotosController < Admin::BaseController
       redirect_to :back and return
     end
 
-    @photo = Photo.find(params[:id])
     if @photo.active
       @photo.update_attributes(active: false)
       flash[:success] = "Photo Has Been Deactivated"

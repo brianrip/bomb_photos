@@ -22,4 +22,8 @@ class Order < ActiveRecord::Base
   def format_total_price
     "$#{'%.02f' % (total_price / 100.0)}"
   end
+
+  def self.studio_specific_orders(studio)
+    joins(photos: :studio).where("studios.id = #{studio.id}").distinct
+  end
 end

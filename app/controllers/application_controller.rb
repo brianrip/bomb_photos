@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   end
 
   def find_photo
-    Photo.find(params[:id])
+    @photo = Photo.find(params[:id])
   end
 
   def format_price(number)
