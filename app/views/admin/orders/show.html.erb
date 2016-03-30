@@ -9,12 +9,10 @@
       </tr>
     </thead>
     <tbody>
-        <div id="gif-info">
-          <tr>
-            <td><%= number_to_currency(@order.studio_price(@studio)) %></td>
-            <td><%= @order.placed_at %></td>
-          </tr>
-        </div>
+      <tr>
+        <td><%= number_to_currency(@order.studio_price(@studio)) %></td>
+        <td><%= @order.placed_at %></td>
+      </tr>
     </tbody>
   </table>
 </div>
