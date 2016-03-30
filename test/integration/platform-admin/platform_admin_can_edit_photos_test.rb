@@ -8,7 +8,7 @@ class PlatformAdminCanEditPhotosTest < ActionDispatch::IntegrationTest
     photo          = create_studio_photo(studio, category)
     admin          = create_and_login_platform_admin
 
-    visit photo_path(studio, photo)
+    visit photo_path(photo)
 
     click_on "Edit"
 
