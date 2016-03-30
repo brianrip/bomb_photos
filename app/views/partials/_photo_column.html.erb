@@ -3,7 +3,7 @@
   <h3 class = "photo-title"><%= link_to "#{photo.name}", photo_path(photo.id), class: "photo-title" %></h3>
     <%= link_to image_tag(photo.image, class: "gifs", width: "250", height: "200"), photo_path(photo.id) %>
     <% if photo.active %>
-      <%= link_to "Add to Cart", cart_photos_path(photo_id: photo.id), method: :post, class: "btn btn-default" %>
+      <%= link_to "Add to Cart", cart_photos_path(id: photo.id), method: :post, class: "btn btn-default" %>
     <% else %>
       <h3><%= "Sorry, this photo is no longer available" %></h3>
     <% end %>

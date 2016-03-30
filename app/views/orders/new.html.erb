@@ -11,13 +11,11 @@
       </thead>
       <tbody>
         <% @cart_photos.each do |photo| %>
-          <div id="gif-info">
-            <tr>
-              <td><%= image_tag photo.image, width: 80 %></td>
-              <td><%= photo.name %>
-              <td><%= format_price(photo.price) %>
-            </tr>
-          </div>
+          <tr>
+            <td><%= image_tag photo.image, width: 80 %></td>
+            <td><%= photo.name %>
+            <td><%= format_price(photo.price) %>
+          </tr>
         <% end %>
       </tbody>
     </table>

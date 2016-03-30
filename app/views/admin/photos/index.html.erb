@@ -16,9 +16,9 @@
         <td><%= link_to "Edit", edit_admin_photo_path(photo.studio, photo.id), class: "btn btn-default" %>
         <td> <%= photo.status %></td>
         <% if photo.active %>
-          <td><%= link_to "Deactivate", "/admin/#{photo.studio.id}/status/#{photo.id}", method: :patch, class: "btn btn-default" %></td>
+          <td><%= link_to "Deactivate", admin_change_photo_status_path(@studio, photo), method: :patch, class: "btn btn-default" %></td>
         <% else %>
-          <td><%= link_to "Activate", "/admin/#{photo.studio.id}/status/#{photo.id}", method: :patch, class: "btn btn-default" %></td>
+          <td><%= link_to "Activate", admin_change_photo_status_path(@studio, photo), method: :patch, class: "btn btn-default" %></td>
         <% end %>
       <% end %>
       </tr>
