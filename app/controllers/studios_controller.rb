@@ -38,7 +38,7 @@ class StudiosController < ApplicationController
     @studio = Studio.find(params[:id])
     if @studio.update(studio_params)
       flash[:success] = "Your studio has been updated!"
-      redirect_to "/#{@studio.slug}"
+      redirect_to studio_show_path(@studio)
     else
       flash[:danger] = "You must provide all information."
       render :edit

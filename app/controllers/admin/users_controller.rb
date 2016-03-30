@@ -1,13 +1,9 @@
 class Admin::UsersController < Admin::BaseController
-  def show
-    require_correct_studio_admin
-    @studio = Studio.find(params[:studio])
-  end
+  before_action :find_studio, only: [:show, :index]
+  before_action :require_correct_studio_admin, only: [:show, :index]
 
   def index
-    require_correct_studio_admin
     @users = User.all
-    @studio = Studio.find_by(slug: params[:studio])
   end
 
   def change_admin_status
