@@ -14,3 +14,32 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require_tree
+$(document).ready(function() {
+  $("#active").on("click", function(){
+    $(".active_studios").removeClass('hide')
+    $(".inactive_studios").addClass('hide')
+    $(".pending_studios").addClass('hide')
+    $(".denied_studios").addClass('hide')
+  })
+
+  $("#inactive").on("click", function(){
+    $(".inactive_studios").removeClass('hide')
+    $(".active_studios").addClass('hide')
+    $(".pending_studios").addClass('hide')
+    $(".denied_studios").addClass('hide')
+  })
+
+  $("#pending").on("click", function(){
+    $(".pending_studios").removeClass('hide')
+    $(".inactive_studios").addClass('hide')
+    $(".active_studios").addClass('hide')
+    $(".denied_studios").addClass('hide')
+  })
+
+  $("#denied").on("click", function(){
+    $(".denied_studios").removeClass('hide')
+    $(".inactive_studios").addClass('hide')
+    $(".active_studios").addClass('hide')
+    $(".pending_studios").addClass('hide')
+  })
+});

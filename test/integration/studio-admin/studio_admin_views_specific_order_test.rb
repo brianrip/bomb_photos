@@ -9,7 +9,7 @@ class StudioAdminViewsSpecificOrderTest < ActionDispatch::IntegrationTest
                            status:      0,
                            promo_image: "https://placeholdit.imgix.net/~text?txtsize=60&bg=000000&txt=640%C3%97480&w=640&h=480&fm=png"
     )
-    admin = create_and_login_studio_admin(studio)
+    admin = create_and_login_platform_admin
     user = create_user
     other_user = other_studio.users.create(email:  "otherexample@eample.com",
                                            password: "password",

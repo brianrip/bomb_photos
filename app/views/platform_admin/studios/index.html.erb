@@ -3,59 +3,54 @@
 <h3>Manage All Studios</h3>
 <%= render partial: "partials/studio_links" %>
 <br/>
-<table class = "table">
-  <%= render partial: "partials/studio_table_headers" %>
-  <%= render partial: "partials/studio_type_header", locals: { status: "Active" } %>
-  <div id="active_studios">
+  <table class = "table active_studios">
+  <%= render partial: "/partials/studio_table_headers" %>
     <% @studios.each do |studio| %>
       <% if studio.active? %>
-        <%= render partial: "partials/studio_data", locals: { studio: studio, button_text: "Deactivate", path: platform_admin_studio_path(studio) } %>
+    <div class = "active_studios">
+     <%= render partial: "/partials/studio_data", locals: {button_text: "Deactivate", method: :patch, studio: studio, path: platform_admin_studio_path(studio)} %>
+    </div>
       <% end %>
     <% end %>
-  </div>
-  <%= render partial: "partials/studio_type_header", locals: { status: "Inactive" } %>
-  <div id="inactive_studios">
+  </table>
+  <table class = "table inactive_studios">
+    <%= render partial: "/partials/studio_table_headers" %>
     <% @studios.each do |studio| %>
       <% if studio.inactive? %>
-        <%= render partial: "partials/studio_data", locals: { studio: studio, button_text: "Activate", path: platform_admin_studio_path(studio) } %>
+    <div class = "inactive_studios">
+      <%= render partial: "/partials/studio_data", locals: {button_text: "Activate", method: :patch, studio: studio, path: platform_admin_studio_path(studio)} %>
+    </div>
       <% end %>
     <% end %>
-  </div>
-  <%= render partial: "partials/studio_type_header", locals: { status: "Pending" } %>
-  <div id="pending_studios">
+  </table>
+  <table class = "table pending_studios">
+    <%= render partial: "/partials/studio_table_headers" %>
     <% @studios.each do |studio| %>
       <% if studio.pending? %>
+    <div class = "pending_studios">
+      <%= render partial: "/partials/studio_data", locals: {button_text: "Approve/Deny", method: :get, studio: studio, path: "/#{studio.slug}"} %>
+    </div>
+      <% end %>
+    <% end %>
+  </table>
+  <table class = "table denied_studios">
+    <%= render partial: "/partials/studio_table_headers" %>
+    <% @studios.each do |studio| %>
+      <% if studio.denied? %>
+    <div class = "denied_studios">
       <tr>
         <td><%= link_to studio.id, admin_path(studio) %></td>
         <td><%= link_to studio.name, admin_path(studio) %></td>
         <td><%= link_to "View/Edit", admin_path(studio), class: "btn btn-default" %></td>
         <td><%= studio.studio_created_on %></td>
         <td><%= studio.status %></td>
-        <td><%= link_to "Approve/Deny", "/#{studio.slug}", class: "btn btn-default" %></td>
+        <td></td>
         <td><%= studio.photos.count %></td>
         <td><%= studio.order_count %></td>
         <td><%= studio.revenue %></td>
       <tr>
+    </div>
       <% end %>
     <% end %>
-  </div>
-  <%= render partial: "partials/studio_type_header", locals: { status: "Denied" } %>
-  <div id="denied_studios">
-    <% @studios.each do |studio| %>
-      <% if studio.denied? %>
-        <tr>
-          <td><%= link_to studio.id, admin_path(studio) %></td>
-          <td><%= link_to studio.name, admin_path(studio) %></td>
-          <td><%= link_to "View/Edit", admin_path(studio), class: "btn btn-default" %></td>
-          <td><%= studio.studio_created_on %></td>
-          <td><%= studio.status %></td>
-          <td></td>
-          <td><%= studio.photos.count %></td>
-          <td><%= studio.order_count %></td>
-          <td><%= studio.revenue %></td>
-        <tr>
-      <% end %>
-    <% end %>
-  </div>
-</table>
+  </table>
 </div>

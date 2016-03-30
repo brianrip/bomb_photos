@@ -23,10 +23,7 @@ Rails.application.routes.draw do
   namespace :platform_admin do
     get "/dashboard", to: "studios#index"
     resources :studios, only: [:update]
-    get "/active", to: "studios#active"
-    get "/inactive", to: "studios#inactive"
-    get "/pending", to: "studios#pending"
-    get "/denied", to: "studios#denied"
+    resources :orders, only: [:index, :show]
   end
 
   resources :cart_photos, only: [:create]
