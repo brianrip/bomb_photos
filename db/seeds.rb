@@ -95,18 +95,16 @@ class Seed
   end
 
   def generate_orders
-    @num_orders.times do
-      subtotal = Random.rand(10..100)
-      puts "generating an order"
-      User.all.each do |user|
-        @num_orders.times do
-          order = user.orders.create(total_price: subtotal)
-          Random.rand(1..5).times do
-            photo_id = Photo.all.shuffle.pop.id
-            UserPhoto.create(user_id: user.id, photo_id: photo_id)
-            op = OrderPhoto.create(photo_id: photo_id)
-            order.order_photos << op
-          end
+    subtotal = Random.rand(10..100)
+    puts "generating an order"
+    User.all.each do |user|
+      @num_orders.times do
+        order = user.orders.create(total_price: subtotal)
+        Random.rand(1..5).times do
+          photo_id = Photo.all.shuffle.pop.id
+          UserPhoto.create(user_id: user.id, photo_id: photo_id)
+          op = OrderPhoto.create(photo_id: photo_id)
+          order.order_photos << op
         end
       end
     end
