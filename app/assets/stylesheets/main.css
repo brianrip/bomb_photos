@@ -2,6 +2,10 @@
   font-family: 'Alef', sans-serif;
 }
 
+.hide { 
+  display: none;
+}
+
 .jumbotron {
   background-image: url(https://images.unsplash.com/photo-1416339426675-1f96fd81b653?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&s=4fb0b2c934659936c6dbf789225ee220);
   background-size: cover;

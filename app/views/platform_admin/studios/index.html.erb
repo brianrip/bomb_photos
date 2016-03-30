@@ -3,59 +3,126 @@
 <h3>Manage All Studios</h3>
 <%= render partial: "partials/studio_links" %>
 <br/>
-<table class = "table">
-  <%= render partial: "partials/studio_table_headers" %>
-  <%= render partial: "partials/studio_type_header", locals: { status: "Active" } %>
-  <div id="active_studios">
+<table class = "table active_studios">
+  <tr>
+    <th>ID</th>
+    <th>Studio Name</th>
+    <th> View/Edit </th>
+    <th>Created On</th>
+    <th>Status</th>
+    <th>Actions</th>
+    <th>Number of Photos</th>
+    <th>Number of Orders</th>
+    <th>Studio Revenue</th>
+  </tr>
     <% @studios.each do |studio| %>
       <% if studio.active? %>
-        <%= render partial: "partials/studio_data", locals: { studio: studio, button_text: "Deactivate", path: platform_admin_studio_path(studio) } %>
-      <% end %>
-    <% end %>
-  </div>
-  <%= render partial: "partials/studio_type_header", locals: { status: "Inactive" } %>
-  <div id="inactive_studios">
-    <% @studios.each do |studio| %>
-      <% if studio.inactive? %>
-        <%= render partial: "partials/studio_data", locals: { studio: studio, button_text: "Activate", path: platform_admin_studio_path(studio) } %>
-      <% end %>
-    <% end %>
-  </div>
-  <%= render partial: "partials/studio_type_header", locals: { status: "Pending" } %>
-  <div id="pending_studios">
-    <% @studios.each do |studio| %>
-      <% if studio.pending? %>
+    <div class = "active_studios">
       <tr>
         <td><%= link_to studio.id, admin_path(studio) %></td>
         <td><%= link_to studio.name, admin_path(studio) %></td>
         <td><%= link_to "View/Edit", admin_path(studio), class: "btn btn-default" %></td>
         <td><%= studio.studio_created_on %></td>
         <td><%= studio.status %></td>
-        <td><%= link_to "Approve/Deny", "/#{studio.slug}", class: "btn btn-default" %></td>
+        <td><%= button_to "Deactivate", platform_admin_studio_path(studio), method: :patch, class: "btn btn-default" %></td>
         <td><%= studio.photos.count %></td>
         <td><%= studio.order_count %></td>
         <td><%= studio.revenue %></td>
       <tr>
+    </div>
       <% end %>
     <% end %>
-  </div>
-  <%= render partial: "partials/studio_type_header", locals: { status: "Denied" } %>
-  <div id="denied_studios">
-    <% @studios.each do |studio| %>
-      <% if studio.denied? %>
+  </table>
+  <table class = "table inactive_studios">
+    <tr>
+      <th>ID</th>
+      <th>Studio Name</th>
+      <th> View/Edit </th>
+      <th>Created On</th>
+      <th>Status</th>
+      <th>Actions</th>
+      <th>Number of Photos</th>
+      <th>Number of Orders</th>
+      <th>Studio Revenue</th>
+    </tr>
+      <% @studios.each do |studio| %>
+        <% if studio.inactive? %>
+      <div class = "inactive_studios">
         <tr>
           <td><%= link_to studio.id, admin_path(studio) %></td>
           <td><%= link_to studio.name, admin_path(studio) %></td>
           <td><%= link_to "View/Edit", admin_path(studio), class: "btn btn-default" %></td>
           <td><%= studio.studio_created_on %></td>
           <td><%= studio.status %></td>
-          <td></td>
+          <td><%= button_to "Activate", platform_admin_studio_path(studio), method: :patch, class: "btn btn-default" %></td>
           <td><%= studio.photos.count %></td>
           <td><%= studio.order_count %></td>
           <td><%= studio.revenue %></td>
         <tr>
+      </div>
+        <% end %>
       <% end %>
-    <% end %>
-  </div>
-</table>
+    </table>
+
+    <table class = "table pending_studios">
+      <tr>
+        <th>ID</th>
+        <th>Studio Name</th>
+        <th> View/Edit </th>
+        <th>Created On</th>
+        <th>Status</th>
+        <th>Actions</th>
+        <th>Number of Photos</th>
+        <th>Number of Orders</th>
+        <th>Studio Revenue</th>
+      </tr>
+        <% @studios.each do |studio| %>
+          <% if studio.pending? %>
+        <div class = "pending_studios">
+          <tr>
+            <td><%= link_to studio.id, admin_path(studio) %></td>
+            <td><%= link_to studio.name, admin_path(studio) %></td>
+            <td><%= link_to "View/Edit", admin_path(studio), class: "btn btn-default" %></td>
+            <td><%= studio.studio_created_on %></td>
+            <td><%= studio.status %></td>
+            <td><%= link_to "Approve/Deny", "/#{studio.slug}", class: "btn btn-default" %></td>
+            <td><%= studio.photos.count %></td>
+            <td><%= studio.order_count %></td>
+            <td><%= studio.revenue %></td>
+          <tr>
+        </div>
+          <% end %>
+        <% end %>
+      </table>
+
+    <table class = "table denied_studios">
+      <tr>
+        <th>ID</th>
+        <th>Studio Name</th>
+        <th> View/Edit </th>
+        <th>Created On</th>
+        <th>Status</th>
+        <th>Actions</th>
+        <th>Number of Photos</th>
+        <th>Number of Orders</th>
+        <th>Studio Revenue</th>
+      </tr>
+        <% @studios.each do |studio| %>
+          <% if studio.denied? %>
+        <div class = "denied_studios">
+          <tr>
+            <td><%= link_to studio.id, admin_path(studio) %></td>
+            <td><%= link_to studio.name, admin_path(studio) %></td>
+            <td><%= link_to "View/Edit", admin_path(studio), class: "btn btn-default" %></td>
+            <td><%= studio.studio_created_on %></td>
+            <td><%= studio.status %></td>
+            <td></td>
+            <td><%= studio.photos.count %></td>
+            <td><%= studio.order_count %></td>
+            <td><%= studio.revenue %></td>
+          <tr>
+        </div>
+          <% end %>
+        <% end %>
+      </table>
 </div>
