@@ -17,6 +17,13 @@ class ApplicationController < ActionController::Base
     current_user && current_user.studio_admin?
   end
 
+  def require_correct_admin
+    if (!current_platform_admin?) && (current_user.studio != @studio)
+      flash[:danger] = "You can only edit a studio that belongs to you"
+      render file: "/public/404"
+    end
+  end
+
   def current_platform_admin?
     current_user && current_user.platform_admin?
   end
