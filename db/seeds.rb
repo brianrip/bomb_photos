@@ -3,7 +3,7 @@ class Seed
     @num_studios = 10
     @num_users = 50
     @num_photos = 20
-    @num_orders = 100
+    @num_orders = 10
     generate_studios
     generate_users
     generate_studio_admins
