@@ -12,16 +12,17 @@
     </div>
   </div>
   <div class="row">
-    <div class="gifs">
-      <p>
-      <% @studio.photos.each do |photo| %>
-        <%= render partial: 'partials/photo_column', locals: { photo: photo } %>
-      <% end %>
-      </p>
-      <% if @studio.pending? && current_user && current_user.platform_admin? %>
-        <%= button_to "Deny", platform_admin_studio_path(@studio), method: :patch, params: { status: "deny" } %>
-        <%= button_to "Approve", platform_admin_studio_path(@studio), method: :patch, params: { status: "approve"} %>
-      <% end %>
-    </div>
+    <p>
+    <% @studio.photos.each do |photo| %>
+      <%= render partial: 'partials/photo_column', locals: { photo: photo } %>
+    <% end %>
+    </p>
   </div>
+</div>
+<div class="text-center">
+  <% if @studio.pending? && current_user && current_user.platform_admin? %>
+    <%= button_to "Deny", platform_admin_studio_path(@studio), method: :patch, params: { status: "deny" }, class: "btn btn-default" %>
+    <br>
+    <%= button_to "Approve", platform_admin_studio_path(@studio), method: :patch, params: { status: "approve"}, class: "btn btn-default" %>
+  <% end %>
 </div>
