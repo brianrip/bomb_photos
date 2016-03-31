@@ -42,4 +42,18 @@ $(document).ready(function() {
     $(".active_studios").addClass('hide')
     $(".pending_studios").addClass('hide')
   })
+
+  var $photos = $('.photo');
+
+  $("#photo_filter_photo").on("change", function(){
+  var currentSearch = this.value;
+    $photos.each(function(index, photo) {
+      $photo = $(photo);
+      if ($photo.data('name').indexOf(currentSearch) !== -1 ) {
+        $photo.show();
+      } else {
+        $photo.hide();
+      }
+    })
+  })
 });

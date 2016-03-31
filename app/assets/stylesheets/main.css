@@ -2,7 +2,7 @@
   font-family: 'Alef', sans-serif;
 }
 
-.hide { 
+.hide {
   display: none;
 }
 
@@ -66,4 +66,13 @@ footer h3 {
 
 .table th {
   text-align: center;
+}
+
+.search-bar {
+  margin-top: 10px;
+  padding-top: 10px;
+}
+
+.red {
+  background-color: red;
 }
