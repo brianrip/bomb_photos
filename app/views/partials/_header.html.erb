@@ -10,6 +10,11 @@
 </div>
 <nav class="navbar navbar-inverse col-md-12">
   <div class="container">
+    <% if current_page?(photos_path) %>
+      <ul class= "nav navbar-nav navbar-left search-bar">
+        <li><%= text_field :photo, :filter_photo %></li>
+      </ul>
+    <% end %>
     <ul class="nav navbar-nav navbar-right gif-links">
       <div class="btn-group">
         <a href="#" data-toggle="dropdown" class="dropdown-links">Shop <b class="caret"></b></a>
