@@ -46,14 +46,29 @@ $(document).ready(function() {
   var $photos = $('.photo');
 
   $("#photo_filter_photo").on("change", function(){
-  var currentSearch = this.value;
+    var currentSearch = this.value.toLowerCase();
     $photos.each(function(index, photo) {
       $photo = $(photo);
-      if ($photo.data('name').indexOf(currentSearch) !== -1 ) {
+      if ($photo.data('name').toLowerCase().indexOf(currentSearch) !== -1 ) {
         $photo.show();
       } else {
         $photo.hide();
       }
     })
   })
+
+  var $categories = $('.category')
+
+  $("#category_filter_category").on("change", function(){
+    var currentSearch = this.value.toLowerCase();
+    $categories.each(function(index, category) {
+      $category = $(category);
+       if ($category.data('name').toLowerCase().indexOf(currentSearch) !== -1 ) {
+         $category.show();
+       } else {
+         $category.hide();
+       }
+    })
+  })
+
 });

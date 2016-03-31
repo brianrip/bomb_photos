@@ -12,7 +12,12 @@
   <div class="container">
     <% if current_page?(photos_path) %>
       <ul class= "nav navbar-nav navbar-left search-bar">
-        <li><%= text_field :photo, :filter_photo %></li>
+        <li><span class="dropdown-links">Search by photo title: </span> <%= text_field :photo, :filter_photo %></li>
+      </ul>
+    <% end %>
+    <% if current_page?(categories_path) || current_page?(root_path) %>
+      <ul class= "nav navbar-nav navbar-left search-bar">
+        <li><span class="dropdown-links">Search by category: </span><%= text_field :category, :filter_category %></li>
       </ul>
     <% end %>
     <ul class="nav navbar-nav navbar-right gif-links">
