@@ -20,3 +20,6 @@ The test suite is built using MiniTest and tests both models and features. Featu
 ## Production
 
 Our production app is hosted [here](abs-pivot.herokuapp.com) on Heroku.
+To log in as a platform admin, with access to all business functionality, the following credentials can be used:
+Username: 'jorge@turing.io'
+Password: 'password'
